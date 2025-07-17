@@ -3,39 +3,52 @@
 import type React from "react"
 
 import { useEffect, useState } from "react"
-import { useRouter, useParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { Calendar, ArrowLeft, Save, Handshake, Trash2 } from "lucide-react"
 import Link from "next/link"
 import { supabase } from "@/lib/supabase"
 import Footer from "@/components/footer"
 
-export default function EditNewsPage() {
+export default function EditNewsPage({ params }: { params: Promise<{ id: string }> }) {
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [publishedDate, setPublishedDate] = useState("")
   const [loading, setLoading] = useState(false)
   const [fetchLoading, setFetchLoading] = useState(true)
   const [error, setError] = useState("")
+  const [newsId, setNewsId] = useState<string>("")
   const router = useRouter()
-  const params = useParams()
-  const newsId = params.id as string
 
   useEffect(() => {
-    fetchNews()
-  }, [])
+    const getParams = async () => {
+      const resolvedParams = await params
+      setNewsId(resolvedParams.id)
+    }
+    getParams()
+  }, [params])
+
+  useEffect(() => {
+    if (newsId) {
+      fetchNews()
+    }
+  }, [newsId])
 
   const fetchNews = async () => {
+    if (!newsId) return
+
     try {
       const { data, error } = await supabase.from("news").select("*").eq("id", newsId).single()
 
       if (error) {
+        console.error("Error fetching news:", error)
         setError("お知らせの取得に失敗しました。")
       } else if (data) {
-        setTitle(data.title)
-        setContent(data.content)
-        setPublishedDate(data.published_date)
+        setTitle(data.title || "")
+        setContent(data.content || "")
+        setPublishedDate(data.published_date || "")
       }
     } catch (error) {
+      console.error("Error:", error)
       setError("エラーが発生しました。")
     } finally {
       setFetchLoading(false)
@@ -44,6 +57,8 @@ export default function EditNewsPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!newsId) return
+
     setLoading(true)
     setError("")
 
@@ -51,19 +66,22 @@ export default function EditNewsPage() {
       const { error } = await supabase
         .from("news")
         .update({
-          title,
-          content,
+          title: title.trim(),
+          content: content.trim(),
           published_date: publishedDate,
           updated_at: new Date().toISOString(),
         })
         .eq("id", newsId)
 
       if (error) {
+        console.error("Update error:", error)
         setError(`お知らせの更新に失敗しました: ${error.message}`)
       } else {
+        alert("お知らせを更新しました。")
         router.push("/admin/dashboard")
       }
     } catch (error) {
+      console.error("Error:", error)
       setError("エラーが発生しました。")
     } finally {
       setLoading(false)
@@ -71,16 +89,21 @@ export default function EditNewsPage() {
   }
 
   const handleDelete = async () => {
-    if (confirm("このお知らせを削除しますか？")) {
+    if (!newsId) return
+
+    if (confirm("このお知らせを削除しますか？この操作は取り消せません。")) {
       try {
         const { error } = await supabase.from("news").delete().eq("id", newsId)
 
         if (error) {
+          console.error("Delete error:", error)
           setError(`お知らせの削除に失敗しました: ${error.message}`)
         } else {
+          alert("お知らせを削除しました。")
           router.push("/admin/dashboard")
         }
       } catch (error) {
+        console.error("Error:", error)
         setError("エラーが発生しました。")
       }
     }

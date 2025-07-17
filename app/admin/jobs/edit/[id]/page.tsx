@@ -6,11 +6,13 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Upload, FileText, Save, ArrowLeft, Download, Trash2 } from "lucide-react"
 import Link from "next/link"
-import { supabase, type Job } from "@/lib/supabase"
+import { supabase, supabaseAdmin, type Job } from "@/lib/supabase"
 import AdminNav from "@/components/admin-nav"
 import Footer from "@/components/footer"
 
-export default function EditJobPage({ params }: { params: { id: string } }) {
+export default function EditJobPage({ params }: { params: Promise<{ id: string }> }) {
+  const router = useRouter()
+  const [jobId, setJobId] = useState<string>("")
   const [job, setJob] = useState<Job | null>(null)
   const [title, setTitle] = useState("")
   const [company, setCompany] = useState("")
@@ -21,32 +23,44 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
-  const router = useRouter()
+  const [error, setError] = useState("")
 
   useEffect(() => {
-    fetchJob()
-  }, [params.id])
+    const getParams = async () => {
+      const resolvedParams = await params
+      setJobId(resolvedParams.id)
+    }
+    getParams()
+  }, [params])
+
+  useEffect(() => {
+    if (jobId) {
+      fetchJob()
+    }
+  }, [jobId])
 
   const fetchJob = async () => {
+    if (!jobId) return
+
     try {
-      const { data, error } = await supabase.from("jobs").select("*").eq("id", params.id).single()
+      const { data, error } = await supabase.from("jobs").select("*").eq("id", jobId).single()
 
       if (error) {
         console.error("Error fetching job:", error)
-        alert("求人情報の取得に失敗しました。")
+        setError("求人情報の取得に失敗しました。")
         router.push("/admin/dashboard")
         return
       }
 
       setJob(data)
-      setTitle(data.title)
-      setCompany(data.company)
-      setLocation(data.location)
-      setEmploymentType(data.employment_type)
+      setTitle(data.title || "")
+      setCompany(data.company || "")
+      setLocation(data.location || "")
+      setEmploymentType(data.employment_type || "")
       setDescription(data.description || "")
     } catch (error) {
       console.error("Error:", error)
-      alert("エラーが発生しました。")
+      setError("エラーが発生しました。")
       router.push("/admin/dashboard")
     } finally {
       setLoading(false)
@@ -68,16 +82,16 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
       const filePath = `${fileName}`
 
-      const { error: uploadError } = await supabase.storage.from("job-pdfs").upload(filePath, file)
+      const { error: uploadError } = await supabaseAdmin.storage.from("job-pdfs").upload(filePath, file)
 
       if (uploadError) {
         console.error("Upload error:", uploadError)
-        return null
+        throw new Error(`Upload failed: ${uploadError.message}`)
       }
 
       const {
         data: { publicUrl },
-      } = supabase.storage.from("job-pdfs").getPublicUrl(filePath)
+      } = supabaseAdmin.storage.from("job-pdfs").getPublicUrl(filePath)
 
       return {
         url: publicUrl,
@@ -85,7 +99,7 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
       }
     } catch (error) {
       console.error("Error uploading file:", error)
-      return null
+      throw error
     }
   }
 
@@ -98,14 +112,14 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
         const urlParts = job.pdf_url.split("/")
         const fileName = urlParts[urlParts.length - 1]
 
-        const { error } = await supabase.storage.from("job-pdfs").remove([fileName])
+        const { error } = await supabaseAdmin.storage.from("job-pdfs").remove([fileName])
 
         if (!error) {
           // Update database to remove PDF references
-          const { error: updateError } = await supabase
+          const { error: updateError } = await supabaseAdmin
             .from("jobs")
             .update({ pdf_url: null, pdf_filename: null })
-            .eq("id", params.id)
+            .eq("id", jobId)
 
           if (!updateError) {
             setJob({ ...job, pdf_url: null, pdf_filename: null })
@@ -119,9 +133,41 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
     }
   }
 
+  const handleDelete = async () => {
+    if (!jobId) return
+
+    if (confirm("この求人情報を削除しますか？この操作は取り消せません。")) {
+      try {
+        // Delete PDF file if exists
+        if (job?.pdf_url) {
+          const urlParts = job.pdf_url.split("/")
+          const fileName = urlParts[urlParts.length - 1]
+          await supabaseAdmin.storage.from("job-pdfs").remove([fileName])
+        }
+
+        // Delete job record
+        const { error } = await supabaseAdmin.from("jobs").delete().eq("id", jobId)
+
+        if (error) {
+          console.error("Delete error:", error)
+          setError(`求人情報の削除に失敗しました: ${error.message}`)
+        } else {
+          alert("求人情報を削除しました。")
+          router.push("/admin/dashboard")
+        }
+      } catch (error) {
+        console.error("Error:", error)
+        setError("エラーが発生しました。")
+      }
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!jobId) return
+
     setSaving(true)
+    setError("")
 
     try {
       let pdfUrl = job?.pdf_url
@@ -137,31 +183,31 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
         setUploadProgress(75)
       }
 
-      const { error } = await supabase
-        .from("jobs")
-        .update({
-          title,
-          company,
-          location,
-          employment_type: employmentType,
-          description: description || null,
-          pdf_url: pdfUrl,
-          pdf_filename: pdfFilename,
-        })
-        .eq("id", params.id)
+      const jobData = {
+        title: title.trim(),
+        company: company.trim() || null,
+        location: location.trim() || null,
+        employment_type: employmentType || null,
+        description: description.trim() || null,
+        pdf_url: pdfUrl,
+        pdf_filename: pdfFilename,
+        updated_at: new Date().toISOString(),
+      }
+
+      const { error } = await supabaseAdmin.from("jobs").update(jobData).eq("id", jobId)
 
       setUploadProgress(100)
 
       if (error) {
         console.error("Error updating job:", error)
-        alert("求人情報の更新に失敗しました。")
+        setError(`求人情報の更新に失敗しました: ${error.message}`)
       } else {
         alert("求人情報を更新しました。")
         router.push("/admin/dashboard")
       }
     } catch (error) {
       console.error("Error:", error)
-      alert("エラーが発生しました。")
+      setError(`エラーが発生しました: ${error instanceof Error ? error.message : "Unknown error"}`)
     } finally {
       setSaving(false)
       setUploadProgress(0)
@@ -351,7 +397,23 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
               </div>
             )}
 
+            {/* Error Message */}
+            {error && (
+              <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4">
+                <p className="text-red-700">{error}</p>
+              </div>
+            )}
+
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
+              <button
+                type="button"
+                onClick={handleDelete}
+                className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg flex items-center justify-center"
+              >
+                <Trash2 className="w-5 h-5 mr-2" />
+                削除
+              </button>
+
               <button
                 type="submit"
                 disabled={saving}
@@ -364,12 +426,6 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
                 )}
                 {saving ? "更新中..." : "求人情報を更新"}
               </button>
-              <Link
-                href="/admin/dashboard"
-                className="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center"
-              >
-                キャンセル
-              </Link>
             </div>
           </form>
         </div>
@@ -378,42 +434,4 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
       <Footer />
     </div>
   )
-
-  async function updateJob(
-    id: string,
-    title: string,
-    company: string,
-    location: string,
-    employmentType: string,
-    description: string | null,
-    pdfUrl: string | null,
-    pdfFilename: string | null,
-  ) {
-    try {
-      const { data, error } = await supabase
-        .from("jobs")
-        .update({
-          title,
-          company: company || null,
-          location: location || null,
-          employment_type: employmentType || null,
-          description: description || null,
-          pdf_url: pdfUrl,
-          pdf_filename: pdfFilename,
-        })
-        .eq("id", id)
-        .select()
-        .single()
-
-      if (error) {
-        console.error("Supabase error updating job", error)
-        return { error }
-      }
-
-      return { data }
-    } catch (error) {
-      console.error("Error updating job", error)
-      return { error }
-    }
-  }
 }

@@ -3,13 +3,13 @@
 import type React from "react"
 
 import { useEffect, useState } from "react"
-import { useRouter, useParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { Calendar, MapPin, ArrowLeft, Save, Handshake, Trash2 } from "lucide-react"
 import Link from "next/link"
 import { supabase } from "@/lib/supabase"
 import Footer from "@/components/footer"
 
-export default function EditEventPage() {
+export default function EditEventPage({ params }: { params: Promise<{ id: string }> }) {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [date, setDate] = useState("")
@@ -17,27 +17,40 @@ export default function EditEventPage() {
   const [loading, setLoading] = useState(false)
   const [fetchLoading, setFetchLoading] = useState(true)
   const [error, setError] = useState("")
+  const [eventId, setEventId] = useState<string>("")
   const router = useRouter()
-  const params = useParams()
-  const eventId = params.id as string
 
   useEffect(() => {
-    fetchEvent()
-  }, [])
+    const getParams = async () => {
+      const resolvedParams = await params
+      setEventId(resolvedParams.id)
+    }
+    getParams()
+  }, [params])
+
+  useEffect(() => {
+    if (eventId) {
+      fetchEvent()
+    }
+  }, [eventId])
 
   const fetchEvent = async () => {
+    if (!eventId) return
+
     try {
       const { data, error } = await supabase.from("events").select("*").eq("id", eventId).single()
 
       if (error) {
+        console.error("Error fetching event:", error)
         setError("イベントの取得に失敗しました。")
       } else if (data) {
-        setTitle(data.title)
-        setDescription(data.description)
-        setDate(data.date)
-        setLocation(data.location)
+        setTitle(data.title || "")
+        setDescription(data.description || "")
+        setDate(data.date || "")
+        setLocation(data.location || "")
       }
     } catch (error) {
+      console.error("Error:", error)
       setError("エラーが発生しました。")
     } finally {
       setFetchLoading(false)
@@ -46,6 +59,8 @@ export default function EditEventPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!eventId) return
+
     setLoading(true)
     setError("")
 
@@ -53,20 +68,23 @@ export default function EditEventPage() {
       const { error } = await supabase
         .from("events")
         .update({
-          title,
-          description,
+          title: title.trim(),
+          description: description.trim(),
           date,
-          location,
+          location: location.trim(),
           updated_at: new Date().toISOString(),
         })
         .eq("id", eventId)
 
       if (error) {
+        console.error("Update error:", error)
         setError(`イベントの更新に失敗しました: ${error.message}`)
       } else {
+        alert("イベントを更新しました。")
         router.push("/admin/dashboard")
       }
     } catch (error) {
+      console.error("Error:", error)
       setError("エラーが発生しました。")
     } finally {
       setLoading(false)
@@ -74,16 +92,21 @@ export default function EditEventPage() {
   }
 
   const handleDelete = async () => {
-    if (confirm("このイベントを削除しますか？")) {
+    if (!eventId) return
+
+    if (confirm("このイベントを削除しますか？この操作は取り消せません。")) {
       try {
         const { error } = await supabase.from("events").delete().eq("id", eventId)
 
         if (error) {
+          console.error("Delete error:", error)
           setError(`イベントの削除に失敗しました: ${error.message}`)
         } else {
+          alert("イベントを削除しました。")
           router.push("/admin/dashboard")
         }
       } catch (error) {
+        console.error("Error:", error)
         setError("エラーが発生しました。")
       }
     }

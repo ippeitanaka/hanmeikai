@@ -5,13 +5,14 @@ import MainNav from "@/components/main-nav"
 import PasswordProtection from "@/components/password-protection"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Download, FileText, Building, MapPin, Briefcase, Eye, X } from "lucide-react"
+import { Download, FileText, Building, MapPin, Briefcase, Eye, X, Calendar, User } from "lucide-react"
 import { supabase, type Job } from "@/lib/supabase"
 
 export default function JobsPage() {
   const [jobListings, setJobListings] = useState<Job[]>([])
   const [loading, setLoading] = useState(true)
   const [previewPdf, setPreviewPdf] = useState<string | null>(null)
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null)
 
   useEffect(() => {
     fetchJobs()
@@ -35,6 +36,14 @@ export default function JobsPage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  const openJobPreview = (job: Job) => {
+    setSelectedJob(job)
+  }
+
+  const closeJobPreview = () => {
+    setSelectedJob(null)
   }
 
   const openPdfPreview = (pdfUrl: string) => {
@@ -99,36 +108,36 @@ export default function JobsPage() {
                       )}
                       {job.employment_type && (
                         <div className="flex items-center gap-2 text-gray-600">
-                          <Briefcase className="w-4 h-4" />
+                          <User className="w-4 h-4" />
                           <span>{job.employment_type}</span>
                         </div>
                       )}
-                      {job.description && <p className="text-gray-700 leading-relaxed mt-4">{job.description}</p>}
+                      <div className="flex items-center gap-2 text-gray-500 text-sm">
+                        <Calendar className="w-4 h-4" />
+                        <span>掲載日: {new Date(job.created_at).toLocaleDateString("ja-JP")}</span>
+                      </div>
                     </div>
 
-                    {job.pdf_url ? (
-                      <div className="space-y-2">
-                        <Button
-                          className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
-                          onClick={() => openPdfPreview(job.pdf_url)}
-                        >
-                          <Eye className="w-4 h-4" />
-                          資料をプレビュー
-                        </Button>
+                    <div className="space-y-2">
+                      <Button
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                        onClick={() => openJobPreview(job)}
+                      >
+                        <Eye className="w-4 h-4" />
+                        詳細を見る
+                      </Button>
+
+                      {job.pdf_url && (
                         <Button
                           variant="outline"
-                          className="w-full border-emerald-600 text-emerald-600 hover:bg-emerald-50 font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
-                          onClick={() => window.open(job.pdf_url, "_blank")}
+                          className="w-full border-emerald-600 text-emerald-600 hover:bg-emerald-50 font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 bg-transparent"
+                          onClick={() => openPdfPreview(job.pdf_url)}
                         >
-                          <Download className="w-4 h-4" />
-                          ダウンロード
+                          <FileText className="w-4 h-4" />
+                          資料を見る
                         </Button>
-                      </div>
-                    ) : (
-                      <div className="w-full bg-gray-300 text-gray-500 font-semibold py-2 px-4 rounded-lg text-center">
-                        詳細資料なし
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               ))}
@@ -153,6 +162,106 @@ export default function JobsPage() {
           </div>
         </div>
 
+        {/* 求人詳細プレビューモーダル */}
+        {selectedJob && (
+          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+              <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center">
+                <h3 className="text-2xl font-bold text-gray-800">{selectedJob.title}</h3>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={closeJobPreview}
+                  className="flex items-center gap-2 bg-transparent"
+                >
+                  <X className="w-4 h-4" />
+                  閉じる
+                </Button>
+              </div>
+
+              <div className="p-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  {selectedJob.company && (
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Building className="w-5 h-5 text-emerald-600" />
+                        <h4 className="font-semibold text-gray-800">会社・組織名</h4>
+                      </div>
+                      <p className="text-gray-700">{selectedJob.company}</p>
+                    </div>
+                  )}
+
+                  {selectedJob.location && (
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <MapPin className="w-5 h-5 text-emerald-600" />
+                        <h4 className="font-semibold text-gray-800">勤務地</h4>
+                      </div>
+                      <p className="text-gray-700">{selectedJob.location}</p>
+                    </div>
+                  )}
+
+                  {selectedJob.employment_type && (
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <User className="w-5 h-5 text-emerald-600" />
+                        <h4 className="font-semibold text-gray-800">雇用形態</h4>
+                      </div>
+                      <p className="text-gray-700">{selectedJob.employment_type}</p>
+                    </div>
+                  )}
+
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Calendar className="w-5 h-5 text-emerald-600" />
+                      <h4 className="font-semibold text-gray-800">掲載日</h4>
+                    </div>
+                    <p className="text-gray-700">{new Date(selectedJob.created_at).toLocaleDateString("ja-JP")}</p>
+                  </div>
+                </div>
+
+                {selectedJob.description && (
+                  <div className="mb-6">
+                    <h4 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                      <FileText className="w-5 h-5 text-emerald-600" />
+                      求人概要
+                    </h4>
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <p className="text-gray-700 leading-relaxed whitespace-pre-line">{selectedJob.description}</p>
+                    </div>
+                  </div>
+                )}
+
+                {selectedJob.pdf_url && (
+                  <div className="border-t pt-6">
+                    <h4 className="font-semibold text-gray-800 mb-3">求人詳細資料</h4>
+                    <div className="flex gap-3">
+                      <Button
+                        className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors flex items-center gap-2"
+                        onClick={() => {
+                          openPdfPreview(selectedJob.pdf_url!)
+                          closeJobPreview()
+                        }}
+                      >
+                        <Eye className="w-4 h-4" />
+                        資料をプレビュー
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 font-semibold py-2 px-4 rounded-lg transition-colors flex items-center gap-2 bg-transparent"
+                        onClick={() => window.open(selectedJob.pdf_url, "_blank")}
+                      >
+                        <Download className="w-4 h-4" />
+                        ダウンロード
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* PDF プレビューモーダル */}
         {previewPdf && (
           <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
@@ -169,7 +278,12 @@ export default function JobsPage() {
                     <Download className="w-4 h-4" />
                     ダウンロード
                   </Button>
-                  <Button variant="outline" size="sm" onClick={closePdfPreview} className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={closePdfPreview}
+                    className="flex items-center gap-2 bg-transparent"
+                  >
                     <X className="w-4 h-4" />
                     閉じる
                   </Button>

@@ -21,6 +21,7 @@ export default function NewJobPage() {
   const [uploadProgress, setUploadProgress] = useState(0)
   const [userEmail, setUserEmail] = useState("")
   const [authLoading, setAuthLoading] = useState(true)
+  const [error, setError] = useState("")
   const router = useRouter()
 
   useEffect(() => {
@@ -91,6 +92,7 @@ export default function NewJobPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+    setError("")
 
     try {
       let pdfUrl = null
@@ -127,7 +129,7 @@ export default function NewJobPage() {
 
       if (error) {
         console.error("Error creating job:", error)
-        throw new Error(`Database error: ${error.message}`)
+        setError(`データベースエラー: ${error.message}`)
       } else {
         console.log("Job created successfully:", data)
         alert("求人情報を作成しました。")
@@ -135,7 +137,7 @@ export default function NewJobPage() {
       }
     } catch (error) {
       console.error("Error:", error)
-      alert(`エラーが発生しました: ${error instanceof Error ? error.message : "Unknown error"}`)
+      setError(`エラーが発生しました: ${error instanceof Error ? error.message : "Unknown error"}`)
     } finally {
       setLoading(false)
       setUploadProgress(0)
@@ -281,6 +283,13 @@ export default function NewJobPage() {
                   className="bg-emerald-600 h-2 rounded-full transition-all duration-300"
                   style={{ width: `${uploadProgress}%` }}
                 ></div>
+              </div>
+            )}
+
+            {/* Error Message */}
+            {error && (
+              <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4">
+                <p className="text-red-700">{error}</p>
               </div>
             )}
 
