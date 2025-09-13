@@ -2,6 +2,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import SeoTags from "@/components/seo-tags"
+import { getSeoConfig } from "@/lib/seo-config"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -62,6 +64,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const seo = getSeoConfig("default")
   return (
     <html lang="ja">
       <head>
@@ -88,6 +91,7 @@ export default function RootLayout({
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
         <link rel="canonical" href="https://kizunakai.com" />
+        <SeoTags gaId={seo.gaId ?? undefined} googleSiteVerification={seo.googleSiteVerification ?? undefined} />
       </head>
       <body className={inter.className}>{children}</body>
     </html>
