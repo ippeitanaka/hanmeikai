@@ -106,7 +106,7 @@ export default function RootLayout({
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
                   gtag('config', '${seo.gaId}');
-                `,
+                `
               }}
             />
           </>
