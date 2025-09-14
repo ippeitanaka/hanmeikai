@@ -20,8 +20,8 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        kiniro: [
-          "GN-きんいろサンセリフ",
+        makinas: [
+          "マキナスsquare",
           "-apple-system",
           "BlinkMacSystemFont",
           "Segoe UI",
@@ -34,7 +34,7 @@ const config: Config = {
           "sans-serif",
         ],
         sans: [
-          "GN-きんいろサンセリフ",
+          "マキナスsquare",
           "-apple-system",
           "BlinkMacSystemFont",
           "Segoe UI",
@@ -80,6 +80,46 @@ const config: Config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        // 絆命会ロゴベースのカラーパレット
+        kizuna: {
+          dark: "#000000",        // ブラック
+          charcoal: "#1a1a1a",   // ダークグレー
+          sage: "#333333",       // ミディアムグレー
+          moss: "#666666",       // ライトグレー
+          beige: "#D4C5A9",      // ロゴのベージュ
+          gold: "#C8B99C",       // ロゴのゴールド
+          "dark-gold": "#B8A082", // 濃いゴールド
+          "bronze": "#A0906B",    // ブロンズ
+          cream: "#E8E0D0",      // 明るいベージュ
+          sand: "#F2EDE3",       // 最も明るいベージュ
+        },
+        // ダークモード対応
+        darkGreen: {
+          50: "#F2EDE3",
+          100: "#E8E0D0", 
+          200: "#D4C5A9",
+          300: "#C8B99C",
+          400: "#A89A7E",
+          500: "#8B7D61",
+          600: "#7A8B7B",
+          700: "#5C6E5D",
+          800: "#3A4A3B",
+          900: "#2C3E2D",
+          950: "#1E2B1F",
+        },
+        warmBeige: {
+          50: "#FEFCF9",
+          100: "#F9F6F0",
+          200: "#F2EDE3",
+          300: "#E8E0D0",
+          400: "#D4C5A9",
+          500: "#C8B99C",
+          600: "#B5A485",
+          700: "#9B8A6B",
+          800: "#7D6F56",
+          900: "#655946",
+          950: "#4A3F33",
         },
       },
       borderRadius: {

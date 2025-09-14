@@ -2,18 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
+/* カスタムCSS変数 - 絆命会テーマ */
+:root {
+  --kizuna-dark: #000000;
+  --kizuna-charcoal: #1a1a1a;
+  --kizuna-sage: #333333;
+  --kizuna-moss: #666666;
+  --kizuna-beige: #D4C5A9;
+  --kizuna-gold: #C8B99C;
+  --kizuna-dark-gold: #B8A082;
+  --kizuna-bronze: #A0906B;
+  --kizuna-cream: #E8E0D0;
+  --kizuna-sand: #F2EDE3;
+  
+  /* shadcn/ui カスタマイズ */
+  --background: 242 237 227; /* sand */
+  --foreground: 0 0 0; /* black */
+  --card: 248 243 239;
+  --card-foreground: 0 0 0;
+  --popover: 248 243 239;
+  --popover-foreground: 0 0 0;
+  --primary: 0 0 0; /* black */
+  --primary-foreground: 242 237 227;
+  --secondary: 212 197 169; /* beige */
+  --secondary-foreground: 0 0 0;
+  --muted: 232 224 208; /* cream */
+  --muted-foreground: 51 51 51;
+  --accent: 200 185 156; /* gold */
+  --accent-foreground: 0 0 0;
+  --destructive: 220 38 38;
+  --destructive-foreground: 248 250 252;
+  --border: 212 197 169;
+  --input: 232 224 208;
+  --ring: 0 0 0;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: 30 46 31;
+  --foreground: 242 237 227;
+  --card: 44 62 45;
+  --card-foreground: 242 237 227;
+  --popover: 44 62 45;
+  --popover-foreground: 242 237 227;
+  --primary: 212 197 169;
+  --primary-foreground: 44 62 45;
+  --secondary: 58 74 59;
+  --secondary-foreground: 242 237 227;
+  --muted: 58 74 59;
+  --muted-foreground: 200 185 156;
+  --accent: 92 110 93;
+  --accent-foreground: 242 237 227;
+  --destructive: 220 38 38;
+  --destructive-foreground: 248 250 252;
+  --border: 58 74 59;
+  --input: 58 74 59;
+  --ring: 212 197 169;
+}
+
 /* カスタムフォントの定義 */
 @font-face {
-  font-family: "GN-きんいろサンセリフ";
-  src: url("/fonts/gn-kiniro-sans-serif.woff2") format("woff2"), url("/fonts/gn-kiniro-sans-serif.woff") format("woff");
+  font-family: "Makinas-Square";
+  src: local("マキナスsquare"), local("Makinas Square"), url("/fonts/makinas-square.woff2") format("woff2"), url("/fonts/makinas-square.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "GN-きんいろサンセリフ";
-  src: url("/fonts/gn-kiniro-sans-serif-bold.woff2") format("woff2"), url("/fonts/gn-kiniro-sans-serif-bold.woff")
+  font-family: "Makinas-Square";
+  src: local("マキナスsquare Bold"), local("Makinas Square Bold"), url("/fonts/makinas-square-bold.woff2") format("woff2"), url("/fonts/makinas-square-bold.woff")
     format("woff");
   font-weight: bold;
   font-style: normal;
@@ -22,12 +80,12 @@
 
 /* ベースフォントの設定 */
 html {
-  font-family: "GN-きんいろサンセリフ", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+  font-family: "Makinas-Square", "マキナスsquare", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
     "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
 }
 
 body {
-  font-family: "GN-きんいろサンセリフ", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+  font-family: "Makinas-Square", "マキナスsquare", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
     "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
 }
 
@@ -36,11 +94,13 @@ body {
   font-feature-settings: "palt" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: "Makinas-Square", "マキナスsquare", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif !important;
 }
 
 /* カスタムフォントクラス */
-.font-kiniro {
-  font-family: "GN-きんいろサンセリフ", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+.font-makinas {
+  font-family: "マキナスsquare", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
     "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
 }
 
@@ -51,21 +111,63 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "GN-きんいろサンセリフ", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+  font-family: "マキナスsquare", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
     "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
   font-weight: 700;
 }
 
 /* ボタンやナビゲーション用のフォント設定 */
+*,
 button,
 .btn,
-nav a {
-  font-family: "GN-きんいろサンセリフ", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-    "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+nav a,
+h1, h2, h3, h4, h5, h6,
+p, span, div, a, li, ul, ol {
+  font-family: "マキナスsquare", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif !important;
 }
 
 /* フォントが読み込まれない場合のフォールバック */
 .font-fallback {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
     "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+}
+
+/* カスタムユーティリティクラス */
+@layer utilities {
+  .text-gradient-kizuna {
+    @apply bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text text-transparent;
+  }
+  
+  .bg-gradient-kizuna {
+    @apply bg-gradient-to-br from-kizuna-sand via-kizuna-cream to-kizuna-beige;
+  }
+  
+  .bg-gradient-kizuna-dark {
+    @apply bg-gradient-to-br from-kizuna-charcoal via-kizuna-dark to-kizuna-sage;
+  }
+  
+  .shadow-kizuna {
+    box-shadow: 0 10px 40px rgba(44, 62, 45, 0.15), 0 4px 16px rgba(44, 62, 45, 0.1);
+  }
+  
+  .shadow-kizuna-lg {
+    box-shadow: 0 20px 60px rgba(44, 62, 45, 0.2), 0 8px 24px rgba(44, 62, 45, 0.15);
+  }
+  
+  .border-gradient-kizuna {
+    @apply border-2 border-transparent bg-gradient-to-r from-kizuna-beige via-kizuna-gold to-kizuna-beige bg-clip-border;
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(12px);
+    background: rgba(232, 224, 208, 0.85);
+    border: 1px solid rgba(212, 197, 169, 0.3);
+  }
+  
+  .glass-effect-dark {
+    backdrop-filter: blur(12px);
+    background: rgba(44, 62, 45, 0.85);
+    border: 1px solid rgba(92, 110, 93, 0.3);
+  }
 }
