@@ -95,6 +95,20 @@ export default function RootLayout({
           <meta name="google-site-verification" content={seo.googleSiteVerification} />
         )}
 
+        {/* Google tag (gtag.js) - G-Y5X9H7GMW0 */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y5X9H7GMW0"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-Y5X9H7GMW0');
+            `,
+          }}
+        />
+
       </head>
       <body className={inter.className}>
         {children}
