@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Heart, Handshake } from "lucide-react"
 
 type NavItem = {
@@ -22,24 +23,27 @@ export default function MainNav({ currentPage }: MainNavProps) {
   ]
 
   return (
-    <nav className="relative z-50 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-800 shadow-2xl border-b-4 border-amber-400">
+    <nav className="relative z-50 bg-gradient-to-r from-black via-kizuna-dark to-black shadow-2xl border-b-4 border-kizuna-gold font-makinas-square">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
+          {/* Logo Container - Rectangular Liner Style */}
           <div className="flex items-center space-x-6">
             <div className="relative group">
-              <div className="w-20 h-20 bg-gradient-to-br from-amber-300 via-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-2xl border-4 border-emerald-900 transform group-hover:scale-110 transition-all duration-300">
-                <div className="relative">
-                  <Handshake className="w-10 h-10 text-emerald-900" />
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center animate-pulse">
-                    <Heart className="w-3 h-3 text-white" />
-                  </div>
-                </div>
+              <div className="w-32 h-20 bg-gradient-to-r from-kizuna-gold via-kizuna-light-gold to-kizuna-gold flex items-center justify-center shadow-2xl border-4 border-black transform group-hover:scale-105 transition-all duration-300 rounded-lg overflow-hidden">
+                <Image
+                  src="/images/kizuna-logo-transparent.png"
+                  alt="絆命会ロゴ"
+                  width={120}
+                  height={72}
+                  className="object-contain"
+                  priority
+                />
               </div>
-              <div className="absolute inset-0 bg-amber-400 rounded-full blur-xl opacity-30 animate-pulse" />
+              <div className="absolute inset-0 bg-kizuna-gold rounded-lg blur-xl opacity-20 animate-pulse" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-amber-100 tracking-wider drop-shadow-lg">絆命会</h1>
-              <p className="text-emerald-200 font-medium">東洋医療専門学校 救急救命士学科 同窓会</p>
+              <h1 className="text-3xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text tracking-wider drop-shadow-lg font-makinas-square">絆命会</h1>
+              <p className="text-kizuna-gold font-medium font-makinas-square">東洋医療専門学校 救急救命士学科 同窓会</p>
             </div>
           </div>
 
@@ -51,7 +55,7 @@ export default function MainNav({ currentPage }: MainNavProps) {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-amber-100 hover:text-amber-300 font-medium text-sm py-2 px-3 rounded-lg hover:bg-emerald-600/30 transition-all duration-300 border-b-2 border-transparent hover:border-amber-300"
+                  className="text-kizuna-gold hover:text-kizuna-light-gold font-medium text-sm py-2 px-3 rounded-lg hover:bg-kizuna-dark/30 transition-all duration-300 border-b-2 border-transparent hover:border-kizuna-gold font-makinas-square"
                 >
                   {item.name}
                 </a>
@@ -59,10 +63,10 @@ export default function MainNav({ currentPage }: MainNavProps) {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`font-medium text-sm py-2 px-3 rounded-lg transition-all duration-300 border-b-2 ${
+                  className={`font-medium text-sm py-2 px-3 rounded-lg transition-all duration-300 border-b-2 font-makinas-square ${
                     item.name === currentPage
-                      ? "text-amber-300 bg-emerald-600/30 border-amber-300"
-                      : "text-amber-100 hover:text-amber-300 hover:bg-emerald-600/30 border-transparent hover:border-amber-300"
+                      ? "text-kizuna-light-gold bg-kizuna-dark/30 border-kizuna-gold"
+                      : "text-kizuna-gold hover:text-kizuna-light-gold hover:bg-kizuna-dark/30 border-transparent hover:border-kizuna-gold"
                   }`}
                 >
                   {item.name}
@@ -82,7 +86,7 @@ export default function MainNav({ currentPage }: MainNavProps) {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-amber-100 hover:text-amber-300 font-medium text-sm py-1 px-2 rounded hover:bg-emerald-600/30 transition-all duration-300"
+                      className="text-kizuna-gold hover:text-kizuna-light-gold font-medium text-sm py-1 px-2 rounded hover:bg-kizuna-dark/30 transition-all duration-300 font-makinas-square"
                     >
                       {item.name}
                     </a>
@@ -90,10 +94,10 @@ export default function MainNav({ currentPage }: MainNavProps) {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className={`font-medium text-sm py-1 px-2 rounded transition-all duration-300 ${
+                      className={`font-medium text-sm py-1 px-2 rounded transition-all duration-300 font-makinas-square ${
                         item.name === currentPage
-                          ? "text-amber-300 bg-emerald-600/30"
-                          : "text-amber-100 hover:text-amber-300 hover:bg-emerald-600/30"
+                          ? "text-kizuna-light-gold bg-kizuna-dark/30"
+                          : "text-kizuna-gold hover:text-kizuna-light-gold hover:bg-kizuna-dark/30"
                       }`}
                     >
                       {item.name}
@@ -109,7 +113,7 @@ export default function MainNav({ currentPage }: MainNavProps) {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-amber-100 hover:text-amber-300 font-medium text-sm py-1 px-2 rounded hover:bg-emerald-600/30 transition-all duration-300"
+                      className="text-kizuna-gold hover:text-kizuna-light-gold font-medium text-sm py-1 px-2 rounded hover:bg-kizuna-dark/30 transition-all duration-300 font-makinas-square"
                     >
                       {item.name}
                     </a>
@@ -117,10 +121,10 @@ export default function MainNav({ currentPage }: MainNavProps) {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className={`font-medium text-sm py-1 px-2 rounded transition-all duration-300 ${
+                      className={`font-medium text-sm py-1 px-2 rounded transition-all duration-300 font-makinas-square ${
                         item.name === currentPage
-                          ? "text-amber-300 bg-emerald-600/30"
-                          : "text-amber-100 hover:text-amber-300 hover:bg-emerald-600/30"
+                          ? "text-kizuna-light-gold bg-kizuna-dark/30"
+                          : "text-kizuna-gold hover:text-kizuna-light-gold hover:bg-kizuna-dark/30"
                       }`}
                     >
                       {item.name}
