@@ -11,11 +11,10 @@ const fs = require('fs')
 const path = require('path')
 
 //=== 設定値（必要に応じて編集） ===
-const GA_ID = 'G-3K0XSVMYL7' // 共通の測定ID
 
 // ディレクトリ名やパスの一部で出し分けたい場合に使用
 // 例: { admin: 'xxxx', public: 'yyyy' }
-// 指定が無いファイルはSearch Console metaを挿入しません（GA4は共通で挿入します）
+// 指定が無いファイルはSearch Console metaを挿入しません
 const GOOGLE_VERIFICATION_MAP = {
   // admin: '',
   // public: '',
@@ -40,12 +39,6 @@ function detectIndent(text, headCloseIndex) {
   return '  '
 }
 
-function hasGA4(content, gaId) {
-  const re1 = new RegExp(`googletagmanager\\.com/gtag/js\\?id=${escapeRegExp(gaId)}`)
-  const re2 = new RegExp(`gtag\\(\\s*['\"]config['\"],\\s*['\"]${escapeRegExp(gaId)}['\"]\\s*\\)`) 
-  return re1.test(content) || re2.test(content)
-}
-
 function hasGoogleVerification(content, value) {
   if (!value) return false
   const re = new RegExp(`<meta\\s+name=["']google-site-verification["']\\s+content=["']${escapeRegExp(value)}["'][^>]*>`, 'i')
@@ -63,20 +56,10 @@ function pickVerificationForFile(filePath) {
   return null
 }
 
-function buildInsertBlock({ indent, eol, gaId, googleVerification }) {
+function buildInsertBlock({ indent, eol, googleVerification }) {
   const lines = []
   if (googleVerification) {
     lines.push(`<meta name="google-site-verification" content="${googleVerification}" />`)
-  }
-  if (gaId) {
-    lines.push(`<!-- Google tag (gtag.js) -->`)
-    lines.push(`<script async src="https://www.googletagmanager.com/gtag/js?id=${gaId}"></script>`)
-    lines.push(`<script>`)
-    lines.push(`  window.dataLayer = window.dataLayer || [];`)
-    lines.push(`  function gtag(){dataLayer.push(arguments);}`)
-    lines.push(`  gtag('js', new Date());`)
-    lines.push(`  gtag('config', '${gaId}'); // 測定IDは共通でOK`)
-    lines.push(`</script>`)
   }
   return lines.map(l => indent + l).join(eol) + eol
 }
@@ -134,16 +117,15 @@ function main() {
       }
 
       const indent = detectIndent(raw, idx)
-      const gaExists = hasGA4(raw, GA_ID)
       const verification = pickVerificationForFile(file)
       const verificationExists = verification ? hasGoogleVerification(raw, verification) : false
 
-      if (gaExists && (!verification || verificationExists)) {
-        skipped.push({ file, reason: 'already has GA4 and/or verification' })
+      if (!verification || verificationExists) {
+        skipped.push({ file, reason: 'already has verification or no verification needed' })
         continue
       }
 
-      const block = buildInsertBlock({ indent, eol, gaId: gaExists ? null : GA_ID, googleVerification: verificationExists ? null : verification })
+      const block = buildInsertBlock({ indent, eol, googleVerification: verificationExists ? null : verification })
       if (!block.trim()) {
         skipped.push({ file, reason: 'nothing to insert' })
         continue
