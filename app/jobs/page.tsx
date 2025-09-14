@@ -152,7 +152,7 @@ export default function JobsPage() {
                   求人情報に関するご質問やご相談がございましたら、お気軽にお問い合わせください。
                 </p>
                 <Button
-                  className="bg-gradient-to-r from-kizuna-gold to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-gold text-black font-semibold py-2 px-6 rounded-lg transition-colors font-makinas-square"
+                  className="bg-gradient-to-r from-kizuna-gold to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-gold text-kizuna-dark font-semibold py-2 px-6 rounded-lg transition-colors font-makinas-square"
                   onClick={() => window.open("https://lin.ee/Y8DHYjk", "_blank")}
                 >
                   LINEでお問い合わせ

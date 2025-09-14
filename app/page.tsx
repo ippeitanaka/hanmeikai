@@ -38,8 +38,8 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-kizuna-gold/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div className={`transition-all duration-700 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'}`}>
-                <h1 className="text-2xl font-bold text-kizuna-dark tracking-wider drop-shadow-sm font-makinas">絆命会</h1>
-                <p className="text-kizuna-sage font-medium font-makinas text-sm">東洋医療専門学校 救急救命士学科 同窓会</p>
+                <h1 className="text-2xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text tracking-wider drop-shadow-sm font-makinas">絆命会</h1>
+                <p className="text-kizuna-gold font-medium font-makinas text-sm">東洋医療専門学校 救急救命士学科 同窓会</p>
               </div>
             </div>
 
@@ -58,7 +58,7 @@ export default function HomePage() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`text-kizuna-dark hover:text-kizuna-charcoal font-semibold py-2 px-4 rounded-lg hover:bg-kizuna-beige/20 transition-all duration-300 border-b-2 border-transparent hover:border-kizuna-gold font-makinas transform hover:scale-105 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}`}
+                    className={`text-kizuna-gold hover:text-kizuna-cream font-semibold py-2 px-4 rounded-lg hover:bg-kizuna-dark/20 transition-all duration-300 border-b-2 border-transparent hover:border-kizuna-gold font-makinas transform hover:scale-105 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}`}
                     style={{ transitionDelay: `${index * 100}ms` }}
                   >
                     {item.name}
@@ -69,8 +69,8 @@ export default function HomePage() {
                     href={item.href}
                     className={`font-semibold py-2 px-4 rounded-lg transition-all duration-300 border-b-2 font-makinas transform hover:scale-105 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'} ${
                       item.name === "ホーム"
-                        ? "text-kizuna-dark bg-kizuna-beige/30 border-kizuna-gold"
-                        : "text-kizuna-dark hover:text-kizuna-charcoal hover:bg-kizuna-beige/20 border-transparent hover:border-kizuna-gold"
+                        ? "text-kizuna-cream bg-kizuna-dark/30 border-kizuna-gold"
+                        : "text-kizuna-gold hover:text-kizuna-cream hover:bg-kizuna-dark/20 border-transparent hover:border-kizuna-gold"
                     }`}
                     style={{ transitionDelay: `${index * 100}ms` }}
                   >
@@ -129,10 +129,10 @@ export default function HomePage() {
 
             {/* Main Heading */}
             <div className={`space-y-4 transition-all duration-1000 delay-300 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-kizuna-dark leading-tight">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text leading-tight">
                 <span className="text-gradient-kizuna font-makinas">絆命会</span>
               </h1>
-              <p className="text-xl md:text-2xl text-kizuna-charcoal font-medium font-makinas">
+              <p className="text-xl md:text-2xl text-kizuna-gold font-medium font-makinas">
                 東洋医療専門学校 救急救命士学科 同窓会
               </p>
             </div>
@@ -149,14 +149,14 @@ export default function HomePage() {
             <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-1000 delay-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
               <Link 
                 href="/about"
-                className="group relative inline-flex items-center gap-2 bg-kizuna-dark text-kizuna-sand px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:bg-kizuna-charcoal transform hover:scale-105 shadow-kizuna"
+                className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-kizuna-gold to-kizuna-bronze text-kizuna-dark px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:from-kizuna-bronze hover:to-kizuna-gold transform hover:scale-105 shadow-kizuna"
               >
                 <span className="font-makinas">絆命会について</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 
                 href="/events"
-                className="group relative inline-flex items-center gap-2 bg-transparent text-kizuna-dark px-8 py-4 rounded-full font-semibold border-2 border-kizuna-dark transition-all duration-300 hover:bg-kizuna-dark hover:text-kizuna-sand transform hover:scale-105"
+                className="group relative inline-flex items-center gap-2 bg-transparent text-kizuna-gold px-8 py-4 rounded-full font-semibold border-2 border-kizuna-gold transition-all duration-300 hover:bg-kizuna-gold hover:text-kizuna-dark transform hover:scale-105"
               >
                 <Calendar className="w-5 h-5" />
                 <span className="font-makinas">イベント情報</span>
@@ -170,10 +170,10 @@ export default function HomePage() {
       <section className="relative z-10 py-20 bg-kizuna-cream/30">
         <div className="max-w-7xl mx-auto px-6">
           <div className={`text-center mb-16 transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-kizuna-dark mb-4 font-makinas">
+            <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-4 font-makinas">
               私たちの活動
             </h2>
-            <p className="text-lg text-kizuna-sage max-w-2xl mx-auto font-makinas">
+            <p className="text-lg text-kizuna-gold max-w-2xl mx-auto font-makinas">
               救急救命士として培った絆を大切に、様々な活動を通じて成長し続けています
             </p>
           </div>
@@ -209,10 +209,10 @@ export default function HomePage() {
                   <div className={`w-16 h-16 ${feature.color} rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`}>
                     <IconComponent className="w-8 h-8 text-kizuna-sand" />
                   </div>
-                  <h3 className="text-xl font-bold text-kizuna-dark mb-4 font-makinas">
+                  <h3 className="text-xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-4 font-makinas">
                     {feature.title}
                   </h3>
-                  <p className="text-kizuna-sage leading-relaxed font-makinas">
+                  <p className="text-kizuna-gold leading-relaxed font-makinas">
                     {feature.description}
                   </p>
                 </div>
@@ -242,14 +242,14 @@ export default function HomePage() {
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-kizuna-dark rounded-lg flex items-center justify-center group-hover:bg-kizuna-charcoal transition-colors">
-                      <IconComponent className="w-6 h-6 text-kizuna-sand" />
+                    <div className="w-12 h-12 bg-gradient-to-br from-kizuna-gold to-kizuna-bronze rounded-lg flex items-center justify-center group-hover:from-kizuna-bronze group-hover:to-kizuna-gold transition-colors">
+                      <IconComponent className="w-6 h-6 text-kizuna-dark" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-kizuna-dark group-hover:text-kizuna-charcoal transition-colors font-makinas">
+                      <h3 className="font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text transition-colors font-makinas">
                         {link.title}
                       </h3>
-                      <p className="text-sm text-kizuna-sage font-makinas">
+                      <p className="text-sm text-kizuna-gold font-makinas">
                         {link.description}
                       </p>
                     </div>
