@@ -1,7 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
-import Script from "next/script"
 import "./globals.css"
 import { getSeoConfig } from "@/lib/seo-config"
 
@@ -95,25 +94,25 @@ export default function RootLayout({
         {seo.googleSiteVerification && (
           <meta name="google-site-verification" content={seo.googleSiteVerification} />
         )}
-      </head>
-      <body className={inter.className}>
+        
         {/* Google Analytics */}
         {seo.gaId && (
           <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${seo.gaId}`}
-              strategy="afterInteractive"
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${seo.gaId}`} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${seo.gaId}');
+                `,
+              }}
             />
-            <Script id="ga4-init" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${seo.gaId}');
-              `}
-            </Script>
           </>
         )}
+      </head>
+      <body className={inter.className}>
         {children}
       </body>
     </html>
