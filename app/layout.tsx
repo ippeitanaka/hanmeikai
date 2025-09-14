@@ -94,6 +94,24 @@ export default function RootLayout({
         {seo.googleSiteVerification && (
           <meta name="google-site-verification" content={seo.googleSiteVerification} />
         )}
+        
+        {/* Google tag (gtag.js) */}
+        {seo.gaId && (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${seo.gaId}`}></script>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '${seo.gaId}');
+                `
+              }}
+            />
+          </>
+        )}
       </head>
       <body className={inter.className}>
         {children}
