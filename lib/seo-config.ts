@@ -10,7 +10,7 @@ export const SEO_MAPPING: Record<string, Partial<SeoConfig>> = {
   // 例: "public": { googleSiteVerification: "" },
 }
 
-export const DEFAULT_GA_ID = "G-2Q2MW2WLEV"
+export const DEFAULT_GA_ID = "G-3K0XSVMYL7"
 
 export function getSeoConfig(appKey = "default"): SeoConfig {
   const base: SeoConfig = {

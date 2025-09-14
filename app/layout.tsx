@@ -95,17 +95,18 @@ export default function RootLayout({
           <meta name="google-site-verification" content={seo.googleSiteVerification} />
         )}
         
-        {/* Google Analytics */}
+        {/* Google tag (gtag.js) */}
         {seo.gaId && (
           <>
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${seo.gaId}`} />
             <script
               dangerouslySetInnerHTML={{
                 __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${seo.gaId}');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '${seo.gaId}');
                 `
               }}
             />
