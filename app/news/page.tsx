@@ -84,13 +84,13 @@ export default function NewsPage() {
                 <div className="flex items-start space-x-6">
                   <div className="flex-shrink-0">
                     <div className="w-16 h-16 bg-gradient-to-br from-kizuna-dark to-black rounded-full flex items-center justify-center shadow-lg border-2 border-kizuna-gold">
-                      <Bell className="w-8 h-8 text-kizuna-light-gold" />
+                      <Bell className="w-8 h-8 text-white" />
                     </div>
                   </div>
 
                   <div className="flex-1">
                     <div className="flex items-center mb-4">
-                      <span className="bg-gradient-to-r from-kizuna-dark to-black text-kizuna-light-gold text-sm font-semibold px-3 py-1 rounded-full mr-4 border border-kizuna-gold font-makinas-square">
+                      <span className="bg-gradient-to-r from-kizuna-dark to-black text-white text-sm font-semibold px-3 py-1 rounded-full mr-4 border border-kizuna-gold font-makinas-square">
                         {format(new Date(item.published_date), "yyyy年MM月dd日", { locale: ja })}
                       </span>
                       {index === 0 && (

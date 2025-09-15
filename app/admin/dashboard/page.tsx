@@ -6,7 +6,8 @@ import { Calendar, Bell, Plus, Edit, Trash2, ExternalLink, Briefcase } from "luc
 import Link from "next/link"
 import { supabase, type Event, type News, type Job } from "@/lib/supabase"
 import Footer from "@/components/footer"
-import AdminNav from "@/components/admin-nav"
+import MainNav from "@/components/main-nav"
+import EnhancedVideoBackground from "@/components/enhanced-video-background"
 
 export default function AdminDashboard() {
   const [user, setUser] = useState<any>(null)
@@ -97,22 +98,42 @@ export default function AdminDashboard() {
     )
   }
 
+  const logout = async () => {
+    await supabase.auth.signOut()
+    router.push("/admin/login")
+  }
+
   if (!user) {
     return null
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50 to-stone-200">
-      {/* Navigation */}
-      <AdminNav title="絆命会 管理画面" userEmail={user.email} showLogout={true} />
+    <div className="min-h-screen bg-gradient-to-br from-stone-950 via-gray-900 to-black relative overflow-hidden font-makinas-square">
+      {/* Enhanced Background Video */}
+      <EnhancedVideoBackground />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
+      {/* Navigation */}
+      <MainNav currentPage="" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
+        {/* Dashboard Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-4 font-makinas-square">管理者ダッシュボード</h1>
+          <p className="text-kizuna-gold font-makinas-square">ユーザー: {user.email}</p>
+          <button
+            onClick={logout}
+            className="mt-4 bg-gradient-to-r from-red-800 to-red-900 hover:from-red-900 hover:to-red-800 text-white font-bold py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105 font-makinas-square"
+          >
+            ログアウト
+          </button>
+        </div>
+
         {/* Quick Links */}
         <div className="mb-8 flex flex-wrap gap-3 justify-center sm:justify-start">
           <Link
             href="/events"
             target="_blank"
-            className="inline-flex items-center bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg text-sm transition-colors"
+            className="inline-flex items-center bg-gradient-to-r from-kizuna-gold to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-gold text-black font-medium py-2 px-4 rounded-lg text-sm transition-colors font-makinas-square"
           >
             <ExternalLink className="w-4 h-4 mr-2" />
             イベントページを表示
@@ -120,7 +141,7 @@ export default function AdminDashboard() {
           <Link
             href="/news"
             target="_blank"
-            className="inline-flex items-center bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg text-sm transition-colors"
+            className="inline-flex items-center bg-gradient-to-r from-kizuna-gold to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-gold text-black font-medium py-2 px-4 rounded-lg text-sm transition-colors font-makinas-square"
           >
             <ExternalLink className="w-4 h-4 mr-2" />
             お知らせページを表示
@@ -128,7 +149,7 @@ export default function AdminDashboard() {
           <Link
             href="/jobs"
             target="_blank"
-            className="inline-flex items-center bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg text-sm transition-colors"
+            className="inline-flex items-center bg-gradient-to-r from-kizuna-gold to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-gold text-black font-medium py-2 px-4 rounded-lg text-sm transition-colors font-makinas-square"
           >
             <ExternalLink className="w-4 h-4 mr-2" />
             求人情報ページを表示
@@ -137,15 +158,15 @@ export default function AdminDashboard() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Events Management */}
-          <div className="bg-white rounded-2xl p-5 sm:p-8 shadow-xl border-4 border-emerald-700">
+          <div className="bg-gradient-to-br from-black/95 via-gray-900/95 to-kizuna-dark/95 backdrop-blur-sm rounded-2xl p-5 sm:p-8 shadow-2xl border-4 border-kizuna-gold">
             <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-              <h2 className="text-xl sm:text-2xl font-bold text-emerald-800 flex items-center">
-                <Calendar className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 flex-shrink-0" />
+              <h2 className="text-xl sm:text-2xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text flex items-center font-makinas-square">
+                <Calendar className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 flex-shrink-0 text-kizuna-gold" />
                 イベント管理
               </h2>
               <Link
                 href="/admin/events/new"
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg flex items-center transition-colors duration-300 text-sm sm:text-base"
+                className="bg-gradient-to-r from-kizuna-gold to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-gold text-black font-semibold py-2 px-4 rounded-lg flex items-center transition-colors duration-300 text-sm sm:text-base font-makinas-square"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 新規作成

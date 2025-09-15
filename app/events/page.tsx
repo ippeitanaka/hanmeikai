@@ -87,16 +87,16 @@ export default function EventsPage() {
                     <p className="text-lg text-gray-300 mb-6 leading-relaxed font-makinas-square">{event.description}</p>
 
                     <div className="flex flex-col sm:flex-row sm:space-x-8 space-y-4 sm:space-y-0">
-                      <div className="flex items-center text-kizuna-light-gold">
-                        <Calendar className="w-6 h-6 mr-3 text-kizuna-gold" />
+                      <div className="flex items-center text-white">
+                        <Calendar className="w-6 h-6 mr-3 text-white" />
                         <div>
                           <p className="font-semibold font-makinas-square">開催日</p>
                           <p className="text-lg font-makinas-square">{format(new Date(event.date), "yyyy年MM月dd日(E)", { locale: ja })}</p>
                         </div>
                       </div>
 
-                      <div className="flex items-center text-kizuna-light-gold">
-                        <MapPin className="w-6 h-6 mr-3 text-kizuna-gold" />
+                      <div className="flex items-center text-white">
+                        <MapPin className="w-6 h-6 mr-3 text-white" />
                         <div>
                           <p className="font-semibold font-makinas-square">会場</p>
                           <p className="text-lg font-makinas-square">{event.location}</p>
@@ -106,8 +106,8 @@ export default function EventsPage() {
                   </div>
 
                   <div className="lg:w-40 flex justify-center lg:justify-end mt-6 lg:mt-0">
-                    <div className="bg-gradient-to-br from-kizuna-dark to-black text-kizuna-light-gold rounded-2xl p-6 text-center shadow-lg border border-kizuna-gold">
-                      <Clock className="w-8 h-8 mx-auto mb-2" />
+                    <div className="bg-gradient-to-br from-kizuna-dark to-black text-white rounded-2xl p-6 text-center shadow-lg border border-kizuna-gold">
+                      <Clock className="w-8 h-8 mx-auto mb-2 text-white" />
                       <p className="text-sm font-semibold font-makinas-square">開催予定</p>
                     </div>
                   </div>

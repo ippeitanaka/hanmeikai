@@ -53,9 +53,9 @@ export default function AboutPage() {
         <div className="bg-gradient-to-br from-black/95 via-gray-900/95 to-kizuna-dark/95 backdrop-blur-sm rounded-3xl p-12 shadow-2xl border-4 border-kizuna-gold">
           <div className="prose prose-lg max-w-none">
             <div className="mb-8">
-              <p className="text-xl leading-relaxed text-kizuna-light-gold mb-6 font-makinas-square">
-                <strong className="text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text text-2xl font-makinas-square">絆命会（はんめいかい）</strong>は、東洋医療専門学校
-                救急救命士学科の卒業生によって組織された同窓会です。
+              <p className="text-xl leading-relaxed mb-6 font-makinas-square">
+                <strong className="text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text text-2xl font-makinas-square">絆命会（はんめいかい）</strong><span className="text-white">は、東洋医療専門学校
+                救急救命士学科の卒業生によって組織された同窓会です。</span>
               </p>
               <p className="text-lg leading-relaxed text-gray-300 mb-6 font-makinas-square">
                 在学中に培った"命をつなぐ"使命感と、仲間との"絆"を大切にしながら、世代を越えてつながり合える場を目指しています。
@@ -75,7 +75,7 @@ export default function AboutPage() {
             </div>
 
             <div className="bg-gradient-to-r from-kizuna-dark/90 to-black/90 backdrop-blur-sm p-8 rounded-2xl border-2 border-kizuna-gold">
-              <p className="text-lg leading-relaxed text-kizuna-light-gold font-medium text-center font-makinas-square">
+              <p className="text-lg leading-relaxed text-white font-medium text-center font-makinas-square">
                 絆命会は、みなさん一人ひとりの参加と協力によって育っていく組織です。より良い会を共につくっていけるよう、ご理解とご協力をよろしくお願いいたします。
               </p>
             </div>
@@ -90,7 +90,7 @@ export default function AboutPage() {
             rel="noopener noreferrer"
             className="group relative inline-flex items-center justify-center bg-gradient-to-r from-kizuna-dark via-black to-kizuna-dark hover:from-black hover:via-kizuna-dark hover:to-black text-kizuna-light-gold font-bold py-4 px-12 rounded-full text-xl shadow-xl transform hover:scale-105 transition-all duration-300 border-4 border-kizuna-gold backdrop-blur-sm font-makinas-square"
           >
-            <Users className="w-6 h-6 mr-3" />
+            <Users className="w-6 h-6 mr-3 text-white" />
             <span className="relative z-10">絆命会に参加する</span>
             <div className="absolute inset-0 bg-gradient-to-r from-kizuna-gold/20 to-kizuna-bronze/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </a>
