@@ -172,7 +172,7 @@ export default function JobsPage() {
                   variant="outline"
                   size="sm"
                   onClick={closeJobPreview}
-                  className="flex items-center gap-2 bg-transparent border-kizuna-gold text-kizuna-gold hover:bg-kizuna-dark/30 font-makinas-square"
+                  className="flex items-center gap-2 bg-transparent border-kizuna-gold text-kizuna-gold hover:bg-kizuna-dark/30 hover:text-white font-makinas-square"
                 >
                   <X className="w-4 h-4" />
                   閉じる
@@ -237,7 +237,7 @@ export default function JobsPage() {
                     <h4 className="font-semibold text-white mb-3 font-makinas-square">求人詳細資料</h4>
                     <div className="flex gap-3">
                       <Button
-                        className="bg-gradient-to-r from-kizuna-dark to-black hover:from-black hover:to-kizuna-dark text-white font-semibold py-2 px-4 rounded-lg transition-colors flex items-center gap-2 border border-kizuna-gold font-makinas-square"
+                        className="bg-gradient-to-r from-kizuna-dark to-black hover:from-black hover:to-kizuna-dark text-white font-semibold py-2 px-4 rounded-lg transition-colors flex items-center gap-2 border border-kizuna-gold font-makinas-square hover:text-white"
                         onClick={() => {
                           openPdfPreview(selectedJob.pdf_url!)
                           closeJobPreview()
@@ -248,7 +248,7 @@ export default function JobsPage() {
                       </Button>
                       <Button
                         variant="outline"
-                        className="border-kizuna-gold text-kizuna-gold hover:bg-kizuna-dark/30 font-semibold py-2 px-4 rounded-lg transition-colors flex items-center gap-2 bg-transparent font-makinas-square"
+                        className="border-kizuna-gold text-kizuna-gold hover:bg-kizuna-dark/30 hover:text-white font-semibold py-2 px-4 rounded-lg transition-colors flex items-center gap-2 bg-transparent font-makinas-square"
                         onClick={() => window.open(selectedJob.pdf_url, "_blank")}
                       >
                         <Download className="w-4 h-4" />
@@ -273,7 +273,7 @@ export default function JobsPage() {
                     variant="outline"
                     size="sm"
                     onClick={() => window.open(previewPdf, "_blank")}
-                    className="flex items-center gap-2 border-kizuna-gold text-kizuna-gold hover:bg-kizuna-dark/30 bg-transparent font-makinas-square"
+                    className="flex items-center gap-2 border-kizuna-gold text-kizuna-gold hover:bg-kizuna-dark/30 hover:text-white bg-transparent font-makinas-square"
                   >
                     <Download className="w-4 h-4" />
                     ダウンロード
@@ -282,7 +282,7 @@ export default function JobsPage() {
                     variant="outline"
                     size="sm"
                     onClick={closePdfPreview}
-                    className="flex items-center gap-2 bg-transparent border-kizuna-gold text-kizuna-gold hover:bg-kizuna-dark/30 font-makinas-square"
+                    className="flex items-center gap-2 bg-transparent border-kizuna-gold text-kizuna-gold hover:bg-kizuna-dark/30 hover:text-white font-makinas-square"
                   >
                     <X className="w-4 h-4" />
                     閉じる
