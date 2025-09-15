@@ -63,9 +63,9 @@ export default function MainNav({ currentPage }: MainNavProps) {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`font-medium text-sm py-2 px-3 rounded-lg transition-all duration-300 border-b-2 font-makinas-square ${
+                  className={`font-medium text-sm py-2 px-4 rounded-full transition-all duration-300 border-2 font-makinas-square ${
                     item.name === currentPage
-                      ? "text-kizuna-light-gold bg-kizuna-dark/30 border-kizuna-gold"
+                      ? "text-black bg-gradient-to-r from-kizuna-gold via-kizuna-light-gold to-kizuna-gold border-kizuna-gold shadow-xl font-bold"
                       : "text-kizuna-gold hover:text-kizuna-light-gold hover:bg-kizuna-dark/30 border-transparent hover:border-kizuna-gold"
                   }`}
                 >
@@ -94,10 +94,10 @@ export default function MainNav({ currentPage }: MainNavProps) {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className={`font-medium text-sm py-1 px-2 rounded transition-all duration-300 font-makinas-square ${
+                      className={`font-medium text-sm py-1 px-3 rounded-full transition-all duration-300 border font-makinas-square ${
                         item.name === currentPage
-                          ? "text-kizuna-light-gold bg-kizuna-dark/30"
-                          : "text-kizuna-gold hover:text-kizuna-light-gold hover:bg-kizuna-dark/30"
+                          ? "text-black bg-gradient-to-r from-kizuna-gold via-kizuna-light-gold to-kizuna-gold border-kizuna-gold shadow-lg font-bold"
+                          : "text-kizuna-gold hover:text-kizuna-light-gold hover:bg-kizuna-dark/30 border-transparent hover:border-kizuna-gold"
                       }`}
                     >
                       {item.name}
@@ -121,10 +121,10 @@ export default function MainNav({ currentPage }: MainNavProps) {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className={`font-medium text-sm py-1 px-2 rounded transition-all duration-300 font-makinas-square ${
+                      className={`font-medium text-sm py-1 px-3 rounded-full transition-all duration-300 border font-makinas-square ${
                         item.name === currentPage
-                          ? "text-kizuna-light-gold bg-kizuna-dark/30"
-                          : "text-kizuna-gold hover:text-kizuna-light-gold hover:bg-kizuna-dark/30"
+                          ? "text-black bg-gradient-to-r from-kizuna-gold via-kizuna-light-gold to-kizuna-gold border-kizuna-gold shadow-lg font-bold"
+                          : "text-kizuna-gold hover:text-kizuna-light-gold hover:bg-kizuna-dark/30 border-transparent hover:border-kizuna-gold"
                       }`}
                     >
                       {item.name}
