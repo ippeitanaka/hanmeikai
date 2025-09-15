@@ -48,17 +48,6 @@ export default function Footer() {
               © 2003 Hanmeikai. All rights reserved.
             </Link>
             <div className="w-32 h-0.5 bg-gradient-to-r from-kizuna-gold to-kizuna-beige mx-auto md:ml-auto md:mr-0 rounded-full"></div>
-
-            {/* 求人情報メニュー */}
-            <div>
-              <Link
-                href="/jobs"
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-kizuna-beige to-kizuna-gold text-kizuna-dark font-semibold rounded-full shadow-kizuna hover:from-kizuna-gold hover:to-kizuna-beige transform hover:scale-105 transition-all duration-300 border border-kizuna-beige/20"
-              >
-                <span className="mr-2">�</span>
-                <span className="font-makinas">求人情報</span>
-              </Link>
-            </div>
           </div>
         </div>
 

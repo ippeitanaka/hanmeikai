@@ -88,10 +88,10 @@ export default function AboutPage() {
             href="https://lin.ee/Y8DHYjk"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative inline-flex items-center justify-center bg-gradient-to-r from-kizuna-dark via-black to-kizuna-dark hover:from-black hover:via-kizuna-dark hover:to-black text-kizuna-light-gold font-bold py-4 px-12 rounded-full text-xl shadow-xl transform hover:scale-105 transition-all duration-300 border-4 border-kizuna-gold backdrop-blur-sm font-makinas-square"
+            className="group relative inline-flex items-center justify-center bg-gradient-to-r from-kizuna-dark via-black to-kizuna-dark hover:from-black hover:via-kizuna-dark hover:to-black text-white font-bold py-4 px-12 rounded-full text-xl shadow-xl transform hover:scale-105 transition-all duration-300 border-4 border-kizuna-gold backdrop-blur-sm font-makinas-square"
           >
             <Users className="w-6 h-6 mr-3 text-white" />
-            <span className="relative z-10">絆命会に参加する</span>
+            <span className="relative z-10 text-white">絆命会に参加する</span>
             <div className="absolute inset-0 bg-gradient-to-r from-kizuna-gold/20 to-kizuna-bronze/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </a>
         </div>

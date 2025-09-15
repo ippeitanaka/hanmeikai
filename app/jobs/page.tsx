@@ -75,7 +75,7 @@ export default function JobsPage() {
                 <CardContent className="p-8">
                   <FileText className="w-16 h-16 mx-auto text-kizuna-gold mb-4" />
                   <h3 className="text-xl font-bold text-kizuna-light-gold mb-2 font-makinas-square">現在、求人情報はありません</h3>
-                  <p className="text-gray-300 font-makinas-square">新しい求人情報が追加されるまでお待ちください。</p>
+                  <p className="text-white font-makinas-square">新しい求人情報が追加されるまでお待ちください。</p>
                 </CardContent>
               </Card>
             </div>
@@ -95,24 +95,24 @@ export default function JobsPage() {
                   <CardContent className="p-6">
                     <div className="space-y-3 mb-6">
                       {job.company && (
-                        <div className="flex items-center gap-2 text-gray-300 font-makinas-square">
+                        <div className="flex items-center gap-2 text-white font-makinas-square">
                           <Building className="w-4 h-4" />
                           <span>{job.company}</span>
                         </div>
                       )}
                       {job.location && (
-                        <div className="flex items-center gap-2 text-gray-300 font-makinas-square">
+                        <div className="flex items-center gap-2 text-white font-makinas-square">
                           <MapPin className="w-4 h-4" />
                           <span>{job.location}</span>
                         </div>
                       )}
                       {job.employment_type && (
-                        <div className="flex items-center gap-2 text-gray-300 font-makinas-square">
+                        <div className="flex items-center gap-2 text-white font-makinas-square">
                           <User className="w-4 h-4" />
                           <span>{job.employment_type}</span>
                         </div>
                       )}
-                      <div className="flex items-center gap-2 text-gray-400 text-sm font-makinas-square">
+                      <div className="flex items-center gap-2 text-white text-sm font-makinas-square">
                         <Calendar className="w-4 h-4" />
                         <span>掲載日: {new Date(job.created_at).toLocaleDateString("ja-JP")}</span>
                       </div>
@@ -148,7 +148,7 @@ export default function JobsPage() {
             <Card className="bg-gradient-to-br from-black/95 via-gray-900/95 to-kizuna-dark/95 backdrop-blur-sm shadow-xl border-2 border-kizuna-gold max-w-2xl mx-auto">
               <CardContent className="p-8">
                 <h2 className="text-2xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-4 font-makinas-square">お問い合わせ</h2>
-                <p className="text-gray-300 mb-4 font-makinas-square">
+                <p className="text-white mb-4 font-makinas-square">
                   求人情報に関するご質問やご相談がございましたら、お気軽にお問い合わせください。
                 </p>
                 <Button
@@ -187,7 +187,7 @@ export default function JobsPage() {
                         <Building className="w-5 h-5 text-kizuna-gold" />
                         <h4 className="font-semibold text-kizuna-light-gold font-makinas-square">会社・組織名</h4>
                       </div>
-                      <p className="text-gray-300 font-makinas-square">{selectedJob.company}</p>
+                      <p className="text-white font-makinas-square">{selectedJob.company}</p>
                     </div>
                   )}
 
@@ -197,7 +197,7 @@ export default function JobsPage() {
                         <MapPin className="w-5 h-5 text-kizuna-gold" />
                         <h4 className="font-semibold text-kizuna-light-gold font-makinas-square">勤務地</h4>
                       </div>
-                      <p className="text-gray-300 font-makinas-square">{selectedJob.location}</p>
+                      <p className="text-white font-makinas-square">{selectedJob.location}</p>
                     </div>
                   )}
 
@@ -207,7 +207,7 @@ export default function JobsPage() {
                         <User className="w-5 h-5 text-kizuna-gold" />
                         <h4 className="font-semibold text-kizuna-light-gold font-makinas-square">雇用形態</h4>
                       </div>
-                      <p className="text-gray-300 font-makinas-square">{selectedJob.employment_type}</p>
+                      <p className="text-white font-makinas-square">{selectedJob.employment_type}</p>
                     </div>
                   )}
 
@@ -216,7 +216,7 @@ export default function JobsPage() {
                       <Calendar className="w-5 h-5 text-kizuna-gold" />
                       <h4 className="font-semibold text-kizuna-light-gold font-makinas-square">掲載日</h4>
                     </div>
-                    <p className="text-gray-300 font-makinas-square">{new Date(selectedJob.created_at).toLocaleDateString("ja-JP")}</p>
+                    <p className="text-white font-makinas-square">{new Date(selectedJob.created_at).toLocaleDateString("ja-JP")}</p>
                   </div>
                 </div>
 
@@ -227,7 +227,7 @@ export default function JobsPage() {
                       求人概要
                     </h4>
                     <div className="bg-gradient-to-br from-kizuna-dark/50 to-black/50 p-4 rounded-lg border border-kizuna-gold/30">
-                      <p className="text-gray-300 leading-relaxed whitespace-pre-line font-makinas-square">{selectedJob.description}</p>
+                      <p className="text-white leading-relaxed whitespace-pre-line font-makinas-square">{selectedJob.description}</p>
                     </div>
                   </div>
                 )}

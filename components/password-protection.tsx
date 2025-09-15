@@ -46,21 +46,33 @@ export default function PasswordProtection({ children, correctPassword }: Passwo
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-700 flex items-center justify-center p-4">
-      <Card className={`w-full max-w-md shadow-2xl border-2 border-amber-400 ${isShaking ? "animate-pulse" : ""}`}>
-        <CardHeader className="text-center bg-gradient-to-r from-emerald-700 to-emerald-600 text-white rounded-t-lg">
+    <div className="min-h-screen bg-gradient-to-br from-stone-950 via-gray-900 to-black flex items-center justify-center p-4 relative overflow-hidden font-makinas-square">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 25% 25%, #B8A082 2px, transparent 2px),
+                           radial-gradient(circle at 75% 75%, #D4B896 2px, transparent 2px)`,
+            backgroundSize: "50px 50px",
+          }}
+        />
+      </div>
+      
+      <Card className={`w-full max-w-md shadow-2xl border-4 border-kizuna-gold backdrop-blur-sm bg-gradient-to-br from-black/95 via-gray-900/95 to-kizuna-dark/95 ${isShaking ? "animate-pulse" : ""}`}>
+        <CardHeader className="text-center bg-gradient-to-r from-kizuna-dark to-black text-white rounded-t-lg border-b-2 border-kizuna-gold">
           <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-amber-400 rounded-full flex items-center justify-center">
-              <Lock className="w-8 h-8 text-emerald-900" />
+            <div className="w-16 h-16 bg-gradient-to-br from-kizuna-gold to-kizuna-bronze rounded-full flex items-center justify-center shadow-xl">
+              <Lock className="w-8 h-8 text-black" />
             </div>
           </div>
-          <CardTitle className="text-2xl font-bold">求人情報</CardTitle>
-          <p className="text-emerald-100">会員専用ページです</p>
+          <CardTitle className="text-2xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text font-makinas-square">求人情報</CardTitle>
+          <p className="text-kizuna-gold font-makinas-square">会員専用ページです</p>
         </CardHeader>
         <CardContent className="p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="text-sm font-medium text-kizuna-gold font-makinas-square">
                 パスワードを入力してください
               </label>
               <div className="relative">
@@ -70,24 +82,24 @@ export default function PasswordProtection({ children, correctPassword }: Passwo
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="パスワードを入力"
-                  className="pr-10 border-2 border-emerald-200 focus:border-emerald-500"
+                  className="pr-10 border-2 border-kizuna-gold/50 bg-black/50 text-white focus:border-kizuna-gold focus:ring-2 focus:ring-kizuna-gold/20 font-makinas-square"
                   required
                 />
-                <button
+                                <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-kizuna-gold hover:text-kizuna-light-gold"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
             </div>
-            {error && <div className="text-red-600 text-sm text-center bg-red-50 p-2 rounded">{error}</div>}
+            {error && <div className="text-red-300 text-sm text-center bg-red-900/50 p-2 rounded border border-red-500 font-makinas-square">{error}</div>}
             <Button
               type="submit"
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+              className="w-full bg-gradient-to-r from-kizuna-gold to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-gold text-black font-bold py-3 transition-all duration-300 transform hover:scale-105 shadow-xl font-makinas-square"
             >
-              アクセスする
+              ログイン
             </Button>
           </form>
         </CardContent>
