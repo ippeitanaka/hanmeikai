@@ -15,27 +15,28 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-kizuna relative overflow-hidden font-makinas">
+    <div className="min-h-screen bg-gradient-to-br from-stone-950 via-gray-900 to-black relative overflow-hidden font-makinas-square">
       {/* Enhanced Background Video */}
       <AutoPlayVideoBackground />
 
       {/* Navigation */}
-      <nav className="relative z-50 glass-effect border-b border-kizuna-beige/30">
+      <nav className="relative z-50 bg-gradient-to-r from-black via-kizuna-dark to-black shadow-2xl border-b-4 border-kizuna-gold">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
-              {/* Logo */}
+              {/* Logo Container - Rectangular Liner Style */}
               <div className="relative group">
-                <div className="w-16 h-16 bg-kizuna-dark rounded-full flex items-center justify-center shadow-kizuna border-2 border-kizuna-beige/20 transform group-hover:scale-110 transition-all duration-300">
-                  <Image 
-                    src="/icon-192.png" 
-                    alt="絆命会ロゴ" 
-                    width={40} 
-                    height={40}
-                    className="rounded-full"
+                <div className="w-32 h-20 bg-gradient-to-r from-kizuna-gold via-kizuna-light-gold to-kizuna-gold flex items-center justify-center shadow-2xl border-4 border-black transform group-hover:scale-105 transition-all duration-300 rounded-lg overflow-hidden">
+                  <Image
+                    src="/images/kizuna-logo-transparent.png"
+                    alt="絆命会ロゴ"
+                    width={120}
+                    height={72}
+                    className="object-contain"
+                    priority
                   />
                 </div>
-                <div className="absolute inset-0 bg-kizuna-gold/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-kizuna-gold rounded-lg blur-xl opacity-20 animate-pulse" />
               </div>
               <div className={`transition-all duration-700 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'}`}>
                 <h1 className="text-2xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text tracking-wider drop-shadow-sm font-makinas">絆命会</h1>
@@ -166,19 +167,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="relative z-10 py-20 bg-kizuna-cream/30">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className={`text-center mb-16 transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-4 font-makinas">
-              私たちの活動
-            </h2>
-            <p className="text-lg text-kizuna-gold max-w-2xl mx-auto font-makinas">
-              救急救命士として培った絆を大切に、様々な活動を通じて成長し続けています
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Features Section */}
+        <section className="relative py-32 px-4 bg-gradient-to-b from-black via-kizuna-dark to-black border-y-4 border-kizuna-gold/30">
+          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-gray-900/95 to-black/95"></div>
+          <div className="relative max-w-7xl mx-auto">
+            <div className="text-center mb-20">
+              <h2 className="text-5xl md:text-6xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-6 font-makinas-square">
+                私たちの活動
+              </h2>
+              <p className="text-xl text-kizuna-gold max-w-3xl mx-auto leading-relaxed font-makinas-square">
+                日本と世界をつなぐ架け橋として、様々な分野で活動しています
+              </p>
+            </div>          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
                 icon: Users,
@@ -203,16 +203,16 @@ export default function HomePage() {
               return (
                 <div
                   key={feature.title}
-                  className={`group glass-effect rounded-2xl p-8 transition-all duration-500 hover:shadow-kizuna-lg transform hover:scale-105 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
-                  style={{ transitionDelay: `${index * 200}ms` }}
+                  className={`group bg-gradient-to-br from-black/95 via-gray-900/95 to-kizuna-dark/95 backdrop-blur-sm rounded-2xl p-8 transition-all duration-500 shadow-2xl border-2 border-kizuna-gold hover:shadow-3xl transform hover:scale-105 animate-fade-in-up`}
+                  data-delay={index * 200}
                 >
-                  <div className={`w-16 h-16 ${feature.color} rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className="w-8 h-8 text-kizuna-sand" />
+                  <div className={`w-16 h-16 bg-gradient-to-br from-kizuna-gold to-kizuna-bronze rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`}>
+                    <IconComponent className="w-8 h-8 text-kizuna-dark" />
                   </div>
-                  <h3 className="text-xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-4 font-makinas">
+                  <h3 className="text-xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-4 font-makinas-square">
                     {feature.title}
                   </h3>
-                  <p className="text-kizuna-gold leading-relaxed font-makinas">
+                  <p className="text-kizuna-gold leading-relaxed font-makinas-square">
                     {feature.description}
                   </p>
                 </div>
@@ -223,7 +223,7 @@ export default function HomePage() {
       </section>
 
       {/* Quick Links Section */}
-      <section className="relative z-10 py-20">
+      <section className="relative z-10 py-20 bg-gradient-to-b from-kizuna-dark via-black to-kizuna-dark border-y-2 border-kizuna-gold/30">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
@@ -238,18 +238,18 @@ export default function HomePage() {
                   key={link.title}
                   href={link.href}
                   target={link.href.startsWith('http') ? '_blank' : undefined}
-                  className={`group glass-effect rounded-xl p-6 transition-all duration-300 hover:shadow-kizuna transform hover:scale-105 border border-kizuna-beige/20 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
+                  className={`group bg-gradient-to-br from-black/95 via-gray-900/95 to-kizuna-dark/95 backdrop-blur-sm rounded-xl p-6 transition-all duration-300 shadow-2xl border-2 border-kizuna-gold hover:shadow-3xl transform hover:scale-105 animate-fade-in-up`}
+                  data-delay={index * 100}
                 >
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-kizuna-gold to-kizuna-bronze rounded-lg flex items-center justify-center group-hover:from-kizuna-bronze group-hover:to-kizuna-gold transition-colors">
                       <IconComponent className="w-6 h-6 text-kizuna-dark" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text transition-colors font-makinas">
+                      <h3 className="font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text transition-colors font-makinas-square">
                         {link.title}
                       </h3>
-                      <p className="text-sm text-kizuna-gold font-makinas">
+                      <p className="text-sm text-kizuna-gold font-makinas-square">
                         {link.description}
                       </p>
                     </div>
