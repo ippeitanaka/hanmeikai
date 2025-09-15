@@ -74,7 +74,7 @@ export default function JobsPage() {
               <Card className="bg-gradient-to-br from-black/95 via-gray-900/95 to-kizuna-dark/95 backdrop-blur-sm shadow-xl border-2 border-kizuna-gold max-w-md mx-auto">
                 <CardContent className="p-8">
                   <FileText className="w-16 h-16 mx-auto text-kizuna-gold mb-4" />
-                  <h3 className="text-xl font-bold text-kizuna-light-gold mb-2 font-makinas-square">現在、求人情報はありません</h3>
+                  <h3 className="text-xl font-bold text-white mb-2 font-makinas-square">現在、求人情報はありません</h3>
                   <p className="text-white font-makinas-square">新しい求人情報が追加されるまでお待ちください。</p>
                 </CardContent>
               </Card>
@@ -185,7 +185,7 @@ export default function JobsPage() {
                     <div className="bg-gradient-to-br from-kizuna-dark/50 to-black/50 p-4 rounded-lg border border-kizuna-gold/30">
                       <div className="flex items-center gap-2 mb-2">
                         <Building className="w-5 h-5 text-kizuna-gold" />
-                        <h4 className="font-semibold text-kizuna-light-gold font-makinas-square">会社・組織名</h4>
+                        <h4 className="font-semibold text-white font-makinas-square">会社・組織名</h4>
                       </div>
                       <p className="text-white font-makinas-square">{selectedJob.company}</p>
                     </div>
@@ -195,7 +195,7 @@ export default function JobsPage() {
                     <div className="bg-gradient-to-br from-kizuna-dark/50 to-black/50 p-4 rounded-lg border border-kizuna-gold/30">
                       <div className="flex items-center gap-2 mb-2">
                         <MapPin className="w-5 h-5 text-kizuna-gold" />
-                        <h4 className="font-semibold text-kizuna-light-gold font-makinas-square">勤務地</h4>
+                        <h4 className="font-semibold text-white font-makinas-square">勤務地</h4>
                       </div>
                       <p className="text-white font-makinas-square">{selectedJob.location}</p>
                     </div>
@@ -205,7 +205,7 @@ export default function JobsPage() {
                     <div className="bg-gradient-to-br from-kizuna-dark/50 to-black/50 p-4 rounded-lg border border-kizuna-gold/30">
                       <div className="flex items-center gap-2 mb-2">
                         <User className="w-5 h-5 text-kizuna-gold" />
-                        <h4 className="font-semibold text-kizuna-light-gold font-makinas-square">雇用形態</h4>
+                        <h4 className="font-semibold text-white font-makinas-square">雇用形態</h4>
                       </div>
                       <p className="text-white font-makinas-square">{selectedJob.employment_type}</p>
                     </div>
@@ -214,7 +214,7 @@ export default function JobsPage() {
                   <div className="bg-gradient-to-br from-kizuna-dark/50 to-black/50 p-4 rounded-lg border border-kizuna-gold/30">
                     <div className="flex items-center gap-2 mb-2">
                       <Calendar className="w-5 h-5 text-kizuna-gold" />
-                      <h4 className="font-semibold text-kizuna-light-gold font-makinas-square">掲載日</h4>
+                      <h4 className="font-semibold text-white font-makinas-square">掲載日</h4>
                     </div>
                     <p className="text-white font-makinas-square">{new Date(selectedJob.created_at).toLocaleDateString("ja-JP")}</p>
                   </div>
@@ -222,7 +222,7 @@ export default function JobsPage() {
 
                 {selectedJob.description && (
                   <div className="mb-6">
-                    <h4 className="font-semibold text-kizuna-light-gold mb-3 flex items-center gap-2 font-makinas-square">
+                    <h4 className="font-semibold text-white mb-3 flex items-center gap-2 font-makinas-square">
                       <FileText className="w-5 h-5 text-kizuna-gold" />
                       求人概要
                     </h4>
@@ -234,10 +234,10 @@ export default function JobsPage() {
 
                 {selectedJob.pdf_url && (
                   <div className="border-t border-kizuna-gold/30 pt-6">
-                    <h4 className="font-semibold text-kizuna-light-gold mb-3 font-makinas-square">求人詳細資料</h4>
+                    <h4 className="font-semibold text-white mb-3 font-makinas-square">求人詳細資料</h4>
                     <div className="flex gap-3">
                       <Button
-                        className="bg-gradient-to-r from-kizuna-dark to-black hover:from-black hover:to-kizuna-dark text-kizuna-light-gold font-semibold py-2 px-4 rounded-lg transition-colors flex items-center gap-2 border border-kizuna-gold font-makinas-square"
+                        className="bg-gradient-to-r from-kizuna-dark to-black hover:from-black hover:to-kizuna-dark text-white font-semibold py-2 px-4 rounded-lg transition-colors flex items-center gap-2 border border-kizuna-gold font-makinas-square"
                         onClick={() => {
                           openPdfPreview(selectedJob.pdf_url!)
                           closeJobPreview()
@@ -267,7 +267,7 @@ export default function JobsPage() {
           <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
             <div className="bg-gradient-to-br from-black via-gray-900 to-kizuna-dark rounded-lg shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col border-2 border-kizuna-gold">
               <div className="flex justify-between items-center p-4 border-b border-kizuna-gold bg-gradient-to-r from-black to-kizuna-dark">
-                <h3 className="text-lg font-semibold text-kizuna-light-gold font-makinas-square">求人資料プレビュー</h3>
+                <h3 className="text-lg font-semibold text-white font-makinas-square">求人資料プレビュー</h3>
                 <div className="flex gap-2">
                   <Button
                     variant="outline"
