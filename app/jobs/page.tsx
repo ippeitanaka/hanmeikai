@@ -86,8 +86,8 @@ export default function JobsPage() {
                   key={job.id}
                   className="bg-gradient-to-br from-black/95 via-gray-900/95 to-kizuna-dark/95 backdrop-blur-sm shadow-xl border-2 border-kizuna-gold hover:shadow-2xl transition-all duration-300"
                 >
-                  <CardHeader className="bg-gradient-to-r from-kizuna-dark to-black text-kizuna-light-gold rounded-t-lg">
-                    <CardTitle className="text-xl font-bold flex items-center gap-2 font-makinas-square">
+                  <CardHeader className="bg-gradient-to-r from-kizuna-dark to-black text-white rounded-t-lg">
+                    <CardTitle className="text-xl font-bold flex items-center gap-2 font-makinas-square text-white">
                       <Briefcase className="w-5 h-5" />
                       {job.title}
                     </CardTitle>
@@ -167,7 +167,7 @@ export default function JobsPage() {
           <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
             <div className="bg-gradient-to-br from-black via-gray-900 to-kizuna-dark rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto border-2 border-kizuna-gold">
               <div className="sticky top-0 bg-gradient-to-r from-black to-kizuna-dark border-b border-kizuna-gold p-6 flex justify-between items-center">
-                <h3 className="text-2xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text font-makinas-square">{selectedJob.title}</h3>
+                <h3 className="text-2xl font-bold text-white font-makinas-square">{selectedJob.title}</h3>
                 <Button
                   variant="outline"
                   size="sm"

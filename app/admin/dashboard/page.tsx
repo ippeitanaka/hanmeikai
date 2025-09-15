@@ -92,8 +92,8 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+      <div className="min-h-screen bg-gradient-kizuna-dark flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-kizuna-gold"></div>
       </div>
     )
   }
@@ -108,7 +108,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-950 via-gray-900 to-black relative overflow-hidden font-makinas-square">
+    <div className="min-h-screen bg-gradient-kizuna-dark relative overflow-hidden font-makinas-square">
       {/* Enhanced Background Video */}
       <EnhancedVideoBackground />
 
@@ -118,11 +118,11 @@ export default function AdminDashboard() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
         {/* Dashboard Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-4 font-makinas-square">管理者ダッシュボード</h1>
+          <h1 className="text-4xl font-bold text-white mb-4 font-makinas-square">管理者ダッシュボード</h1>
           <p className="text-kizuna-gold font-makinas-square">ユーザー: {user.email}</p>
           <button
             onClick={logout}
-            className="mt-4 bg-gradient-to-r from-red-800 to-red-900 hover:from-red-900 hover:to-red-800 text-white font-bold py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105 font-makinas-square"
+            className="mt-4 bg-gradient-to-r from-kizuna-dark to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-dark text-white font-bold py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105 font-makinas-square border border-kizuna-gold"
           >
             ログアウト
           </button>
@@ -175,16 +175,16 @@ export default function AdminDashboard() {
 
             <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-1">
               {events.length === 0 ? (
-                <div className="text-center py-8 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-                  <Calendar className="w-12 h-12 mx-auto text-gray-400 mb-2" />
-                  <p className="text-gray-500">イベントがありません</p>
-                  <p className="text-sm text-gray-400 mt-1">「新規作成」から追加できます</p>
+                <div className="text-center py-8 bg-kizuna-dark/50 rounded-lg border-2 border-dashed border-kizuna-gold/30">
+                  <Calendar className="w-12 h-12 mx-auto text-kizuna-gold mb-2" />
+                  <p className="text-white">イベントがありません</p>
+                  <p className="text-sm text-kizuna-beige mt-1">「新規作成」から追加できます</p>
                 </div>
               ) : (
                 events.map((event) => (
-                  <div key={event.id} className="bg-gray-50 rounded-lg p-4 border-2 border-gray-200">
-                    <h3 className="font-semibold text-gray-800 mb-2 line-clamp-1">{event.title}</h3>
-                    <p className="text-sm text-gray-600 mb-3">{new Date(event.date).toLocaleDateString("ja-JP")}</p>
+                  <div key={event.id} className="bg-kizuna-dark/50 rounded-lg p-4 border-2 border-kizuna-bronze/30">
+                    <h3 className="font-semibold text-white mb-2 line-clamp-1">{event.title}</h3>
+                    <p className="text-sm text-kizuna-beige mb-3">{new Date(event.date).toLocaleDateString("ja-JP")}</p>
                     <div className="flex flex-wrap gap-2">
                       <Link
                         href={`/admin/events/edit/${event.id}`}
@@ -208,15 +208,15 @@ export default function AdminDashboard() {
           </div>
 
           {/* News Management */}
-          <div className="bg-white rounded-2xl p-5 sm:p-8 shadow-xl border-4 border-emerald-700">
+          <div className="bg-kizuna-dark/80 rounded-2xl p-5 sm:p-8 shadow-xl border-4 border-kizuna-gold">
             <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-              <h2 className="text-xl sm:text-2xl font-bold text-emerald-800 flex items-center">
+              <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center">
                 <Bell className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 flex-shrink-0" />
                 お知らせ管理
               </h2>
               <Link
                 href="/admin/news/new"
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg flex items-center transition-colors duration-300 text-sm sm:text-base"
+                className="bg-kizuna-gold hover:bg-kizuna-bronze text-kizuna-dark font-semibold py-2 px-4 rounded-lg flex items-center transition-colors duration-300 text-sm sm:text-base"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 新規作成
@@ -225,16 +225,16 @@ export default function AdminDashboard() {
 
             <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-1">
               {news.length === 0 ? (
-                <div className="text-center py-8 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-                  <Bell className="w-12 h-12 mx-auto text-gray-400 mb-2" />
-                  <p className="text-gray-500">お知らせがありません</p>
-                  <p className="text-sm text-gray-400 mt-1">「新規作成」から追加できます</p>
+                <div className="text-center py-8 bg-kizuna-dark/50 rounded-lg border-2 border-dashed border-kizuna-gold/30">
+                  <Bell className="w-12 h-12 mx-auto text-kizuna-gold mb-2" />
+                  <p className="text-white">お知らせがありません</p>
+                  <p className="text-sm text-kizuna-beige mt-1">「新規作成」から追加できます</p>
                 </div>
               ) : (
                 news.map((item) => (
-                  <div key={item.id} className="bg-gray-50 rounded-lg p-4 border-2 border-gray-200">
-                    <h3 className="font-semibold text-gray-800 mb-2 line-clamp-1">{item.title}</h3>
-                    <p className="text-sm text-gray-600 mb-3">
+                  <div key={item.id} className="bg-kizuna-dark/50 rounded-lg p-4 border-2 border-kizuna-bronze/30">
+                    <h3 className="font-semibold text-white mb-2 line-clamp-1">{item.title}</h3>
+                    <p className="text-sm text-kizuna-beige mb-3">
                       {new Date(item.published_date).toLocaleDateString("ja-JP")}
                     </p>
                     <div className="flex flex-wrap gap-2">
@@ -260,15 +260,15 @@ export default function AdminDashboard() {
           </div>
 
           {/* Jobs Management - 新規追加 */}
-          <div className="bg-white rounded-2xl p-5 sm:p-8 shadow-xl border-4 border-emerald-700">
+          <div className="bg-kizuna-dark/80 rounded-2xl p-5 sm:p-8 shadow-xl border-4 border-kizuna-gold">
             <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-              <h2 className="text-xl sm:text-2xl font-bold text-emerald-800 flex items-center">
+              <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center">
                 <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 flex-shrink-0" />
                 求人管理
               </h2>
               <Link
                 href="/admin/jobs/new"
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg flex items-center transition-colors duration-300 text-sm sm:text-base"
+                className="bg-kizuna-gold hover:bg-kizuna-bronze text-kizuna-dark font-semibold py-2 px-4 rounded-lg flex items-center transition-colors duration-300 text-sm sm:text-base"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 新規作成
@@ -277,17 +277,17 @@ export default function AdminDashboard() {
 
             <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-1">
               {jobs.length === 0 ? (
-                <div className="text-center py-8 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-                  <Briefcase className="w-12 h-12 mx-auto text-gray-400 mb-2" />
-                  <p className="text-gray-500">求人情報がありません</p>
-                  <p className="text-sm text-gray-400 mt-1">「新規作成」から追加できます</p>
+                <div className="text-center py-8 bg-kizuna-dark/50 rounded-lg border-2 border-dashed border-kizuna-gold/30">
+                  <Briefcase className="w-12 h-12 mx-auto text-kizuna-gold mb-2" />
+                  <p className="text-white">求人情報がありません</p>
+                  <p className="text-sm text-kizuna-beige mt-1">「新規作成」から追加できます</p>
                 </div>
               ) : (
                 jobs.map((job) => (
-                  <div key={job.id} className="bg-gray-50 rounded-lg p-4 border-2 border-gray-200">
-                    <h3 className="font-semibold text-gray-800 mb-2 line-clamp-1">{job.title}</h3>
-                    <p className="text-sm text-gray-600 mb-1">{job.company}</p>
-                    <p className="text-sm text-gray-600 mb-3">{job.location}</p>
+                  <div key={job.id} className="bg-kizuna-dark/50 rounded-lg p-4 border-2 border-kizuna-bronze/30">
+                    <h3 className="font-semibold text-white mb-2 line-clamp-1">{job.title}</h3>
+                    <p className="text-sm text-kizuna-beige mb-1">{job.company}</p>
+                    <p className="text-sm text-kizuna-beige mb-3">{job.location}</p>
                     <div className="flex flex-wrap gap-2">
                       <Link
                         href={`/admin/jobs/edit/${job.id}`}
@@ -314,7 +314,7 @@ export default function AdminDashboard() {
         <div className="text-center mt-8 sm:mt-12">
           <Link
             href="/"
-            className="text-emerald-700 hover:text-emerald-900 font-semibold transition-colors duration-300"
+            className="text-kizuna-gold hover:text-kizuna-beige font-semibold transition-colors duration-300"
           >
             ホームページに戻る
           </Link>
