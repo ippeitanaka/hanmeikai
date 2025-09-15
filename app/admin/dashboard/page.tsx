@@ -210,8 +210,8 @@ export default function AdminDashboard() {
           {/* News Management */}
           <div className="bg-kizuna-dark/80 rounded-2xl p-5 sm:p-8 shadow-xl border-4 border-kizuna-gold">
             <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-              <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center">
-                <Bell className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 flex-shrink-0" />
+              <h2 className="text-xl sm:text-2xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text flex items-center font-makinas-square">
+                <Bell className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 flex-shrink-0 text-kizuna-gold" />
                 お知らせ管理
               </h2>
               <Link
@@ -262,8 +262,8 @@ export default function AdminDashboard() {
           {/* Jobs Management - 新規追加 */}
           <div className="bg-kizuna-dark/80 rounded-2xl p-5 sm:p-8 shadow-xl border-4 border-kizuna-gold">
             <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-              <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center">
-                <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 flex-shrink-0" />
+              <h2 className="text-xl sm:text-2xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text flex items-center font-makinas-square">
+                <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 flex-shrink-0 text-kizuna-gold" />
                 求人管理
               </h2>
               <Link

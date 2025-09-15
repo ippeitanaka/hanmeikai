@@ -120,7 +120,7 @@ export default function JobsPage() {
 
                     <div className="space-y-2">
                       <Button
-                        className="w-full bg-gradient-to-r from-kizuna-dark to-black hover:from-black hover:to-kizuna-dark text-kizuna-light-gold font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 border border-kizuna-gold font-makinas-square"
+                        className="w-full bg-gradient-to-r from-kizuna-dark to-black hover:from-black hover:to-kizuna-dark text-kizuna-gold font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 border border-kizuna-gold font-makinas-square"
                         onClick={() => openJobPreview(job)}
                       >
                         <Eye className="w-4 h-4" />
