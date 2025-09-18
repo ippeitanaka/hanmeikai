@@ -236,41 +236,41 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50 to-stone-200">
+    <div className="min-h-screen bg-gradient-to-br from-black via-kizuna-dark to-black font-makinas-square">
       <AdminNav title="求人情報 編集" userEmail="" showLogout={false} />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
         <div className="mb-6">
           <Link
             href="/admin/dashboard"
-            className="inline-flex items-center text-emerald-700 hover:text-emerald-900 font-medium transition-colors"
+            className="inline-flex items-center text-kizuna-gold hover:text-kizuna-cream font-semibold transition-colors duration-300 font-makinas"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             管理画面に戻る
           </Link>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xl border-4 border-emerald-700">
-          <h1 className="text-2xl sm:text-3xl font-bold text-emerald-800 mb-8">求人情報 編集</h1>
+        <div className="bg-gradient-to-br from-black/90 via-gray-900/90 to-kizuna-dark/90 rounded-2xl p-8 shadow-2xl border-4 border-kizuna-gold">
+          <h1 className="text-2xl sm:text-3xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-8 font-makinas">求人情報 編集</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="title" className="block text-sm font-medium text-emerald-700 mb-2">
-                求人タイトル *
+              <label htmlFor="title" className="block text-lg font-semibold text-kizuna-gold mb-2 font-makinas">
+                求人タイトル <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 id="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-4 py-3 border border-emerald-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 border-2 border-kizuna-gold rounded-lg focus:outline-none focus:border-kizuna-light-gold focus:ring-2 focus:ring-kizuna-gold/40 bg-black text-white transition-all duration-300 font-makinas"
                 placeholder="例: 救急救命士募集"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="company" className="block text-sm font-medium text-emerald-700 mb-2">
+              <label htmlFor="company" className="block text-lg font-semibold text-kizuna-gold mb-2 font-makinas">
                 会社・組織名
               </label>
               <input
@@ -278,14 +278,14 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
                 id="company"
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
-                className="w-full px-4 py-3 border border-emerald-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 border-2 border-kizuna-gold rounded-lg focus:outline-none focus:border-kizuna-light-gold focus:ring-2 focus:ring-kizuna-gold/40 bg-black text-white transition-all duration-300 font-makinas"
                 placeholder="例: 大阪市消防局"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="location" className="block text-sm font-medium text-emerald-700 mb-2">
+                <label htmlFor="location" className="block text-lg font-semibold text-kizuna-gold mb-2 font-makinas">
                   勤務地
                 </label>
                 <input
@@ -293,20 +293,20 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
                   id="location"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full px-4 py-3 border border-emerald-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border-2 border-kizuna-gold rounded-lg focus:outline-none focus:border-kizuna-light-gold focus:ring-2 focus:ring-kizuna-gold/40 bg-black text-white transition-all duration-300 font-makinas"
                   placeholder="例: 大阪府大阪市"
                 />
               </div>
 
               <div>
-                <label htmlFor="employmentType" className="block text-sm font-medium text-emerald-700 mb-2">
+                <label htmlFor="employmentType" className="block text-lg font-semibold text-kizuna-gold mb-2 font-makinas">
                   雇用形態
                 </label>
                 <select
                   id="employmentType"
                   value={employmentType}
                   onChange={(e) => setEmploymentType(e.target.value)}
-                  className="w-full px-4 py-3 border border-emerald-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border-2 border-kizuna-gold rounded-lg focus:outline-none focus:border-kizuna-light-gold focus:ring-2 focus:ring-kizuna-gold/40 bg-black text-white transition-all duration-300 font-makinas"
                 >
                   <option value="">選択してください</option>
                   <option value="正社員">正社員</option>
@@ -319,7 +319,7 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
             </div>
 
             <div>
-              <label htmlFor="description" className="block text-sm font-medium text-emerald-700 mb-2">
+              <label htmlFor="description" className="block text-lg font-semibold text-kizuna-gold mb-2 font-makinas">
                 求人概要
               </label>
               <textarea
@@ -327,27 +327,27 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={4}
-                className="w-full px-4 py-3 border border-emerald-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 border-2 border-kizuna-gold rounded-lg focus:outline-none focus:border-kizuna-light-gold focus:ring-2 focus:ring-kizuna-gold/40 bg-black text-white transition-all duration-300 font-makinas"
                 placeholder="求人の概要や特徴を入力してください（任意）"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-emerald-700 mb-2">求人詳細PDF</label>
+              <label className="block text-lg font-semibold text-kizuna-gold mb-2 font-makinas">求人詳細PDF</label>
 
               {job.pdf_url && (
-                <div className="mb-4 p-4 bg-emerald-50 rounded-lg border border-emerald-200">
+                <div className="mb-4 p-4 bg-kizuna-gold/10 rounded-lg border border-kizuna-gold">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <FileText className="w-5 h-5 text-emerald-600 mr-2" />
-                      <span className="text-emerald-700">{job.pdf_filename || "求人詳細.pdf"}</span>
+                      <FileText className="w-5 h-5 text-kizuna-gold mr-2" />
+                      <span className="text-kizuna-gold">{job.pdf_filename || "求人詳細.pdf"}</span>
                     </div>
                     <div className="flex gap-2">
                       <a
                         href={job.pdf_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-blue-500 hover:bg-blue-600 text-white text-sm py-1 px-3 rounded flex items-center transition-colors"
+                        className="bg-kizuna-gold hover:bg-kizuna-bronze text-kizuna-dark text-sm py-1 px-3 rounded flex items-center transition-colors font-makinas"
                       >
                         <Download className="w-3 h-3 mr-1" />
                         表示
@@ -355,7 +355,7 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
                       <button
                         type="button"
                         onClick={deletePDF}
-                        className="bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-3 rounded flex items-center transition-colors"
+                        className="bg-red-600 hover:bg-red-700 text-white text-sm py-1 px-3 rounded flex items-center transition-colors font-makinas"
                       >
                         <Trash2 className="w-3 h-3 mr-1" />
                         削除
@@ -365,23 +365,23 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
                 </div>
               )}
 
-              <div className="border-2 border-dashed border-emerald-300 rounded-lg p-6">
+              <div className="border-2 border-dashed border-kizuna-gold rounded-lg p-6">
                 <div className="text-center">
-                  <FileText className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
+                  <FileText className="w-12 h-12 text-kizuna-gold mx-auto mb-4" />
                   <div className="flex flex-col items-center">
                     <label
                       htmlFor="pdf"
-                      className="cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+                      className="cursor-pointer bg-kizuna-gold hover:bg-kizuna-bronze text-kizuna-dark font-medium py-2 px-4 rounded-lg transition-colors font-makinas"
                     >
                       <Upload className="w-4 h-4 inline mr-2" />
                       {job.pdf_url ? "PDFファイルを変更" : "PDFファイルを選択"}
                     </label>
                     <input type="file" id="pdf" accept=".pdf" onChange={handleFileChange} className="hidden" />
-                    <p className="text-sm text-emerald-600 mt-2">最大10MBまで</p>
+                    <p className="text-sm text-kizuna-gold mt-2">最大10MBまで</p>
                   </div>
                   {pdfFile && (
-                    <div className="mt-4 p-3 bg-emerald-50 rounded-lg">
-                      <p className="text-sm text-emerald-700">選択されたファイル: {pdfFile.name}</p>
+                    <div className="mt-4 p-3 bg-kizuna-gold/10 rounded-lg">
+                      <p className="text-sm text-kizuna-gold">選択されたファイル: {pdfFile.name}</p>
                     </div>
                   )}
                 </div>
@@ -389,9 +389,9 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
             </div>
 
             {uploadProgress > 0 && uploadProgress < 100 && (
-              <div className="w-full bg-gray-200 rounded-full h-2">
+              <div className="w-full bg-kizuna-gold/20 rounded-full h-2">
                 <div
-                  className="bg-emerald-600 h-2 rounded-full transition-all duration-300"
+                  className="bg-kizuna-gold h-2 rounded-full transition-all duration-300"
                   style={{ width: `${uploadProgress}%` }}
                 ></div>
               </div>
@@ -400,7 +400,7 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
             {/* Error Message */}
             {error && (
               <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4">
-                <p className="text-red-700">{error}</p>
+                <p className="text-red-700 font-makinas">{error}</p>
               </div>
             )}
 
@@ -408,7 +408,7 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
               <button
                 type="button"
                 onClick={handleDelete}
-                className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg flex items-center justify-center"
+                className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg flex items-center justify-center font-makinas"
               >
                 <Trash2 className="w-5 h-5 mr-2" />
                 削除
@@ -417,10 +417,10 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
               <button
                 type="submit"
                 disabled={saving}
-                className="flex-1 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-400 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center"
+                className="flex-1 bg-gradient-to-r from-kizuna-gold to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-gold text-kizuna-dark font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg flex items-center justify-center font-makinas"
               >
                 {saving ? (
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-kizuna-dark mr-2"></div>
                 ) : (
                   <Save className="w-5 h-5 mr-2" />
                 )}
