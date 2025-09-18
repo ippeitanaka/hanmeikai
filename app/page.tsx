@@ -40,7 +40,10 @@ export default function HomePage() {
               </div>
               <div className={`transition-all duration-700 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'}`}>
                 <h1 className="text-2xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text tracking-wider drop-shadow-sm font-makinas">絆命会</h1>
-                <p className="text-kizuna-gold font-medium font-makinas text-sm">東洋医療専門学校 救急救命士学科 同窓会</p>
+                <p className="text-kizuna-gold font-medium font-makinas text-sm text-center">
+                  <span className="block sm:inline">東洋医療専門学校 救急救命士学科</span>
+                  <span className="block">同窓会</span>
+                </p>
               </div>
             </div>
 
@@ -134,16 +137,18 @@ export default function HomePage() {
                 <span className="text-gradient-kizuna font-makinas">絆命会</span>
               </h1>
               <p className="text-xl md:text-2xl text-kizuna-gold font-medium font-makinas">
-                東洋医療専門学校 救急救命士学科 同窓会
+                <span className="block md:inline">東洋医療専門学校 救急救命士学科</span>
+                <span className="block">同窓会</span>
               </p>
             </div>
 
             {/* Mission Statement */}
             <div className={`max-w-3xl mx-auto space-y-6 transition-all duration-1000 delay-500 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-              <p className="text-lg md:text-xl text-kizuna-sage leading-relaxed font-makinas">
+              <p className="text-lg md:text-xl text-white leading-relaxed font-makinas">
                 大阪から全国へ、命を救う使命を胸に。<br />
                 救急救命士として共に歩む仲間たちと、絆を深め、未来を創造する。
-              </p>
+                  {/* 文字色を白色に変更 */}
+                </p>
             </div>
 
             {/* CTA Buttons */}
