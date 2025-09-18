@@ -1,3 +1,9 @@
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
 import React from "react";
 
 // テキスト内の改行を<br>に変換し、URLをリンク化する
