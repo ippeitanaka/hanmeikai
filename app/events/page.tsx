@@ -5,6 +5,7 @@ import { Calendar, MapPin, Clock, ArrowLeft, Handshake, Heart } from "lucide-rea
 import Link from "next/link"
 import Image from "next/image"
 import { supabase, type Event } from "@/lib/supabase"
+import { formatTextWithLinks } from "@/lib/utils"
 import { format } from "date-fns"
 import { ja } from "date-fns/locale"
 import Footer from "@/components/footer"
@@ -84,7 +85,9 @@ export default function EventsPage() {
                 <div className="flex flex-col lg:flex-row lg:items-start lg:space-x-8">
                   <div className="flex-1">
                     <h2 className="text-3xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-4 font-makinas-square">{event.title}</h2>
-                    <p className="text-lg text-gray-300 mb-6 leading-relaxed font-makinas-square">{event.description}</p>
+                    <p className="text-lg text-gray-300 mb-6 leading-relaxed font-makinas-square">
+                      {formatTextWithLinks(event.description)}
+                    </p>
 
                     <div className="flex flex-col sm:flex-row sm:space-x-8 space-y-4 sm:space-y-0">
                       <div className="flex items-center text-white">

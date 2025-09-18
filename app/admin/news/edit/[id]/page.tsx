@@ -8,6 +8,8 @@ import { Calendar, ArrowLeft, Save, Handshake, Trash2 } from "lucide-react"
 import Link from "next/link"
 import { supabase } from "@/lib/supabase"
 import Footer from "@/components/footer"
+import VideoBackground from "@/components/video-background"
+import MainNav from "@/components/main-nav"
 
 export default function EditNewsPage({ params }: { params: Promise<{ id: string }> }) {
   const [title, setTitle] = useState("")
@@ -111,52 +113,27 @@ export default function EditNewsPage({ params }: { params: Promise<{ id: string 
 
   if (fetchLoading) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+      <div className="min-h-screen bg-gradient-to-br from-stone-950 via-gray-900 to-black flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-kizuna-gold"></div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50 to-stone-200 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 25% 25%, #059669 2px, transparent 2px),
-                           radial-gradient(circle at 75% 75%, #d97706 2px, transparent 2px)`,
-            backgroundSize: "50px 50px",
-          }}
-        />
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-stone-950 via-gray-900 to-black relative overflow-hidden font-makinas-square">
+      {/* Background Video */}
+      <VideoBackground />
 
       {/* Navigation */}
-      <nav className="relative z-50 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-800 shadow-2xl border-b-4 border-amber-400">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-6">
-              <div className="relative group">
-                <div className="w-16 h-16 bg-gradient-to-br from-amber-300 via-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-2xl border-4 border-emerald-900">
-                  <Handshake className="w-8 h-8 text-emerald-900" />
-                </div>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-amber-100 tracking-wider">絆命会 管理画面</h1>
-                <p className="text-emerald-200 text-sm">お知らせ編集</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <MainNav currentPage="お知らせ管理" />
 
       {/* Main Content */}
-      <main className="relative z-10 max-w-4xl mx-auto px-6 py-12">
+      <main className="relative z-10 max-w-3xl mx-auto px-6 py-16">
         {/* Back Button */}
         <div className="mb-8">
           <Link
             href="/admin/dashboard"
-            className="inline-flex items-center text-emerald-700 hover:text-emerald-900 font-semibold transition-colors duration-300"
+            className="inline-flex items-center text-kizuna-gold hover:text-kizuna-light-gold font-semibold transition-colors duration-300 font-makinas-square"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
             ダッシュボードに戻る
@@ -165,16 +142,16 @@ export default function EditNewsPage({ params }: { params: Promise<{ id: string 
 
         {/* Page Header */}
         <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold text-emerald-800 mb-2">お知らせ編集</h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-amber-500 mx-auto rounded-full"></div>
+          <h1 className="text-4xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-2 tracking-wide drop-shadow-md font-makinas-square">お知らせ編集</h1>
+          <div className="w-24 h-1 bg-gradient-to-r from-kizuna-gold to-kizuna-bronze mx-auto rounded-full mb-4"></div>
         </div>
 
         {/* Form */}
-        <div className="bg-white rounded-2xl p-8 shadow-xl border-4 border-emerald-700">
+        <div className="bg-gradient-to-br from-black/95 via-gray-900/95 to-kizuna-dark/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border-4 border-kizuna-gold">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Title */}
             <div>
-              <label htmlFor="title" className="block text-lg font-semibold text-emerald-700 mb-2">
+              <label htmlFor="title" className="block text-lg font-semibold text-kizuna-gold mb-2">
                 タイトル <span className="text-red-500">*</span>
               </label>
               <input
@@ -183,14 +160,14 @@ export default function EditNewsPage({ params }: { params: Promise<{ id: string 
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                className="w-full px-4 py-3 border-2 border-emerald-300 rounded-lg focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all duration-300"
+                className="w-full px-4 py-3 border-2 border-kizuna-gold rounded-lg focus:outline-none focus:border-kizuna-light-gold focus:ring-2 focus:ring-kizuna-gold/40 bg-black text-white transition-all duration-300"
                 placeholder="例: 絆命会公式LINEアカウント開設のお知らせ"
               />
             </div>
 
             {/* Content */}
             <div>
-              <label htmlFor="content" className="block text-lg font-semibold text-emerald-700 mb-2">
+              <label htmlFor="content" className="block text-lg font-semibold text-kizuna-gold mb-2">
                 内容 <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -199,7 +176,7 @@ export default function EditNewsPage({ params }: { params: Promise<{ id: string 
                 onChange={(e) => setContent(e.target.value)}
                 required
                 rows={8}
-                className="w-full px-4 py-3 border-2 border-emerald-300 rounded-lg focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all duration-300 resize-none"
+                className="w-full px-4 py-3 border-2 border-kizuna-gold rounded-lg focus:outline-none focus:border-kizuna-light-gold focus:ring-2 focus:ring-kizuna-gold/40 bg-black text-white transition-all duration-300 resize-none"
                 placeholder="お知らせの内容を入力してください"
               />
             </div>
@@ -208,9 +185,9 @@ export default function EditNewsPage({ params }: { params: Promise<{ id: string 
             <div>
               <label
                 htmlFor="publishedDate"
-                className="block text-lg font-semibold text-emerald-700 mb-2 flex items-center"
+                className="block text-lg font-semibold text-kizuna-gold mb-2 flex items-center"
               >
-                <Calendar className="w-5 h-5 mr-2 text-emerald-600" />
+                <Calendar className="w-5 h-5 mr-2 text-kizuna-gold" />
                 公開日 <span className="text-red-500 ml-1">*</span>
               </label>
               <input
@@ -219,14 +196,14 @@ export default function EditNewsPage({ params }: { params: Promise<{ id: string 
                 value={publishedDate}
                 onChange={(e) => setPublishedDate(e.target.value)}
                 required
-                className="w-full px-4 py-3 border-2 border-emerald-300 rounded-lg focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all duration-300"
+                className="w-full px-4 py-3 border-2 border-kizuna-gold rounded-lg focus:outline-none focus:border-kizuna-light-gold focus:ring-2 focus:ring-kizuna-gold/40 bg-black text-white transition-all duration-300"
               />
             </div>
 
             {/* Error Message */}
             {error && (
-              <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4">
-                <p className="text-red-700">{error}</p>
+              <div className="bg-red-900/20 border-2 border-red-400 rounded-lg p-4">
+                <p className="text-red-300">{error}</p>
               </div>
             )}
 
@@ -235,7 +212,7 @@ export default function EditNewsPage({ params }: { params: Promise<{ id: string 
               <button
                 type="button"
                 onClick={handleDelete}
-                className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg flex items-center"
+                className="bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg flex items-center"
               >
                 <Trash2 className="w-5 h-5 mr-2" />
                 削除
@@ -244,11 +221,11 @@ export default function EditNewsPage({ params }: { params: Promise<{ id: string 
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg flex items-center"
+                className="bg-gradient-to-r from-kizuna-gold to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-gold text-black font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg flex items-center"
               >
                 {loading ? (
                   <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-black mr-3"></div>
                     保存中...
                   </>
                 ) : (
