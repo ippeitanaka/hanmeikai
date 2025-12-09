@@ -27,27 +27,29 @@ export default function EventsPage() {
       if (error) {
         console.error("Error fetching events:", error)
       } else {
-        // 現在の日付を取得
+        // 現在の日付を取得（日本時間）
         const now = new Date()
-        now.setHours(0, 0, 0, 0) // 時刻をリセットして日付のみで比較
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
 
         // イベントを未来・過去で分類してソート
         const sortedEvents = (data || []).sort((a, b) => {
           const dateA = new Date(a.date)
           const dateB = new Date(b.date)
-          dateA.setHours(0, 0, 0, 0)
-          dateB.setHours(0, 0, 0, 0)
+          
+          // 日付のみを取得（時刻を0にする）
+          const dayA = new Date(dateA.getFullYear(), dateA.getMonth(), dateA.getDate())
+          const dayB = new Date(dateB.getFullYear(), dateB.getMonth(), dateB.getDate())
 
-          const isAPast = dateA < now
-          const isBPast = dateB < now
+          const isAPast = dayA < today
+          const isBPast = dayB < today
 
-          // 両方とも未来のイベントの場合：近い順
+          // 両方とも未来のイベント（今日を含む）の場合：近い順
           if (!isAPast && !isBPast) {
-            return dateA.getTime() - dateB.getTime()
+            return dayA.getTime() - dayB.getTime()
           }
           // 両方とも過去のイベントの場合：新しい順
           if (isAPast && isBPast) {
-            return dateB.getTime() - dateA.getTime()
+            return dayB.getTime() - dayA.getTime()
           }
           // 一方が未来、一方が過去の場合：未来を優先
           return isAPast ? 1 : -1
