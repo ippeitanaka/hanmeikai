@@ -22,12 +22,38 @@ export default function EventsPage() {
 
   const fetchEvents = async () => {
     try {
-      const { data, error } = await supabase.from("events").select("*").order("date", { ascending: true })
+      const { data, error } = await supabase.from("events").select("*")
 
       if (error) {
         console.error("Error fetching events:", error)
       } else {
-        setEvents(data || [])
+        // 現在の日付を取得
+        const now = new Date()
+        now.setHours(0, 0, 0, 0) // 時刻をリセットして日付のみで比較
+
+        // イベントを未来・過去で分類してソート
+        const sortedEvents = (data || []).sort((a, b) => {
+          const dateA = new Date(a.date)
+          const dateB = new Date(b.date)
+          dateA.setHours(0, 0, 0, 0)
+          dateB.setHours(0, 0, 0, 0)
+
+          const isAPast = dateA < now
+          const isBPast = dateB < now
+
+          // 両方とも未来のイベントの場合：近い順
+          if (!isAPast && !isBPast) {
+            return dateA.getTime() - dateB.getTime()
+          }
+          // 両方とも過去のイベントの場合：新しい順
+          if (isAPast && isBPast) {
+            return dateB.getTime() - dateA.getTime()
+          }
+          // 一方が未来、一方が過去の場合：未来を優先
+          return isAPast ? 1 : -1
+        })
+
+        setEvents(sortedEvents)
       }
     } catch (error) {
       console.error("Error:", error)
