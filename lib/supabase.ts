@@ -40,9 +40,9 @@ export type News = {
 export type Job = {
   id: string
   title: string
-  company: string
-  location: string
-  employment_type: string
+  company: string | null
+  location: string | null
+  employment_type: string | null
   description: string | null
   pdf_url: string | null
   pdf_filename: string | null

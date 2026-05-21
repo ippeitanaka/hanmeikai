@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { getSeoConfig } from "@/lib/seo-config"
@@ -7,6 +7,7 @@ import { getSeoConfig } from "@/lib/seo-config"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://kizunakai.com"),
   title: "絆命会 | 東洋医療専門学校 救急救命士学科 同窓会",
   description:
     "東洋医療専門学校 救急救命士学科の卒業生による同窓会「絆命会」の公式ホームページです。イベント情報、お知らせ、求人情報などをお届けします。",
@@ -47,15 +48,16 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
   },
   manifest: "/manifest.json",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
   verification: {
     google: "your-google-verification-code", // 必要に応じて設定
   },
-    generator: 'v0.dev'
+  generator: "v0.dev",
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 }
 
 export default function RootLayout({

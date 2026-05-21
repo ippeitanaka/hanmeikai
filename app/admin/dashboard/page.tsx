@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Calendar, Bell, Plus, Edit, Trash2, ExternalLink, Briefcase } from "lucide-react"
 import Link from "next/link"
-import { supabase, type Event, type News, type Job } from "@/lib/supabase"
+import { supabase, supabaseAdmin, type Event, type News, type Job } from "@/lib/supabase"
 import Footer from "@/components/footer"
 import MainNav from "@/components/main-nav"
 import EnhancedVideoBackground from "@/components/enhanced-video-background"
@@ -15,6 +15,7 @@ export default function AdminDashboard() {
   const [news, setNews] = useState<News[]>([])
   const [jobs, setJobs] = useState<Job[]>([])
   const [loading, setLoading] = useState(true)
+  const [actionError, setActionError] = useState("")
   const router = useRouter()
 
   useEffect(() => {
@@ -62,9 +63,12 @@ export default function AdminDashboard() {
 
   const deleteEvent = async (id: string) => {
     if (confirm("このイベントを削除しますか？")) {
-      const { error } = await supabase.from("events").delete().eq("id", id)
+      setActionError("")
+      const { error } = await supabaseAdmin.from("events").delete().eq("id", id)
 
-      if (!error) {
+      if (error) {
+        setActionError(`イベントの削除に失敗しました: ${error.message}`)
+      } else {
         fetchEvents()
       }
     }
@@ -72,9 +76,12 @@ export default function AdminDashboard() {
 
   const deleteNews = async (id: string) => {
     if (confirm("このお知らせを削除しますか？")) {
-      const { error } = await supabase.from("news").delete().eq("id", id)
+      setActionError("")
+      const { error } = await supabaseAdmin.from("news").delete().eq("id", id)
 
-      if (!error) {
+      if (error) {
+        setActionError(`お知らせの削除に失敗しました: ${error.message}`)
+      } else {
         fetchNews()
       }
     }
@@ -82,9 +89,12 @@ export default function AdminDashboard() {
 
   const deleteJob = async (id: string) => {
     if (confirm("この求人情報を削除しますか？")) {
-      const { error } = await supabase.from("jobs").delete().eq("id", id)
+      setActionError("")
+      const { error } = await supabaseAdmin.from("jobs").delete().eq("id", id)
 
-      if (!error) {
+      if (error) {
+        setActionError(`求人情報の削除に失敗しました: ${error.message}`)
+      } else {
         fetchJobs()
       }
     }
@@ -127,6 +137,12 @@ export default function AdminDashboard() {
             ログアウト
           </button>
         </div>
+
+        {actionError && (
+          <div className="mb-6 rounded-lg border-2 border-red-400 bg-red-950/80 px-4 py-3 text-sm text-red-100">
+            {actionError}
+          </div>
+        )}
 
         {/* Quick Links */}
         <div className="mb-8 flex flex-wrap gap-3 justify-center sm:justify-start">

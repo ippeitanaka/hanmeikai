@@ -131,7 +131,7 @@ export default function JobsPage() {
                         <Button
                           variant="outline"
                           className="w-full border-kizuna-gold text-kizuna-gold hover:bg-kizuna-dark/30 font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 bg-transparent font-makinas-square"
-                          onClick={() => openPdfPreview(job.pdf_url)}
+                          onClick={() => openPdfPreview(job.pdf_url!)}
                         >
                           <FileText className="w-4 h-4" />
                           資料を見る
@@ -249,7 +249,7 @@ export default function JobsPage() {
                       <Button
                         variant="outline"
                         className="border-kizuna-gold text-kizuna-gold hover:bg-kizuna-dark/30 hover:text-white font-semibold py-2 px-4 rounded-lg transition-colors flex items-center gap-2 bg-transparent font-makinas-square"
-                        onClick={() => window.open(selectedJob.pdf_url, "_blank")}
+                        onClick={() => window.open(selectedJob.pdf_url!, "_blank")}
                       >
                         <Download className="w-4 h-4" />
                         ダウンロード
