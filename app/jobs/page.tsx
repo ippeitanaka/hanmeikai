@@ -85,6 +85,19 @@ export default function JobsPage() {
               </span>
             </div>
           </a>
+
+          <div className="mb-7 flex items-center gap-4 sm:mb-8">
+            <div className="flex min-w-0 items-center gap-3">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#E8F7F4] text-[#087C73]">
+                <BriefcaseBusiness className="h-5 w-5" />
+              </span>
+              <h2 className="whitespace-nowrap text-xl font-black tracking-[-0.02em] text-[#112B3A] sm:text-2xl">
+                消防以外の求人情報
+              </h2>
+            </div>
+            <div className="h-px flex-1 bg-gradient-to-r from-[#B9DDD7] via-slate-200 to-transparent" />
+          </div>
+
           {loading ? (
             <LoadingState label="求人情報を読み込んでいます..." />
           ) : jobs.length === 0 ? (
