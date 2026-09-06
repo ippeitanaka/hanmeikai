@@ -16,7 +16,7 @@ export default function Footer() {
         <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
           <Link href="/" className="inline-flex items-center gap-3.5">
             <img
-              src="/images/school-emblem.webp?v=2"
+              src="/images/school-emblem.webp?v=3"
               alt="東洋医療専門学校 校章"
               className="h-16 w-16 object-contain"
             />
