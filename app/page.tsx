@@ -16,35 +16,33 @@ import {
 import MainNav from "@/components/main-nav"
 import Footer from "@/components/footer"
 
-const heroImage =
-  "https://images.unsplash.com/photo-1766325693423-69e9fe20605b?auto=format&fit=crop&fm=jpg&q=80&w=1800"
-const messageImage =
-  "https://images.unsplash.com/photo-1773139780700-bb9a1a859dc3?auto=format&fit=crop&fm=jpg&q=80&w=1800"
+const heroImage = "/images/home-hero.webp"
+const messageImage = "/images/home-message.webp"
 
 const activities = [
   {
     icon: UsersRound,
     title: "交流する",
     description: "卒業生同士の再会や情報交換を通して、つながりを深めます。",
-    image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=75",
+    image: "/images/home-activity-1.webp",
   },
   {
     icon: GraduationCap,
     title: "学ぶ",
     description: "研修会や勉強会を通して、現場に活きる学びを共有します。",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=75",
+    image: "/images/home-activity-2.webp",
   },
   {
     icon: Network,
     title: "つながる",
     description: "世代を越えたネットワークから、新しい相談や活動のきっかけを。",
-    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=75",
+    image: "/images/home-activity-3.webp",
   },
   {
     icon: BriefcaseBusiness,
     title: "活躍する",
     description: "求人・キャリア情報を通して、卒業生の次の挑戦を応援します。",
-    image: heroImage,
+    image: "/images/home-activity-4.webp",
   },
 ]
 
@@ -124,15 +122,7 @@ export default function HomePage() {
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: `url("${heroImage}")` }}
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-white via-white/10 to-transparent lg:from-white/65 lg:via-transparent" />
-              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#071C2A]/55 to-transparent" />
-              <div className="absolute bottom-8 right-7 max-w-xs text-right text-white sm:right-10">
-                <p className="text-2xl font-semibold leading-relaxed tracking-[0.08em] drop-shadow sm:text-3xl">
-                  卒業しても、
-                  <span className="block">仲間であり続ける。</span>
-                </p>
-                <p className="mt-4 text-[10px] font-extrabold tracking-[0.2em] text-white/80">FOR A BRIGHTER TOMORROW</p>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-white/75 via-white/10 to-transparent lg:from-white/45 lg:via-transparent" />
             </div>
           </div>
         </section>
