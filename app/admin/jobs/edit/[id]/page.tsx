@@ -217,7 +217,7 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
   if (loading) {
     return (
       <div className="min-h-screen bg-[#F7FBFC] text-[#112B3A] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#D8EFEB] border-t-[#0B9A82]"></div>
       </div>
     )
   }
@@ -336,7 +336,7 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
               <label className="block text-lg font-semibold text-slate-700 mb-2 font-makinas">求人詳細PDF</label>
 
               {job.pdf_url && (
-                <div className="mb-4 p-4 bg-kizuna-gold/10 rounded-lg border border-kizuna-gold">
+                <div className="mb-4 p-4 bg-[#F1FAF8] rounded-lg border border-[#B9DDD7]">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       <FileText className="w-5 h-5 text-slate-700 mr-2" />
@@ -365,7 +365,7 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
                 </div>
               )}
 
-              <div className="border-2 border-dashed border-kizuna-gold rounded-lg p-6">
+              <div className="border-2 border-dashed border-[#B9DDD7] rounded-lg p-6">
                 <div className="text-center">
                   <FileText className="w-12 h-12 text-slate-700 mx-auto mb-4" />
                   <div className="flex flex-col items-center">
@@ -380,7 +380,7 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
                     <p className="text-sm text-slate-700 mt-2">最大10MBまで</p>
                   </div>
                   {pdfFile && (
-                    <div className="mt-4 p-3 bg-kizuna-gold/10 rounded-lg">
+                    <div className="mt-4 p-3 bg-[#F1FAF8] rounded-lg">
                       <p className="text-sm text-slate-700">選択されたファイル: {pdfFile.name}</p>
                     </div>
                   )}
@@ -389,9 +389,9 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
             </div>
 
             {uploadProgress > 0 && uploadProgress < 100 && (
-              <div className="w-full bg-kizuna-gold/20 rounded-full h-2">
+              <div className="w-full bg-slate-200 rounded-full h-2">
                 <div
-                  className="bg-kizuna-gold h-2 rounded-full transition-all duration-300"
+                  className="bg-[#0B9A82] h-2 rounded-full transition-all duration-300"
                   style={{ width: `${uploadProgress}%` }}
                 ></div>
               </div>
@@ -417,7 +417,7 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
               <button
                 type="submit"
                 disabled={saving}
-                className="flex-1 bg-gradient-to-r from-kizuna-gold to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-gold text-kizuna-dark font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-sm flex items-center justify-center font-makinas"
+                className="flex-1 bg-gradient-to-r from-[#12B89E] to-[#087C73] text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-sm flex items-center justify-center font-makinas"
               >
                 {saving ? (
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-kizuna-dark mr-2"></div>
