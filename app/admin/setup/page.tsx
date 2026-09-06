@@ -93,7 +93,7 @@ export default function SupabaseSetupPage() {
 
           <form onSubmit={handleSave} className="space-y-8">
             {/* Supabase URL */}
-            <div className="bg-white p-6 rounded-2xl border-2 border-emerald-200 shadow-sm">
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
               <label htmlFor="supabaseUrl" className="block text-lg font-bold text-slate-700 mb-3 flex items-center">
                 <Database className="w-5 h-5 mr-3" />
                 Supabase URL
@@ -105,7 +105,7 @@ export default function SupabaseSetupPage() {
                   value={supabaseUrl}
                   onChange={(e) => setSupabaseUrl(e.target.value)}
                   required
-                  className="w-full px-4 py-4 border border-slate-200 rounded-xl focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-200 transition-all duration-300 font-mono text-base pr-12"
+                  className="w-full px-4 py-4 border border-slate-200 rounded-xl focus:outline-none focus:border-[#12A491] focus:ring-4 focus:ring-[#12A491]/10 transition-all duration-300 font-mono text-base pr-12"
                   placeholder="https://your-project-id.supabase.co"
                 />
                 {supabaseUrl && (
