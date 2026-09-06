@@ -6,6 +6,7 @@ import { useState } from "react"
 import { Database, Key, Shield, Save, ArrowLeft, Handshake, Heart, Copy, Check } from "lucide-react"
 import Link from "next/link"
 import Footer from "@/components/footer"
+import AdminNav from "@/components/admin-nav"
 
 export default function SupabaseSetupPage() {
   const [supabaseUrl, setSupabaseUrl] = useState("")
@@ -61,43 +62,10 @@ export default function SupabaseSetupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50 to-stone-200 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 25% 25%, #059669 2px, transparent 2px),
-                           radial-gradient(circle at 75% 75%, #d97706 2px, transparent 2px)`,
-            backgroundSize: "50px 50px",
-          }}
-        />
-      </div>
+    <div className="min-h-screen bg-[#F7FBFC] text-[#112B3A]">
 
       {/* Navigation */}
-      <nav className="relative z-50 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-800 shadow-2xl border-b-4 border-amber-400">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-6">
-              <div className="relative group">
-                <div className="w-20 h-20 bg-gradient-to-br from-amber-300 via-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-2xl border-4 border-emerald-900 transform group-hover:scale-110 transition-all duration-300">
-                  <div className="relative">
-                    <Handshake className="w-10 h-10 text-emerald-900" />
-                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center animate-pulse">
-                      <Heart className="w-3 h-3 text-white" />
-                    </div>
-                  </div>
-                </div>
-                <div className="absolute inset-0 bg-amber-400 rounded-full blur-xl opacity-30 animate-pulse" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold text-amber-100 tracking-wider drop-shadow-lg">絆命会</h1>
-                <p className="text-emerald-200 font-medium">Supabase環境変数設定</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <AdminNav title="絆命会 管理画面" subtitle="Supabase環境設定" />
 
       {/* Main Content */}
       <main className="relative z-10 max-w-3xl mx-auto px-6 py-20">
@@ -105,7 +73,7 @@ export default function SupabaseSetupPage() {
         <div className="mb-8">
           <Link
             href="/admin/login"
-            className="inline-flex items-center text-emerald-700 hover:text-emerald-900 font-semibold transition-colors duration-300"
+            className="inline-flex items-center text-slate-700 hover:text-[#087C73] font-semibold transition-colors duration-300"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
             管理者ログインに戻る
@@ -113,20 +81,20 @@ export default function SupabaseSetupPage() {
         </div>
 
         {/* Setup Form */}
-        <div className="bg-gradient-to-br from-white via-stone-50 to-amber-50 rounded-3xl p-10 shadow-2xl border-4 border-emerald-700">
-          <div className="text-center mb-10">
-            <div className="w-24 h-24 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg animate-pulse">
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_10px_30px_rgba(15,61,62,0.06)] sm:p-10">
+          <div className="mb-8">
+            <div className="w-24 h-24 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm animate-pulse">
               <Database className="w-12 h-12 text-white" />
             </div>
-            <h2 className="text-4xl font-bold text-emerald-800 mb-4">Supabase環境変数設定</h2>
+            <h2 className="text-4xl font-bold text-[#112B3A] mb-4">Supabase環境変数設定</h2>
             <p className="text-xl text-gray-600">Supabaseプロジェクトの接続情報を入力してください</p>
-            <div className="w-32 h-1 bg-gradient-to-r from-emerald-600 to-amber-500 mx-auto rounded-full mt-4"></div>
+            
           </div>
 
           <form onSubmit={handleSave} className="space-y-8">
             {/* Supabase URL */}
-            <div className="bg-white p-6 rounded-2xl border-2 border-emerald-200 shadow-lg">
-              <label htmlFor="supabaseUrl" className="block text-lg font-bold text-emerald-700 mb-3 flex items-center">
+            <div className="bg-white p-6 rounded-2xl border-2 border-emerald-200 shadow-sm">
+              <label htmlFor="supabaseUrl" className="block text-lg font-bold text-slate-700 mb-3 flex items-center">
                 <Database className="w-5 h-5 mr-3" />
                 Supabase URL
               </label>
@@ -137,14 +105,14 @@ export default function SupabaseSetupPage() {
                   value={supabaseUrl}
                   onChange={(e) => setSupabaseUrl(e.target.value)}
                   required
-                  className="w-full px-4 py-4 border-2 border-emerald-300 rounded-xl focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-200 transition-all duration-300 font-mono text-base pr-12"
+                  className="w-full px-4 py-4 border border-slate-200 rounded-xl focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-200 transition-all duration-300 font-mono text-base pr-12"
                   placeholder="https://your-project-id.supabase.co"
                 />
                 {supabaseUrl && (
                   <button
                     type="button"
                     onClick={() => copyToClipboard(supabaseUrl, "url")}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-emerald-600 hover:text-emerald-800 transition-colors"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#087C73] hover:text-[#112B3A] transition-colors"
                   >
                     {copiedField === "url" ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
                   </button>
@@ -156,7 +124,7 @@ export default function SupabaseSetupPage() {
             </div>
 
             {/* Anon Key */}
-            <div className="bg-white p-6 rounded-2xl border-2 border-blue-200 shadow-lg">
+            <div className="bg-white p-6 rounded-2xl border-2 border-blue-200 shadow-sm">
               <label htmlFor="anonKey" className="block text-lg font-bold text-blue-700 mb-3 flex items-center">
                 <Key className="w-5 h-5 mr-3" />
                 Anon Key (公開キー)
@@ -187,7 +155,7 @@ export default function SupabaseSetupPage() {
             </div>
 
             {/* Service Role Key */}
-            <div className="bg-red-50 p-6 rounded-2xl border-2 border-red-300 shadow-lg">
+            <div className="bg-red-50 p-6 rounded-2xl border-2 border-red-300 shadow-sm">
               <label htmlFor="serviceRoleKey" className="block text-lg font-bold text-red-700 mb-3 flex items-center">
                 <Shield className="w-5 h-5 mr-3" />
                 Service Role Key (秘密キー)
@@ -266,12 +234,12 @@ export default function SupabaseSetupPage() {
         {/* Next Steps */}
         {success && (
           <div className="text-center mt-8">
-            <div className="bg-white rounded-2xl p-6 shadow-xl border-2 border-emerald-300">
-              <h3 className="text-xl font-bold text-emerald-800 mb-4">🎉 次のステップ</h3>
+            <div className="bg-white rounded-2xl p-6 shadow-xl border border-slate-200">
+              <h3 className="text-xl font-bold text-[#112B3A] mb-4">🎉 次のステップ</h3>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/admin/login"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105"
+                  className="bg-[#087C73] hover:bg-[#076B65] text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105"
                 >
                   管理者ログイン
                 </Link>
