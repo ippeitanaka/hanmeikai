@@ -1,305 +1,126 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { BriefcaseBusiness, Building2, CalendarDays, Download, Eye, FileText, MapPin, MessageCircle, UserRound, X } from "lucide-react"
+import Footer from "@/components/footer"
 import MainNav from "@/components/main-nav"
 import PasswordProtection from "@/components/password-protection"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Download, FileText, Building, MapPin, Briefcase, Eye, X, Calendar, User } from "lucide-react"
+import { EmptyState, LoadingState, PublicPageHeader } from "@/components/public-page"
 import { supabase, type Job } from "@/lib/supabase"
 
 export default function JobsPage() {
-  const [jobListings, setJobListings] = useState<Job[]>([])
+  const [jobs, setJobs] = useState<Job[]>([])
   const [loading, setLoading] = useState(true)
-  const [previewPdf, setPreviewPdf] = useState<string | null>(null)
   const [selectedJob, setSelectedJob] = useState<Job | null>(null)
+  const [previewPdf, setPreviewPdf] = useState<string | null>(null)
 
   useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const { data, error } = await supabase.from("jobs").select("*").eq("is_active", true).order("created_at", { ascending: false })
+        if (error) console.error("Error fetching jobs:", error)
+        else setJobs(data || [])
+      } finally {
+        setLoading(false)
+      }
+    }
     fetchJobs()
   }, [])
 
-  const fetchJobs = async () => {
-    try {
-      const { data, error } = await supabase
-        .from("jobs")
-        .select("*")
-        .eq("is_active", true)
-        .order("created_at", { ascending: false })
-
-      if (error) {
-        console.error("Error fetching jobs:", error)
-      } else {
-        setJobListings(data || [])
-      }
-    } catch (error) {
-      console.error("Error:", error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const openJobPreview = (job: Job) => {
-    setSelectedJob(job)
-  }
-
-  const closeJobPreview = () => {
-    setSelectedJob(null)
-  }
-
-  const openPdfPreview = (pdfUrl: string) => {
-    setPreviewPdf(pdfUrl)
-  }
-
-  const closePdfPreview = () => {
-    setPreviewPdf(null)
-  }
-
   return (
     <PasswordProtection correctPassword="toyo119">
-      <div className="min-h-screen bg-gradient-to-br from-stone-950 via-gray-900 to-black font-makinas-square">
+      <div className="min-h-screen bg-white text-[#112B3A]">
         <MainNav currentPage="求人情報" />
+        <PublicPageHeader
+          eyebrow="CAREER"
+          title="求人情報"
+          description="絆命会会員向けに、救急救命士としての経験を活かせる求人・キャリア情報を掲載しています。"
+          icon={<BriefcaseBusiness className="h-6 w-6" />}
+        />
 
-        <div className="container mx-auto px-6 py-12">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-4 font-makinas-square">求人情報</h1>
-            <p className="text-kizuna-gold text-lg font-makinas-square">絆命会会員専用の求人情報です</p>
-          </div>
-
+        <main className="mx-auto max-w-[1200px] px-5 py-14 sm:px-8 sm:py-16 lg:px-10">
           {loading ? (
-            <div className="flex justify-center items-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-kizuna-gold"></div>
-            </div>
-          ) : jobListings.length === 0 ? (
-            <div className="text-center py-12">
-              <Card className="bg-gradient-to-br from-black/95 via-gray-900/95 to-kizuna-dark/95 backdrop-blur-sm shadow-xl border-2 border-kizuna-gold max-w-md mx-auto">
-                <CardContent className="p-8">
-                  <FileText className="w-16 h-16 mx-auto text-kizuna-gold mb-4" />
-                  <h3 className="text-xl font-bold text-white mb-2 font-makinas-square">現在、求人情報はありません</h3>
-                  <p className="text-white font-makinas-square">新しい求人情報が追加されるまでお待ちください。</p>
-                </CardContent>
-              </Card>
-            </div>
+            <LoadingState label="求人情報を読み込んでいます..." />
+          ) : jobs.length === 0 ? (
+            <EmptyState icon={<BriefcaseBusiness className="h-8 w-8" />} title="現在、求人情報はありません" description="新しい求人情報が追加されるまでお待ちください。" />
           ) : (
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {jobListings.map((job) => (
-                <Card
-                  key={job.id}
-                  className="bg-gradient-to-br from-black/95 via-gray-900/95 to-kizuna-dark/95 backdrop-blur-sm shadow-xl border-2 border-kizuna-gold hover:shadow-2xl transition-all duration-300"
-                >
-                  <CardHeader className="bg-gradient-to-r from-kizuna-dark to-black text-white rounded-t-lg">
-                    <CardTitle className="text-xl font-bold flex items-center gap-2 font-makinas-square text-white">
-                      <Briefcase className="w-5 h-5" />
-                      {job.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="p-6">
-                    <div className="space-y-3 mb-6">
-                      {job.company && (
-                        <div className="flex items-center gap-2 text-white font-makinas-square">
-                          <Building className="w-4 h-4" />
-                          <span>{job.company}</span>
-                        </div>
-                      )}
-                      {job.location && (
-                        <div className="flex items-center gap-2 text-white font-makinas-square">
-                          <MapPin className="w-4 h-4" />
-                          <span>{job.location}</span>
-                        </div>
-                      )}
-                      {job.employment_type && (
-                        <div className="flex items-center gap-2 text-white font-makinas-square">
-                          <User className="w-4 h-4" />
-                          <span>{job.employment_type}</span>
-                        </div>
-                      )}
-                      <div className="flex items-center gap-2 text-white text-sm font-makinas-square">
-                        <Calendar className="w-4 h-4" />
-                        <span>掲載日: {new Date(job.created_at).toLocaleDateString("ja-JP")}</span>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Button
-                        className="w-full bg-gradient-to-r from-kizuna-dark to-black hover:from-black hover:to-kizuna-dark text-kizuna-gold font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 border border-kizuna-gold font-makinas-square"
-                        onClick={() => openJobPreview(job)}
-                      >
-                        <Eye className="w-4 h-4" />
-                        詳細を見る
-                      </Button>
-
-                      {job.pdf_url && (
-                        <Button
-                          variant="outline"
-                          className="w-full border-kizuna-gold text-kizuna-gold hover:bg-kizuna-dark/30 font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 bg-transparent font-makinas-square"
-                          onClick={() => openPdfPreview(job.pdf_url!)}
-                        >
-                          <FileText className="w-4 h-4" />
-                          資料を見る
-                        </Button>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
+            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {jobs.map((job) => (
+                <article key={job.id} className="flex flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_10px_30px_rgba(15,61,62,0.06)]">
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#E8F7F4] text-[#0B9A82]">
+                      <BriefcaseBusiness className="h-6 w-6" />
+                    </span>
+                    <span className="rounded-full bg-[#F3F7F7] px-3 py-1 text-[10px] font-extrabold text-slate-500">{new Date(job.created_at).toLocaleDateString("ja-JP")}</span>
+                  </div>
+                  <h2 className="mt-5 text-xl font-black leading-7">{job.title}</h2>
+                  <div className="mt-4 space-y-2.5 text-sm font-semibold text-slate-500">
+                    {job.company && <p className="flex items-center gap-2"><Building2 className="h-4 w-4 text-[#0B9A82]" />{job.company}</p>}
+                    {job.location && <p className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[#0B9A82]" />{job.location}</p>}
+                    {job.employment_type && <p className="flex items-center gap-2"><UserRound className="h-4 w-4 text-[#0B9A82]" />{job.employment_type}</p>}
+                  </div>
+                  <div className="mt-auto grid grid-cols-1 gap-2 pt-6 sm:grid-cols-2">
+                    <button onClick={() => setSelectedJob(job)} className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#087C73] px-4 py-3 text-sm font-extrabold text-white">
+                      <Eye className="h-4 w-4" />詳細
+                    </button>
+                    {job.pdf_url && <button onClick={() => setPreviewPdf(job.pdf_url)} className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-3 text-sm font-extrabold text-slate-700 hover:border-[#12B89E]/40 hover:text-[#087C73]"><FileText className="h-4 w-4" />資料</button>}
+                  </div>
+                </article>
               ))}
             </div>
           )}
 
-          <div className="mt-12 text-center">
-            <Card className="bg-gradient-to-br from-black/95 via-gray-900/95 to-kizuna-dark/95 backdrop-blur-sm shadow-xl border-2 border-kizuna-gold max-w-2xl mx-auto">
-              <CardContent className="p-8">
-                <h2 className="text-2xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-4 font-makinas-square">お問い合わせ</h2>
-                <p className="text-white mb-4 font-makinas-square">
-                  求人情報に関するご質問やご相談がございましたら、お気軽にお問い合わせください。
-                </p>
-                <Button
-                  className="bg-gradient-to-r from-kizuna-gold to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-gold text-kizuna-dark font-semibold py-2 px-6 rounded-lg transition-colors font-makinas-square"
-                  onClick={() => window.open("https://lin.ee/Y8DHYjk", "_blank")}
-                >
-                  LINEでお問い合わせ
-                </Button>
-              </CardContent>
-            </Card>
+          <div className="mt-12 rounded-3xl bg-gradient-to-r from-[#087C73] to-[#064E52] p-8 text-white sm:p-10">
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h2 className="text-2xl font-black">求人情報についてのお問い合わせ</h2>
+                <p className="mt-2 text-sm font-medium text-white/75">掲載内容へのご質問や相談はLINEからお問い合わせください。</p>
+              </div>
+              <a href="https://lin.ee/Y8DHYjk" target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-extrabold text-[#087C73]">
+                <MessageCircle className="h-4 w-4" />LINEで問い合わせ
+              </a>
+            </div>
           </div>
-        </div>
+        </main>
 
-        {/* 求人詳細プレビューモーダル */}
         {selectedJob && (
-          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-            <div className="bg-gradient-to-br from-black via-gray-900 to-kizuna-dark rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto border-2 border-kizuna-gold">
-              <div className="sticky top-0 bg-gradient-to-r from-black to-kizuna-dark border-b border-kizuna-gold p-6 flex justify-between items-center">
-                <h3 className="text-2xl font-bold text-white font-makinas-square">{selectedJob.title}</h3>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={closeJobPreview}
-                  className="flex items-center gap-2 bg-transparent border-kizuna-gold text-kizuna-gold hover:bg-kizuna-dark/30 hover:text-white font-makinas-square"
-                >
-                  <X className="w-4 h-4" />
-                  閉じる
-                </Button>
+          <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[#071C2A]/70 p-4 backdrop-blur-sm">
+            <div className="max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-3xl bg-white shadow-2xl">
+              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-100 bg-white/95 px-6 py-5 backdrop-blur">
+                <h3 className="text-xl font-black sm:text-2xl">{selectedJob.title}</h3>
+                <button onClick={() => setSelectedJob(null)} className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-600"><X className="h-5 w-5" /></button>
               </div>
-
-              <div className="p-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  {selectedJob.company && (
-                    <div className="bg-gradient-to-br from-kizuna-dark/50 to-black/50 p-4 rounded-lg border border-kizuna-gold/30">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Building className="w-5 h-5 text-kizuna-gold" />
-                        <h4 className="font-semibold text-white font-makinas-square">会社・組織名</h4>
-                      </div>
-                      <p className="text-white font-makinas-square">{selectedJob.company}</p>
-                    </div>
-                  )}
-
-                  {selectedJob.location && (
-                    <div className="bg-gradient-to-br from-kizuna-dark/50 to-black/50 p-4 rounded-lg border border-kizuna-gold/30">
-                      <div className="flex items-center gap-2 mb-2">
-                        <MapPin className="w-5 h-5 text-kizuna-gold" />
-                        <h4 className="font-semibold text-white font-makinas-square">勤務地</h4>
-                      </div>
-                      <p className="text-white font-makinas-square">{selectedJob.location}</p>
-                    </div>
-                  )}
-
-                  {selectedJob.employment_type && (
-                    <div className="bg-gradient-to-br from-kizuna-dark/50 to-black/50 p-4 rounded-lg border border-kizuna-gold/30">
-                      <div className="flex items-center gap-2 mb-2">
-                        <User className="w-5 h-5 text-kizuna-gold" />
-                        <h4 className="font-semibold text-white font-makinas-square">雇用形態</h4>
-                      </div>
-                      <p className="text-white font-makinas-square">{selectedJob.employment_type}</p>
-                    </div>
-                  )}
-
-                  <div className="bg-gradient-to-br from-kizuna-dark/50 to-black/50 p-4 rounded-lg border border-kizuna-gold/30">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Calendar className="w-5 h-5 text-kizuna-gold" />
-                      <h4 className="font-semibold text-white font-makinas-square">掲載日</h4>
-                    </div>
-                    <p className="text-white font-makinas-square">{new Date(selectedJob.created_at).toLocaleDateString("ja-JP")}</p>
-                  </div>
+              <div className="p-6 sm:p-8">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {selectedJob.company && <Info icon={<Building2 className="h-5 w-5" />} label="会社・組織名" value={selectedJob.company} />}
+                  {selectedJob.location && <Info icon={<MapPin className="h-5 w-5" />} label="勤務地" value={selectedJob.location} />}
+                  {selectedJob.employment_type && <Info icon={<UserRound className="h-5 w-5" />} label="雇用形態" value={selectedJob.employment_type} />}
+                  <Info icon={<CalendarDays className="h-5 w-5" />} label="掲載日" value={new Date(selectedJob.created_at).toLocaleDateString("ja-JP")} />
                 </div>
-
-                {selectedJob.description && (
-                  <div className="mb-6">
-                    <h4 className="font-semibold text-white mb-3 flex items-center gap-2 font-makinas-square">
-                      <FileText className="w-5 h-5 text-kizuna-gold" />
-                      求人概要
-                    </h4>
-                    <div className="bg-gradient-to-br from-kizuna-dark/50 to-black/50 p-4 rounded-lg border border-kizuna-gold/30">
-                      <p className="text-white leading-relaxed whitespace-pre-line font-makinas-square">{selectedJob.description}</p>
-                    </div>
-                  </div>
-                )}
-
-                {selectedJob.pdf_url && (
-                  <div className="border-t border-kizuna-gold/30 pt-6">
-                    <h4 className="font-semibold text-white mb-3 font-makinas-square">求人詳細資料</h4>
-                    <div className="flex gap-3">
-                      <Button
-                        className="bg-gradient-to-r from-kizuna-dark to-black hover:from-black hover:to-kizuna-dark text-white font-semibold py-2 px-4 rounded-lg transition-colors flex items-center gap-2 border border-kizuna-gold font-makinas-square hover:text-white"
-                        onClick={() => {
-                          openPdfPreview(selectedJob.pdf_url!)
-                          closeJobPreview()
-                        }}
-                      >
-                        <Eye className="w-4 h-4" />
-                        資料をプレビュー
-                      </Button>
-                      <Button
-                        variant="outline"
-                        className="border-kizuna-gold text-kizuna-gold hover:bg-kizuna-dark/30 hover:text-white font-semibold py-2 px-4 rounded-lg transition-colors flex items-center gap-2 bg-transparent font-makinas-square"
-                        onClick={() => window.open(selectedJob.pdf_url!, "_blank")}
-                      >
-                        <Download className="w-4 h-4" />
-                        ダウンロード
-                      </Button>
-                    </div>
-                  </div>
-                )}
+                {selectedJob.description && <div className="mt-6 rounded-2xl bg-[#F7FBFC] p-6"><h4 className="font-black">求人概要</h4><p className="mt-3 whitespace-pre-line text-sm font-medium leading-7 text-slate-600">{selectedJob.description}</p></div>}
+                {selectedJob.pdf_url && <div className="mt-6 flex flex-wrap gap-3"><button onClick={() => { setPreviewPdf(selectedJob.pdf_url); setSelectedJob(null) }} className="inline-flex items-center gap-2 rounded-xl bg-[#087C73] px-5 py-3 text-sm font-extrabold text-white"><Eye className="h-4 w-4" />資料をプレビュー</button><a href={selectedJob.pdf_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-5 py-3 text-sm font-extrabold text-slate-700"><Download className="h-4 w-4" />開く</a></div>}
               </div>
             </div>
           </div>
         )}
 
-        {/* PDF プレビューモーダル */}
         {previewPdf && (
-          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-            <div className="bg-gradient-to-br from-black via-gray-900 to-kizuna-dark rounded-lg shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col border-2 border-kizuna-gold">
-              <div className="flex justify-between items-center p-4 border-b border-kizuna-gold bg-gradient-to-r from-black to-kizuna-dark">
-                <h3 className="text-lg font-semibold text-white font-makinas-square">求人資料プレビュー</h3>
-                <div className="flex gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => window.open(previewPdf, "_blank")}
-                    className="flex items-center gap-2 border-kizuna-gold text-kizuna-gold hover:bg-kizuna-dark/30 hover:text-white bg-transparent font-makinas-square"
-                  >
-                    <Download className="w-4 h-4" />
-                    ダウンロード
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={closePdfPreview}
-                    className="flex items-center gap-2 bg-transparent border-kizuna-gold text-kizuna-gold hover:bg-kizuna-dark/30 hover:text-white font-makinas-square"
-                  >
-                    <X className="w-4 h-4" />
-                    閉じる
-                  </Button>
-                </div>
+          <div className="fixed inset-0 z-[90] flex items-center justify-center bg-[#071C2A]/80 p-4 backdrop-blur-sm">
+            <div className="flex h-[90vh] w-full max-w-6xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl">
+              <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+                <h3 className="font-black">求人資料プレビュー</h3>
+                <button onClick={() => setPreviewPdf(null)} className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-600"><X className="h-5 w-5" /></button>
               </div>
-              <div className="flex-1 p-4">
-                <iframe
-                  src={`${previewPdf}#toolbar=1&navpanes=1&scrollbar=1`}
-                  className="w-full h-full border border-kizuna-gold/30 rounded"
-                  title="PDF Preview"
-                />
-              </div>
+              <iframe src={previewPdf} className="min-h-0 flex-1" title="求人資料PDF" />
             </div>
           </div>
         )}
+        <Footer />
       </div>
     </PasswordProtection>
   )
+}
+
+function Info({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+  return <div className="rounded-2xl border border-slate-200 p-5"><div className="flex items-center gap-2 text-[#0B9A82]">{icon}<span className="text-xs font-extrabold tracking-[0.08em] text-slate-500">{label}</span></div><p className="mt-2 font-bold text-[#112B3A]">{value}</p></div>
 }

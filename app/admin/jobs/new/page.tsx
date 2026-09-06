@@ -147,33 +147,33 @@ export default function NewJobPage() {
   // Show loading while checking authentication
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+      <div className="min-h-screen bg-[#F7FBFC] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#D8EFEB] border-t-[#0B9A82]"></div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50 to-stone-200">
+    <div className="min-h-screen bg-[#F7FBFC] text-[#112B3A]">
       <AdminNav title="求人情報 新規作成" userEmail={userEmail} showLogout={true} />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
         <div className="mb-6">
           <Link
             href="/admin/dashboard"
-            className="inline-flex items-center text-emerald-700 hover:text-emerald-900 font-medium transition-colors"
+            className="inline-flex items-center text-slate-700 hover:text-[#087C73] font-medium transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             管理画面に戻る
           </Link>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xl border-4 border-emerald-700">
-          <h1 className="text-2xl sm:text-3xl font-bold text-emerald-800 mb-8">求人情報 新規作成</h1>
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_10px_30px_rgba(15,61,62,0.06)] sm:p-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#112B3A] mb-8">求人情報 新規作成</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="title" className="block text-sm font-medium text-emerald-700 mb-2">
+              <label htmlFor="title" className="block text-sm font-medium text-slate-700 mb-2">
                 求人タイトル *
               </label>
               <input
@@ -181,14 +181,14 @@ export default function NewJobPage() {
                 id="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-4 py-3 border border-emerald-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[#112B3A] outline-none transition focus:border-[#12A491] focus:ring-4 focus:ring-[#12A491]/10 rounded-xl outline-none"
                 placeholder="例: 救急救命士募集"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="company" className="block text-sm font-medium text-emerald-700 mb-2">
+              <label htmlFor="company" className="block text-sm font-medium text-slate-700 mb-2">
                 会社・組織名
               </label>
               <input
@@ -196,14 +196,14 @@ export default function NewJobPage() {
                 id="company"
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
-                className="w-full px-4 py-3 border border-emerald-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[#112B3A] outline-none transition focus:border-[#12A491] focus:ring-4 focus:ring-[#12A491]/10 rounded-xl outline-none"
                 placeholder="例: 大阪市消防局"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="location" className="block text-sm font-medium text-emerald-700 mb-2">
+                <label htmlFor="location" className="block text-sm font-medium text-slate-700 mb-2">
                   勤務地
                 </label>
                 <input
@@ -211,20 +211,20 @@ export default function NewJobPage() {
                   id="location"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full px-4 py-3 border border-emerald-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[#112B3A] outline-none transition focus:border-[#12A491] focus:ring-4 focus:ring-[#12A491]/10 rounded-xl outline-none"
                   placeholder="例: 大阪府大阪市"
                 />
               </div>
 
               <div>
-                <label htmlFor="employmentType" className="block text-sm font-medium text-emerald-700 mb-2">
+                <label htmlFor="employmentType" className="block text-sm font-medium text-slate-700 mb-2">
                   雇用形態
                 </label>
                 <select
                   id="employmentType"
                   value={employmentType}
                   onChange={(e) => setEmploymentType(e.target.value)}
-                  className="w-full px-4 py-3 border border-emerald-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[#112B3A] outline-none transition focus:border-[#12A491] focus:ring-4 focus:ring-[#12A491]/10 rounded-xl outline-none"
                 >
                   <option value="">選択してください</option>
                   <option value="正社員">正社員</option>
@@ -237,7 +237,7 @@ export default function NewJobPage() {
             </div>
 
             <div>
-              <label htmlFor="description" className="block text-sm font-medium text-emerald-700 mb-2">
+              <label htmlFor="description" className="block text-sm font-medium text-slate-700 mb-2">
                 求人概要
               </label>
               <textarea
@@ -245,32 +245,32 @@ export default function NewJobPage() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={4}
-                className="w-full px-4 py-3 border border-emerald-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[#112B3A] outline-none transition focus:border-[#12A491] focus:ring-4 focus:ring-[#12A491]/10 rounded-xl outline-none"
                 placeholder="求人の概要や特徴を入力してください（任意）"
               />
             </div>
 
             <div>
-              <label htmlFor="pdf" className="block text-sm font-medium text-emerald-700 mb-2">
+              <label htmlFor="pdf" className="block text-sm font-medium text-slate-700 mb-2">
                 求人詳細PDF
               </label>
-              <div className="border-2 border-dashed border-emerald-300 rounded-lg p-6">
+              <div className="border-2 border-dashed border-[#B9DDD7] rounded-lg p-6">
                 <div className="text-center">
-                  <FileText className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
+                  <FileText className="w-12 h-12 text-[#0B9A82] mx-auto mb-4" />
                   <div className="flex flex-col items-center">
                     <label
                       htmlFor="pdf"
-                      className="cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+                      className="cursor-pointer bg-[#087C73] hover:bg-[#076B65] text-white font-medium py-2 px-4 rounded-xl transition-colors"
                     >
                       <Upload className="w-4 h-4 inline mr-2" />
                       PDFファイルを選択
                     </label>
                     <input type="file" id="pdf" accept=".pdf" onChange={handleFileChange} className="hidden" />
-                    <p className="text-sm text-emerald-600 mt-2">最大10MBまで（任意）</p>
+                    <p className="text-sm text-[#087C73] mt-2">最大10MBまで（任意）</p>
                   </div>
                   {pdfFile && (
-                    <div className="mt-4 p-3 bg-emerald-50 rounded-lg">
-                      <p className="text-sm text-emerald-700">選択されたファイル: {pdfFile.name}</p>
+                    <div className="mt-4 p-3 bg-[#F1FAF8] rounded-lg">
+                      <p className="text-sm text-slate-700">選択されたファイル: {pdfFile.name}</p>
                     </div>
                   )}
                 </div>
@@ -278,9 +278,9 @@ export default function NewJobPage() {
             </div>
 
             {uploadProgress > 0 && uploadProgress < 100 && (
-              <div className="w-full bg-gray-200 rounded-full h-2">
+              <div className="w-full bg-slate-200 rounded-full h-2">
                 <div
-                  className="bg-emerald-600 h-2 rounded-full transition-all duration-300"
+                  className="bg-[#0B9A82] h-2 rounded-full transition-all duration-300"
                   style={{ width: `${uploadProgress}%` }}
                 ></div>
               </div>
@@ -288,7 +288,7 @@ export default function NewJobPage() {
 
             {/* Error Message */}
             {error && (
-              <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4">
+              <div className="rounded-xl border border-red-200 bg-red-50 p-4">
                 <p className="text-red-700">{error}</p>
               </div>
             )}
@@ -297,7 +297,7 @@ export default function NewJobPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-400 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center"
+                className="flex-1 bg-[#087C73] hover:bg-[#076B65] disabled:bg-gray-400 text-white font-bold py-3 px-6 rounded-xl transition-colors flex items-center justify-center"
               >
                 {loading ? (
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
@@ -308,7 +308,7 @@ export default function NewJobPage() {
               </button>
               <Link
                 href="/admin/dashboard"
-                className="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center"
+                className="flex-1 bg-slate-500 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-xl transition-colors text-center"
               >
                 キャンセル
               </Link>

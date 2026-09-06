@@ -45,18 +45,7 @@ export default function NewNewsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50 to-stone-200 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 25% 25%, #059669 2px, transparent 2px),
-                           radial-gradient(circle at 75% 75%, #d97706 2px, transparent 2px)`,
-            backgroundSize: "50px 50px",
-          }}
-        />
-      </div>
+    <div className="min-h-screen bg-[#F7FBFC] text-[#112B3A]">
 
       {/* Navigation */}
       <AdminNav title="絆命会 管理画面" subtitle="お知らせ新規作成" />
@@ -67,7 +56,7 @@ export default function NewNewsPage() {
         <div className="mb-6">
           <Link
             href="/admin/dashboard"
-            className="inline-flex items-center text-emerald-700 hover:text-emerald-900 font-semibold transition-colors duration-300 text-sm sm:text-base"
+            className="inline-flex items-center text-slate-700 hover:text-[#087C73] font-semibold transition-colors duration-300 text-sm sm:text-base"
           >
             <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
             ダッシュボードに戻る
@@ -75,17 +64,17 @@ export default function NewNewsPage() {
         </div>
 
         {/* Page Header */}
-        <div className="text-center mb-6 sm:mb-10">
-          <h1 className="text-2xl sm:text-3xl font-bold text-emerald-800 mb-2">お知らせ新規作成</h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-amber-500 mx-auto rounded-full"></div>
+        <div className="mb-7">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#112B3A] mb-2">お知らせ新規作成</h1>
+          
         </div>
 
         {/* Form */}
-        <div className="bg-white rounded-2xl p-5 sm:p-8 shadow-xl border-4 border-emerald-700">
+        <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_10px_30px_rgba(15,61,62,0.06)] sm:p-8">
           <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
             {/* Title */}
             <div>
-              <label htmlFor="title" className="block text-base sm:text-lg font-semibold text-emerald-700 mb-2">
+              <label htmlFor="title" className="block text-base sm:text-lg font-semibold text-slate-700 mb-2">
                 タイトル <span className="text-red-500">*</span>
               </label>
               <input
@@ -94,14 +83,14 @@ export default function NewNewsPage() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                className="w-full px-4 py-3 border-2 border-emerald-300 rounded-lg focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all duration-300 text-base"
+                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[#112B3A] outline-none transition focus:border-[#12A491] focus:ring-4 focus:ring-[#12A491]/10 rounded-xl outline-none focus: transition-all duration-300 text-base"
                 placeholder="例: 絆命会公式LINEアカウント開設のお知らせ"
               />
             </div>
 
             {/* Content */}
             <div>
-              <label htmlFor="content" className="block text-base sm:text-lg font-semibold text-emerald-700 mb-2">
+              <label htmlFor="content" className="block text-base sm:text-lg font-semibold text-slate-700 mb-2">
                 内容 <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -110,7 +99,7 @@ export default function NewNewsPage() {
                 onChange={(e) => setContent(e.target.value)}
                 required
                 rows={8}
-                className="w-full px-4 py-3 border-2 border-emerald-300 rounded-lg focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all duration-300 resize-none text-base"
+                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[#112B3A] outline-none transition focus:border-[#12A491] focus:ring-4 focus:ring-[#12A491]/10 rounded-xl outline-none focus: transition-all duration-300 resize-none text-base"
                 placeholder="お知らせの内容を入力してください"
               />
             </div>
@@ -119,9 +108,9 @@ export default function NewNewsPage() {
             <div>
               <label
                 htmlFor="publishedDate"
-                className="block text-base sm:text-lg font-semibold text-emerald-700 mb-2 flex items-center"
+                className="block text-base sm:text-lg font-semibold text-slate-700 mb-2 flex items-center"
               >
-                <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-emerald-600" />
+                <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-[#087C73]" />
                 公開日 <span className="text-red-500 ml-1">*</span>
               </label>
               <input
@@ -130,13 +119,13 @@ export default function NewNewsPage() {
                 value={publishedDate}
                 onChange={(e) => setPublishedDate(e.target.value)}
                 required
-                className="w-full px-4 py-3 border-2 border-emerald-300 rounded-lg focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all duration-300 text-base"
+                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[#112B3A] outline-none transition focus:border-[#12A491] focus:ring-4 focus:ring-[#12A491]/10 rounded-xl outline-none focus: transition-all duration-300 text-base"
               />
             </div>
 
             {/* Error Message */}
             {error && (
-              <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4">
+              <div className="rounded-xl border border-red-200 bg-red-50 p-4">
                 <p className="text-red-700 text-sm sm:text-base">{error}</p>
               </div>
             )}
@@ -146,7 +135,7 @@ export default function NewNewsPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-bold py-3 px-6 sm:px-8 rounded-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg flex items-center text-base sm:text-lg"
+                className="bg-gradient-to-r from-[#12B89E] to-[#087C73] hover:from-[#0EA68F] hover:to-[#076B65] text-white font-bold py-3 px-6 sm:px-8 rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-sm flex items-center text-base sm:text-lg"
               >
                 {loading ? (
                   <>

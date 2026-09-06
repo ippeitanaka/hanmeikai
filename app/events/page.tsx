@@ -1,15 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Calendar, MapPin, Clock, ArrowLeft, Handshake, Heart } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
-import { supabase, type Event } from "@/lib/supabase"
+import { useEffect, useMemo, useState } from "react"
+import { CalendarDays, Clock3, MapPin } from "lucide-react"
 import { format } from "date-fns"
 import { ja } from "date-fns/locale"
 import Footer from "@/components/footer"
-import VideoBackground from "@/components/video-background"
 import MainNav from "@/components/main-nav"
+import { EmptyState, LoadingState, PublicPageHeader } from "@/components/public-page"
+import { supabase, type Event } from "@/lib/supabase"
 import { formatTextWithLinks } from "@/lib/utils"
 
 export default function EventsPage() {
@@ -17,139 +15,89 @@ export default function EventsPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const { data, error } = await supabase.from("events").select("*")
+        if (error) {
+          console.error("Error fetching events:", error)
+          return
+        }
+        const now = new Date()
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+        const sorted = (data || []).sort((a, b) => {
+          const da = new Date(a.date); const db = new Date(b.date)
+          const aDay = new Date(da.getFullYear(), da.getMonth(), da.getDate())
+          const bDay = new Date(db.getFullYear(), db.getMonth(), db.getDate())
+          const aPast = aDay < today; const bPast = bDay < today
+          if (!aPast && !bPast) return aDay.getTime() - bDay.getTime()
+          if (aPast && bPast) return bDay.getTime() - aDay.getTime()
+          return aPast ? 1 : -1
+        })
+        setEvents(sorted)
+      } finally {
+        setLoading(false)
+      }
+    }
     fetchEvents()
   }, [])
 
-  const fetchEvents = async () => {
-    try {
-      const { data, error } = await supabase.from("events").select("*")
-
-      if (error) {
-        console.error("Error fetching events:", error)
-      } else {
-        // 現在の日付を取得（日本時間）
-        const now = new Date()
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-
-        // イベントを未来・過去で分類してソート
-        const sortedEvents = (data || []).sort((a, b) => {
-          const dateA = new Date(a.date)
-          const dateB = new Date(b.date)
-          
-          // 日付のみを取得（時刻を0にする）
-          const dayA = new Date(dateA.getFullYear(), dateA.getMonth(), dateA.getDate())
-          const dayB = new Date(dateB.getFullYear(), dateB.getMonth(), dateB.getDate())
-
-          const isAPast = dayA < today
-          const isBPast = dayB < today
-
-          // 両方とも未来のイベント（今日を含む）の場合：近い順
-          if (!isAPast && !isBPast) {
-            return dayA.getTime() - dayB.getTime()
-          }
-          // 両方とも過去のイベントの場合：新しい順
-          if (isAPast && isBPast) {
-            return dayB.getTime() - dayA.getTime()
-          }
-          // 一方が未来、一方が過去の場合：未来を優先
-          return isAPast ? 1 : -1
-        })
-
-        setEvents(sortedEvents)
-      }
-    } catch (error) {
-      console.error("Error:", error)
-    } finally {
-      setLoading(false)
-    }
-  }
+  const today = useMemo(() => {
+    const d = new Date()
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate())
+  }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-950 via-gray-900 to-black relative overflow-hidden font-makinas-square">
-      {/* Background Video */}
-      <VideoBackground />
-
-      {/* Navigation */}
+    <div className="min-h-screen bg-white text-[#112B3A]">
       <MainNav currentPage="イベント" />
+      <PublicPageHeader
+        eyebrow="EVENTS"
+        title="イベント"
+        description="交流会・研修会など、絆命会が開催・案内するイベント情報を掲載しています。"
+        icon={<CalendarDays className="h-6 w-6" />}
+      />
 
-      {/* Main Content */}
-      <main className="relative z-10 max-w-6xl mx-auto px-6 py-20">
-        {/* Back Button */}
-        <div className="mb-8">
-          <Link
-            href="/"
-            className="inline-flex items-center text-kizuna-gold hover:text-kizuna-light-gold font-semibold transition-colors duration-300 font-makinas-square"
-          >
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            ホームに戻る
-          </Link>
-        </div>
-
-        {/* Page Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-4 tracking-wide drop-shadow-md font-makinas-square">イベント</h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-kizuna-gold to-kizuna-bronze mx-auto rounded-full mb-6"></div>
-          <p className="text-xl text-kizuna-light-gold drop-shadow-sm font-makinas-square">絆命会主催のイベント情報をお知らせします</p>
-        </div>
-
-        {/* Events List */}
+      <main className="mx-auto max-w-[1200px] px-5 py-14 sm:px-8 sm:py-16 lg:px-10">
         {loading ? (
-          <div className="text-center py-20">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-kizuna-gold"></div>
-            <p className="mt-4 text-gray-300 font-makinas-square">イベント情報を読み込んでいます...</p>
-          </div>
+          <LoadingState label="イベント情報を読み込んでいます..." />
         ) : events.length === 0 ? (
-          <div className="text-center py-20 bg-gradient-to-br from-black/80 via-gray-900/80 to-kizuna-dark/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border-2 border-kizuna-gold">
-            <Calendar className="w-24 h-24 text-kizuna-gold mx-auto mb-6" />
-            <p className="text-xl text-gray-300 font-makinas-square">現在、予定されているイベントはありません。</p>
-          </div>
+          <EmptyState icon={<CalendarDays className="h-8 w-8" />} title="現在、予定されているイベントはありません" description="新しいイベントが決まり次第、こちらでお知らせします。" />
         ) : (
-          <div className="grid gap-8">
-            {events.map((event) => (
-              <div
-                key={event.id}
-                className="bg-gradient-to-br from-black/95 via-gray-900/95 to-kizuna-dark/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border-4 border-kizuna-gold hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-500"
-              >
-                <div className="flex flex-col lg:flex-row lg:items-start lg:space-x-8">
-                  <div className="flex-1">
-                    <h2 className="text-3xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-4 font-makinas-square">{event.title}</h2>
-                    <p className="text-lg text-gray-300 mb-6 leading-relaxed font-makinas-square">{formatTextWithLinks(event.description)}</p>
-
-                    <div className="flex flex-col sm:flex-row sm:space-x-8 space-y-4 sm:space-y-0">
-                      <div className="flex items-center text-white">
-                        <Calendar className="w-6 h-6 mr-3 text-white" />
-                        <div>
-                          <p className="font-semibold font-makinas-square">開催日</p>
-                          <p className="text-lg font-makinas-square">{format(new Date(event.date), "yyyy年MM月dd日(E)", { locale: ja })}</p>
+          <div className="space-y-5">
+            {events.map((event) => {
+              const eventDay = new Date(event.date)
+              const normalized = new Date(eventDay.getFullYear(), eventDay.getMonth(), eventDay.getDate())
+              const isPast = normalized < today
+              return (
+                <article key={event.id} className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_10px_30px_rgba(15,61,62,0.06)]">
+                  <div className="grid md:grid-cols-[150px_1fr]">
+                    <div className={isPast ? "bg-slate-100 p-6 text-slate-500" : "bg-[#E8F7F4] p-6 text-[#087C73]"}>
+                      <p className="text-xs font-extrabold tracking-[0.15em]">{isPast ? "PAST" : "UPCOMING"}</p>
+                      <p className="mt-3 text-4xl font-black">{format(eventDay, "dd")}</p>
+                      <p className="mt-1 text-sm font-extrabold">{format(eventDay, "yyyy.MM")}</p>
+                    </div>
+                    <div className="p-6 sm:p-8">
+                      <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+                        <div className="min-w-0">
+                          <h2 className="text-2xl font-black tracking-[-0.02em]">{event.title}</h2>
+                          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3 text-sm font-bold text-slate-500">
+                            <span className="inline-flex items-center gap-2"><CalendarDays className="h-4 w-4 text-[#0B9A82]" />{format(eventDay, "yyyy年MM月dd日(E)", { locale: ja })}</span>
+                            <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4 text-[#0B9A82]" />{event.location}</span>
+                          </div>
+                          <div className="mt-5 text-sm font-medium leading-7 text-slate-600">{formatTextWithLinks(event.description)}</div>
                         </div>
-                      </div>
-
-                      <div className="flex items-center text-white">
-                        <MapPin className="w-6 h-6 mr-3 text-white" />
-                        <div>
-                          <p className="font-semibold font-makinas-square">会場</p>
-                          <p className="text-lg font-makinas-square">{event.location}</p>
-                        </div>
+                        <span className={isPast ? "inline-flex shrink-0 items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-xs font-extrabold text-slate-500" : "inline-flex shrink-0 items-center gap-2 rounded-full bg-[#E8F7F4] px-4 py-2 text-xs font-extrabold text-[#087C73]"}>
+                          <Clock3 className="h-4 w-4" />
+                          {isPast ? "開催済み" : "開催予定"}
+                        </span>
                       </div>
                     </div>
                   </div>
-
-                  <div className="lg:w-40 flex justify-center lg:justify-end mt-6 lg:mt-0">
-                    <div className="bg-gradient-to-br from-kizuna-dark to-black text-white rounded-2xl p-6 text-center shadow-lg border border-kizuna-gold">
-                      <Clock className="w-8 h-8 mx-auto mb-2 text-white" />
-                      <p className="text-sm font-semibold font-makinas-square">開催予定</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+                </article>
+              )
+            })}
           </div>
         )}
-
-        {/* Admin Link */}
       </main>
-
-      {/* Footer */}
       <Footer />
     </div>
   )
