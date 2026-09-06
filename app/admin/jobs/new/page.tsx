@@ -148,7 +148,7 @@ export default function NewJobPage() {
   if (authLoading) {
     return (
       <div className="min-h-screen bg-[#F7FBFC] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#D8EFEB] border-t-[#0B9A82]"></div>
       </div>
     )
   }
