@@ -1,68 +1,55 @@
 import Link from "next/link"
-import Image from "next/image"
-import { ArrowUpRight, MessageCircle } from "lucide-react"
+import { MessageCircle } from "lucide-react"
 
 const footerLinks = [
+  { label: "ホーム", href: "/" },
   { label: "絆命会について", href: "/about" },
   { label: "イベント", href: "/events" },
-  { label: "お知らせ", href: "/news" },
   { label: "求人情報", href: "/jobs" },
+  { label: "お知らせ", href: "/news" },
 ]
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0B3435] text-white">
-      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-          <div>
-            <Link href="/" className="inline-flex items-center gap-3">
-              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white p-1.5 shadow-sm">
-                <Image
-                  src="/images/school-emblem.webp"
-                  alt="東洋医療専門学校 校章"
-                  width={48}
-                  height={48}
-                  className="h-12 w-12 object-contain"
-                />
+    <footer className="border-t border-slate-200 bg-white text-slate-700">
+      <div className="mx-auto max-w-[1440px] px-5 py-10 sm:px-8 lg:px-10">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+          <Link href="/" className="inline-flex items-center gap-3.5">
+            <img
+              src="/images/school-emblem.webp?v=2"
+              alt="東洋医療専門学校 校章"
+              className="h-16 w-16 object-contain"
+            />
+            <span>
+              <span className="block text-xl font-black tracking-[0.08em] text-[#112B3A]">絆命会</span>
+              <span className="mt-1 block text-[11px] font-semibold text-slate-500">
+                東洋医療専門学校 救急救命士学科 同窓会
               </span>
-              <span>
-                <span className="block text-xl font-extrabold tracking-[0.08em]">絆命会</span>
-                <span className="mt-1 block text-xs font-medium text-white/60">
-                  東洋医療専門学校 救急救命士学科 同窓会
-                </span>
-              </span>
-            </Link>
-            <p className="mt-6 max-w-xl text-sm leading-7 text-white/65">
-              卒業してからも、救急救命士として歩む仲間がつながり、学び、支え合える場所を。
-            </p>
-          </div>
+            </span>
+          </Link>
 
-          <div className="lg:text-right">
-            <div className="flex flex-wrap gap-x-5 gap-y-3 lg:justify-end">
+          <div className="flex flex-col gap-5 lg:items-end">
+            <nav className="flex flex-wrap gap-x-6 gap-y-3" aria-label="フッターナビゲーション">
               {footerLinks.map((item) => (
-                <Link key={item.label} href={item.href} className="text-sm font-semibold text-white/70 transition hover:text-white">
+                <Link key={item.label} href={item.href} className="text-sm font-bold text-slate-600 transition hover:text-[#087C73]">
                   {item.label}
                 </Link>
               ))}
+            </nav>
+            <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400">
+              <a
+                href="https://lin.ee/Y8DHYjk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-bold text-[#087C73] hover:underline"
+              >
+                <MessageCircle className="h-4 w-4" />
+                LINE
+              </a>
+              <Link href="/admin/login" className="hover:text-slate-600">Management</Link>
+              <span>© 2003 Hanmeikai. All rights reserved.</span>
             </div>
-            <a
-              href="https://lin.ee/Y8DHYjk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#0F3D3E] transition hover:bg-[#F2F7F6]"
-            >
-              <MessageCircle className="h-4 w-4" />
-              LINEで問い合わせ
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
           </div>
-        </div>
-
-        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2003 Hanmeikai. All rights reserved.</p>
-          <Link href="/admin/login" className="transition hover:text-white/70">
-            Management
-          </Link>
         </div>
       </div>
     </footer>
