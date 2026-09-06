@@ -17,7 +17,12 @@ export default function JobsPage() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const { data, error } = await supabase.from("jobs").select("*").eq("is_active", true).order("created_at", { ascending: false })
+        const { data, error } = await supabase
+          .from("jobs")
+          .select("*")
+          .eq("is_active", true)
+          .neq("title", "R8年度 消防採用試験情報")
+          .order("created_at", { ascending: false })
         if (error) console.error("Error fetching jobs:", error)
         else setJobs(data || [])
       } finally {
