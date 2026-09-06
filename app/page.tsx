@@ -1,56 +1,54 @@
 import Link from "next/link"
-import {
-  ArrowRight,
-  BookOpen,
-  BriefcaseBusiness,
-  CalendarDays,
-  ChartNoAxesCombined,
-  ChevronRight,
-  ClipboardList,
-  Gem,
-  Handshake,
-  Megaphone,
-  MessageCircle,
-  Target,
-  UserRoundPlus,
-  UsersRound,
-} from "lucide-react"
+import { ArrowRight, ChevronRight, MessageCircle } from "lucide-react"
 import MainNav from "@/components/main-nav"
 import Footer from "@/components/footer"
+import {
+  BookIcon,
+  BriefcaseIcon,
+  CalendarIcon,
+  ClipboardIcon,
+  CommunityIcon,
+  GemIcon,
+  GrowthIcon,
+  HandshakeIcon,
+  MegaphoneIcon,
+  TargetIcon,
+  UserPlusIcon,
+} from "@/components/home-icons"
 
-const heroImage = "/images/home-hero.webp?v=6"
-const messageImage = "/images/home-message.webp?v=6"
+const heroImage = "/images/home-hero-v2.webp"
+const messageImage = "/images/home-message-v2.webp"
 
 const activities = [
   {
-    icon: UsersRound,
+    icon: CommunityIcon,
     title: "交流する",
     description: "卒業生同士の再会や情報交換を通して、つながりを深めます。",
-    image: "/images/home-activity-1.webp?v=6",
+    image: "/images/home-activity-1-v2.webp",
   },
   {
-    icon: BookOpen,
+    icon: BookIcon,
     title: "学ぶ",
     description: "研修会や勉強会を通して、現場に活きる学びを共有します。",
-    image: "/images/home-activity-2.webp?v=6",
+    image: "/images/home-activity-2-v2.webp",
   },
   {
-    icon: Handshake,
+    icon: HandshakeIcon,
     title: "つながる",
     description: "世代を越えたネットワークから、新しい相談や活動のきっかけを。",
-    image: "/images/home-activity-3.webp?v=6",
+    image: "/images/home-activity-3-v2.webp",
   },
   {
-    icon: ChartNoAxesCombined,
+    icon: GrowthIcon,
     title: "活躍する",
     description: "求人・キャリア情報を通して、卒業生の次の挑戦を応援します。",
-    image: "/images/home-activity-4.webp?v=6",
+    image: "/images/home-activity-4-v2.webp",
   },
 ]
 
 const infoColumns = [
   {
-    icon: Megaphone,
+    icon: MegaphoneIcon,
     title: "お知らせ",
     href: "/news",
     iconClass: "bg-[#FDECEF] text-[#E34D6B]",
@@ -58,7 +56,7 @@ const infoColumns = [
     items: ["絆命会からの大切なお知らせ", "活動報告・会員向け案内", "最新のお知らせを確認する"],
   },
   {
-    icon: CalendarDays,
+    icon: CalendarIcon,
     title: "イベント",
     href: "/events",
     iconClass: "bg-[#F2ECFD] text-[#8D55C7]",
@@ -66,7 +64,7 @@ const infoColumns = [
     items: ["交流会・研修会のご案内", "開催予定をチェック", "イベント情報を確認する"],
   },
   {
-    icon: BriefcaseBusiness,
+    icon: BriefcaseIcon,
     title: "求人情報",
     href: "/jobs",
     iconClass: "bg-[#E7F7F4] text-[#0B9A82]",
@@ -76,23 +74,11 @@ const infoColumns = [
 ]
 
 const aboutItems = [
-  { icon: Target, title: "目的", text: "卒業生同士の交流と支え合い" },
-  { icon: UsersRound, title: "対象", text: "東洋医療専門学校 救急救命士学科 卒業生" },
-  { icon: ClipboardList, title: "活動内容", text: "交流会・勉強会・情報発信・求人共有" },
-  { icon: Gem, title: "入会メリット", text: "学び・情報収集・キャリア支援" },
+  { icon: TargetIcon, title: "目的", text: "卒業生同士の交流と支え合い" },
+  { icon: CommunityIcon, title: "対象", text: "東洋医療専門学校 救急救命士学科 卒業生" },
+  { icon: ClipboardIcon, title: "活動内容", text: "交流会・勉強会・情報発信・求人共有" },
+  { icon: GemIcon, title: "入会メリット", text: "学び・情報収集・キャリア支援" },
 ]
-
-function ActivityIcon({
-  icon: Icon,
-}: {
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>
-}) {
-  return (
-    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#E8F7F4] text-[#08A58E] shadow-[inset_0_0_0_1px_rgba(8,165,142,0.06)]">
-      <Icon className="h-8 w-8" strokeWidth={2.4} />
-    </span>
-  )
-}
 
 export default function HomePage() {
   return (
@@ -132,16 +118,18 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative min-h-[390px] overflow-hidden bg-[#EDF6F5] lg:min-h-full">
+            <div
+              className="relative overflow-hidden bg-[#EDF6F5] bg-cover bg-center"
+              style={{ backgroundImage: `url("${heroImage}")` }}
+            >
               <img
                 src={heroImage}
                 alt="救急活動のイメージ"
-                className="absolute inset-0 h-full w-full object-cover object-center"
+                className="block h-[390px] w-full object-cover object-center lg:h-[560px]"
                 fetchPriority="high"
               />
-              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.90)_8%,rgba(255,255,255,0.55)_20%,rgba(255,255,255,0.18)_34%,rgba(255,255,255,0)_52%)]" />
-              <div className="pointer-events-none absolute inset-y-0 left-[5%] w-[28%] bg-white/35 blur-3xl" />
-              <div className="pointer-events-none absolute inset-y-0 left-0 w-[12%] bg-gradient-to-r from-white to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.92)_10%,rgba(255,255,255,0.58)_22%,rgba(255,255,255,0.20)_36%,rgba(255,255,255,0)_55%)]" />
+              <div className="pointer-events-none absolute inset-y-0 left-[7%] w-[28%] bg-white/35 blur-3xl" />
             </div>
           </div>
         </section>
@@ -164,7 +152,9 @@ export default function HomePage() {
                   >
                     <div className="p-5 pb-4">
                       <div className="flex items-start gap-4">
-                        <ActivityIcon icon={Icon} />
+                        <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#E8F7F4] text-[#08A58E] shadow-[inset_0_0_0_1px_rgba(8,165,142,0.08)]">
+                          <Icon className="h-9 w-9" />
+                        </span>
                         <div>
                           <h3 className="text-xl font-black text-[#112B3A]">{activity.title}</h3>
                           <p className="mt-2 text-sm leading-6 text-slate-500">{activity.description}</p>
@@ -207,7 +197,7 @@ export default function HomePage() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <span className={"flex h-10 w-10 items-center justify-center rounded-xl " + column.iconClass}>
-                          <Icon className="h-5 w-5" strokeWidth={2.4} />
+                          <Icon className="h-6 w-6" />
                         </span>
                         <h3 className="text-xl font-black text-[#112B3A]">{column.title}</h3>
                       </div>
@@ -262,7 +252,7 @@ export default function HomePage() {
                     className="rounded-2xl border border-slate-100 bg-white p-6 text-center shadow-[0_8px_24px_rgba(15,61,62,0.05)]"
                   >
                     <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#E8F7F4] text-[#08A58E]">
-                      <Icon className="h-8 w-8" strokeWidth={2.3} />
+                      <Icon className="h-9 w-9" />
                     </span>
                     <h3 className="mt-4 text-lg font-black text-[#112B3A]">{item.title}</h3>
                     <p className="mt-2 text-sm font-medium leading-6 text-slate-500">{item.text}</p>
@@ -275,15 +265,18 @@ export default function HomePage() {
 
         <section className="overflow-hidden bg-white">
           <div className="mx-auto grid max-w-[1440px] lg:grid-cols-[0.88fr_1.12fr]">
-            <div className="relative min-h-[310px] overflow-hidden bg-[#EDF3F4] lg:min-h-[390px]">
+            <div
+              className="relative overflow-hidden bg-[#EDF3F4] bg-cover bg-center"
+              style={{ backgroundImage: `url("${messageImage}")` }}
+            >
               <img
                 src={messageImage}
                 alt="救急救命士のイメージ"
-                className="absolute inset-0 h-full w-full object-cover object-center"
+                className="block h-[310px] w-full object-cover object-center lg:h-[390px]"
                 loading="lazy"
               />
-              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(6,49,57,0.10)_0%,rgba(6,49,57,0.03)_55%,rgba(255,255,255,0.45)_78%,rgba(255,255,255,0.98)_100%)]" />
-              <div className="pointer-events-none absolute inset-y-0 right-[3%] w-[26%] bg-white/35 blur-3xl" />
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(6,49,57,0.08)_0%,rgba(6,49,57,0.02)_52%,rgba(255,255,255,0.42)_76%,rgba(255,255,255,0.98)_100%)]" />
+              <div className="pointer-events-none absolute inset-y-0 right-[4%] w-[24%] bg-white/35 blur-3xl" />
             </div>
             <div className="relative flex items-center bg-white px-7 py-12 sm:px-10 lg:px-14">
               <div className="pointer-events-none absolute inset-y-0 -left-20 hidden w-28 bg-white/70 blur-3xl lg:block" />
@@ -321,21 +314,21 @@ export default function HomePage() {
                 href="/about"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#D79A22] px-4 py-4 text-sm font-extrabold text-white shadow-sm transition hover:-translate-y-0.5"
               >
-                <UserRoundPlus className="h-5 w-5" strokeWidth={2.3} />
+                <UserPlusIcon className="h-6 w-6" />
                 絆命会について
               </Link>
               <Link
                 href="/events"
                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/5 px-4 py-4 text-sm font-extrabold text-white transition hover:bg-white/10"
               >
-                <CalendarDays className="h-5 w-5" strokeWidth={2.3} />
+                <CalendarIcon className="h-6 w-6" />
                 イベントに参加する
               </Link>
               <Link
                 href="/jobs"
                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/5 px-4 py-4 text-sm font-extrabold text-white transition hover:bg-white/10"
               >
-                <BriefcaseBusiness className="h-5 w-5" strokeWidth={2.3} />
+                <BriefcaseIcon className="h-6 w-6" />
                 求人情報を見る
               </Link>
               <a
