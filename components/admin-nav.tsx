@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { Menu, X, LogOut, Home, Handshake, Heart } from "lucide-react"
 import Link from "next/link"
+import { ExternalLink, LayoutDashboard, LogOut, Menu, X } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 
 type AdminNavProps = {
@@ -14,91 +14,48 @@ type AdminNavProps = {
 }
 
 export default function AdminNav({ title, subtitle, showLogout = false, userEmail }: AdminNavProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [open, setOpen] = useState(false)
   const router = useRouter()
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
     router.push("/admin/login")
-    setIsMenuOpen(false)
   }
 
   return (
-    <nav className="relative z-50 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-800 shadow-2xl border-b-4 border-amber-400">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo and Title */}
-          <div className="flex items-center space-x-3 sm:space-x-6">
-            <div className="relative group">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-amber-300 via-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-2xl border-2 sm:border-4 border-emerald-900">
-                <div className="relative">
-                  <Handshake className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-900" />
-                  <div className="absolute -top-1 -right-1 w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full flex items-center justify-center animate-pulse">
-                    <Heart className="w-1 h-1 sm:w-2 sm:h-2 text-white" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-amber-100 tracking-wider">{title}</h1>
-              {subtitle && <p className="text-xs sm:text-sm text-emerald-200">{subtitle}</p>}
-              {userEmail && <p className="text-xs text-emerald-200">ログイン中: {userEmail}</p>}
-            </div>
-          </div>
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-xl">
+      <div className="mx-auto flex min-h-[82px] max-w-[1440px] items-center justify-between gap-4 px-5 py-3 sm:px-8 lg:px-10">
+        <Link href="/admin/dashboard" className="flex min-w-0 items-center gap-3">
+          <img src="/images/school-emblem.webp?v=3" alt="東洋医療専門学校 校章" className="h-12 w-12 shrink-0 object-contain" />
+          <span className="min-w-0">
+            <span className="flex items-center gap-2">
+              <span className="truncate text-lg font-black text-[#112B3A] sm:text-xl">{title}</span>
+              <span className="hidden rounded-full bg-[#E8F7F4] px-2.5 py-1 text-[9px] font-extrabold tracking-[0.12em] text-[#087C73] sm:inline">ADMIN</span>
+            </span>
+            {subtitle && <span className="mt-0.5 block truncate text-xs font-semibold text-slate-500">{subtitle}</span>}
+            {userEmail && <span className="mt-0.5 block truncate text-[10px] text-slate-400">{userEmail}</span>}
+          </span>
+        </Link>
 
-          {/* Mobile menu button */}
-          <div className="flex items-center space-x-2">
-            {showLogout && (
-              <button
-                onClick={handleLogout}
-                className="hidden md:flex items-center bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300"
-              >
-                <LogOut className="w-4 h-4 mr-2" />
-                ログアウト
-              </button>
-            )}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 transition-colors duration-300"
-            >
-              {isMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
-            </button>
-          </div>
+        <div className="hidden items-center gap-2 md:flex">
+          <Link href="/admin/dashboard" className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-[#087C73]">
+            <LayoutDashboard className="h-4 w-4" />ダッシュボード
+          </Link>
+          <Link href="/" target="_blank" className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-[#087C73]">
+            <ExternalLink className="h-4 w-4" />サイト表示
+          </Link>
+          {showLogout && <button onClick={handleLogout} className="inline-flex items-center gap-2 rounded-xl bg-[#112B3A] px-4 py-2.5 text-sm font-extrabold text-white hover:bg-[#0B4550]"><LogOut className="h-4 w-4" />ログアウト</button>}
         </div>
 
-        {/* Mobile menu */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-3 py-3 border-t border-emerald-600">
-            <div className="flex flex-col space-y-3">
-              <Link
-                href="/"
-                className="flex items-center text-amber-100 hover:text-amber-300 font-semibold py-2 px-3 rounded-lg hover:bg-emerald-600/30 transition-all duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <Home className="w-5 h-5 mr-3" />
-                ホームページ
-              </Link>
-              <Link
-                href="/admin/dashboard"
-                className="flex items-center text-amber-100 hover:text-amber-300 font-semibold py-2 px-3 rounded-lg hover:bg-emerald-600/30 transition-all duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <Handshake className="w-5 h-5 mr-3" />
-                管理ダッシュボード
-              </Link>
-              {showLogout && (
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center text-red-300 hover:text-red-100 font-semibold py-2 px-3 rounded-lg hover:bg-red-600/30 transition-all duration-300 w-full text-left"
-                >
-                  <LogOut className="w-5 h-5 mr-3" />
-                  ログアウト
-                </button>
-              )}
-            </div>
-          </div>
-        )}
+        <button onClick={() => setOpen(v => !v)} className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-600 md:hidden" aria-label="管理メニュー">
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
-    </nav>
+      {open && <div className="border-t border-slate-100 bg-white px-5 py-4 md:hidden"><div className="mx-auto flex max-w-[1440px] flex-col gap-2">
+        <Link href="/admin/dashboard" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50">ダッシュボード</Link>
+        <Link href="/" target="_blank" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50">サイトを表示</Link>
+        {showLogout && <button onClick={handleLogout} className="rounded-xl bg-[#112B3A] px-4 py-3 text-left text-sm font-extrabold text-white">ログアウト</button>}
+      </div></div>}
+    </header>
   )
 }
