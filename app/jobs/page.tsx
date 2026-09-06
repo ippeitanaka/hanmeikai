@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { BriefcaseBusiness, Building2, CalendarDays, Download, Eye, FileText, MapPin, MessageCircle, UserRound, X } from "lucide-react"
+import { ArrowUpRight, BriefcaseBusiness, Building2, CalendarDays, Download, Eye, FileText, Flame, MapPin, MessageCircle, ShieldCheck, UserRound, X } from "lucide-react"
 import Footer from "@/components/footer"
 import MainNav from "@/components/main-nav"
 import PasswordProtection from "@/components/password-protection"
@@ -44,6 +44,47 @@ export default function JobsPage() {
         />
 
         <main className="mx-auto max-w-[1200px] px-5 py-14 sm:px-8 sm:py-16 lg:px-10">
+          <a
+            href="https://tmc-fire-recruitment.ippeipain.chatgpt.site/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative mb-10 block overflow-hidden rounded-[28px] bg-gradient-to-br from-[#083F43] via-[#087C73] to-[#0B9A82] p-7 text-white shadow-[0_22px_60px_rgba(8,124,115,0.24)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_rgba(8,124,115,0.32)] sm:p-9"
+          >
+            <div className="pointer-events-none absolute -right-16 -top-20 h-52 w-52 rounded-full bg-white/10 blur-2xl" />
+            <div className="pointer-events-none absolute -bottom-24 left-1/3 h-56 w-56 rounded-full bg-[#D79A22]/20 blur-3xl" />
+
+            <div className="relative flex flex-col gap-7 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-3xl">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-white/14 px-3.5 py-2 text-[11px] font-extrabold tracking-[0.12em] text-white ring-1 ring-white/20">
+                    <Flame className="h-4 w-4 text-[#FFD47A]" />
+                    全国消防本部の採用情報
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FFD47A] px-3 py-2 text-[11px] font-black text-[#083F43]">
+                    <ShieldCheck className="h-4 w-4" />
+                    卒業生におすすめ
+                  </span>
+                </div>
+
+                <p className="mt-5 text-[10px] font-extrabold tracking-[0.24em] text-white/65">
+                  FIRE DEPARTMENT RECRUITMENT
+                </p>
+                <h2 className="mt-2 text-2xl font-black leading-tight tracking-[-0.02em] sm:text-3xl lg:text-[34px]">
+                  TMC救急救命士学科
+                  <span className="block">消防職員採用情報サイト</span>
+                </h2>
+                <p className="mt-4 max-w-2xl text-sm font-medium leading-7 text-white/80 sm:text-base">
+                  全国の消防本部の採用情報をまとめて確認できます。
+                  消防職員を目指す卒業生にとって、最優先でチェックしてほしい採用情報サイトです。
+                </p>
+              </div>
+
+              <span className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-black text-[#087C73] shadow-[0_10px_25px_rgba(0,0,0,0.12)] transition group-hover:scale-[1.03]">
+                採用情報サイトを見る
+                <ArrowUpRight className="h-4 w-4" />
+              </span>
+            </div>
+          </a>
           {loading ? (
             <LoadingState label="求人情報を読み込んでいます..." />
           ) : jobs.length === 0 ? (
