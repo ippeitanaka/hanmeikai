@@ -2,8 +2,6 @@ import Link from "next/link"
 import { ArrowRight, ChevronRight, MessageCircle } from "lucide-react"
 import MainNav from "@/components/main-nav"
 import Footer from "@/components/footer"
-import heroInline1 from "@/lib/hero-inline-1"
-import heroInline2 from "@/lib/hero-inline-2"
 import {
   BookIcon,
   BriefcaseIcon,
@@ -18,33 +16,33 @@ import {
   UserPlusIcon,
 } from "@/components/home-icons"
 
-const heroImage = "data:image/avif;base64," + heroInline1 + heroInline2
-const messageImage = "/images/home-message-v2.webp"
+const heroImage = "/images/home-hero-hq.png"
+const messageImage = "/images/home-message-hq.png"
 
 const activities = [
   {
     icon: CommunityIcon,
     title: "交流する",
     description: "卒業生同士の再会や情報交換を通して、つながりを深めます。",
-    image: "/images/home-activity-1-v2.webp",
+    image: "/images/home-activity-1-hq.png",
   },
   {
     icon: BookIcon,
     title: "学ぶ",
     description: "研修会や勉強会を通して、現場に活きる学びを共有します。",
-    image: "/images/home-activity-2-v2.webp",
+    image: "/images/home-activity-2-hq.png",
   },
   {
     icon: HandshakeIcon,
     title: "つながる",
     description: "世代を越えたネットワークから、新しい相談や活動のきっかけを。",
-    image: "/images/home-activity-3-v2.webp",
+    image: "/images/home-activity-3-hq.png",
   },
   {
     icon: GrowthIcon,
     title: "活躍する",
     description: "求人・キャリア情報を通して、卒業生の次の挑戦を応援します。",
-    image: "/images/home-activity-4-v2.webp",
+    image: "/images/home-activity-4-hq.png",
   },
 ]
 
