@@ -2,6 +2,8 @@ import Link from "next/link"
 import { ArrowRight, ChevronRight, MessageCircle } from "lucide-react"
 import MainNav from "@/components/main-nav"
 import Footer from "@/components/footer"
+import heroInline1 from "@/lib/hero-inline-1"
+import heroInline2 from "@/lib/hero-inline-2"
 import {
   BookIcon,
   BriefcaseIcon,
@@ -16,7 +18,7 @@ import {
   UserPlusIcon,
 } from "@/components/home-icons"
 
-const heroImage = "/images/home-hero-v2.webp"
+const heroImage = "data:image/avif;base64," + heroInline1 + heroInline2
 const messageImage = "/images/home-message-v2.webp"
 
 const activities = [
