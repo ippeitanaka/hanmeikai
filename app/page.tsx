@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -14,7 +15,6 @@ import {
 } from "lucide-react"
 import MainNav from "@/components/main-nav"
 import Footer from "@/components/footer"
-import KizunaMark from "@/components/kizuna-mark"
 
 const activities = [
   {
@@ -131,7 +131,16 @@ export default function HomePage() {
                       <Sparkles className="h-3.5 w-3.5 text-[#F1C36F]" />
                       KIZUNA MEIKAI
                     </span>
-                    <KizunaMark className="h-20 w-20 text-[#F1C36F]" />
+                    <span className="flex h-24 w-24 items-center justify-center rounded-3xl bg-white p-2 shadow-lg">
+                      <Image
+                        src="/images/school-emblem.webp"
+                        alt="東洋医療専門学校 校章"
+                        width={88}
+                        height={88}
+                        className="h-20 w-20 object-contain"
+                        priority
+                      />
+                    </span>
                   </div>
 
                   <div className="mt-16">
