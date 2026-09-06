@@ -116,7 +116,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
   if (fetchLoading) {
     return (
       <div className="min-h-screen bg-[#F7FBFC] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#D8EFEB] border-t-[#0B9A82]"></div>
       </div>
     )
   }
@@ -239,7 +239,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-gradient-to-r from-kizuna-gold to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-gold text-kizuna-dark font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-sm flex items-center font-makinas"
+                className="bg-gradient-to-r from-[#12B89E] to-[#087C73] text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-sm flex items-center font-makinas"
               >
                 {loading ? (
                   <>
