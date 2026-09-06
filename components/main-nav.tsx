@@ -24,7 +24,7 @@ export default function MainNav({ currentPage }: MainNavProps) {
       <div className="mx-auto flex h-[86px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-10">
         <Link href="/" className="group flex min-w-0 items-center gap-3.5" onClick={() => setOpen(false)}>
           <img
-            src="/images/school-emblem.webp?v=2"
+            src="/images/school-emblem.webp?v=3"
             alt="東洋医療専門学校 校章"
             className="h-14 w-14 shrink-0 object-contain sm:h-16 sm:w-16"
           />
