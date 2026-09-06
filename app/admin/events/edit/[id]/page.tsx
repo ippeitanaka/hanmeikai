@@ -8,6 +8,7 @@ import { Calendar, MapPin, ArrowLeft, Save, Handshake, Trash2 } from "lucide-rea
 import Link from "next/link"
 import { supabase } from "@/lib/supabase"
 import Footer from "@/components/footer"
+import AdminNav from "@/components/admin-nav"
 
 export default function EditEventPage({ params }: { params: Promise<{ id: string }> }) {
   const [title, setTitle] = useState("")
@@ -114,32 +115,16 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
 
   if (fetchLoading) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="min-h-screen bg-[#F7FBFC] flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-kizuna-dark to-black relative overflow-hidden font-makinas-square">
+    <div className="min-h-screen bg-[#F7FBFC] text-[#112B3A]">
       {/* Navigation */}
-      <nav className="relative z-50 bg-gradient-to-r from-black via-kizuna-dark to-black shadow-2xl border-b-4 border-kizuna-gold font-makinas-square">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-6">
-              <div className="relative group">
-                <div className="w-16 h-16 bg-gradient-to-br from-kizuna-gold via-kizuna-bronze to-kizuna-gold rounded-full flex items-center justify-center shadow-2xl border-4 border-kizuna-dark">
-                  <Handshake className="w-8 h-8 text-kizuna-dark" />
-                </div>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text tracking-wider font-makinas">絆命会 管理画面</h1>
-                <p className="text-kizuna-gold text-sm font-makinas">イベント編集</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <AdminNav title="絆命会 管理画面" subtitle="イベント編集" />
 
       {/* Main Content */}
       <main className="relative z-10 max-w-4xl mx-auto px-6 py-12">
@@ -147,7 +132,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
         <div className="mb-8">
           <Link
             href="/admin/dashboard"
-            className="inline-flex items-center text-kizuna-gold hover:text-kizuna-cream font-semibold transition-colors duration-300 font-makinas"
+            className="inline-flex items-center text-slate-700 hover:text-[#087C73] font-semibold transition-colors duration-300 font-makinas"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
             ダッシュボードに戻る
@@ -155,17 +140,17 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
         </div>
 
         {/* Page Header */}
-        <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text mb-2 font-makinas">イベント編集</h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-kizuna-gold to-kizuna-bronze mx-auto rounded-full"></div>
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-[#112B3A] mb-2 font-makinas">イベント編集</h1>
+          
         </div>
 
         {/* Form */}
-        <div className="bg-gradient-to-br from-black/90 via-gray-900/90 to-kizuna-dark/90 rounded-2xl p-8 shadow-2xl border-4 border-kizuna-gold">
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_10px_30px_rgba(15,61,62,0.06)] sm:p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Title */}
             <div>
-              <label htmlFor="title" className="block text-lg font-semibold text-kizuna-gold mb-2 font-makinas">
+              <label htmlFor="title" className="block text-lg font-semibold text-slate-700 mb-2 font-makinas">
                 イベント名 <span className="text-red-500">*</span>
               </label>
               <input
@@ -174,14 +159,14 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                className="w-full px-4 py-3 border-2 border-kizuna-gold rounded-lg focus:outline-none focus:border-kizuna-light-gold focus:ring-2 focus:ring-kizuna-gold/40 bg-black text-white transition-all duration-300 font-makinas"
+                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[#112B3A] outline-none transition focus:border-[#12A491] focus:ring-4 focus:ring-[#12A491]/10 rounded-xl outline-none focus: text-[#112B3A] transition-all duration-300 font-makinas"
                 placeholder="例: 第15回 絆命会総会"
               />
             </div>
 
             {/* Description */}
             <div>
-              <label htmlFor="description" className="block text-lg font-semibold text-kizuna-gold mb-2 font-makinas">
+              <label htmlFor="description" className="block text-lg font-semibold text-slate-700 mb-2 font-makinas">
                 イベント詳細 <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -190,7 +175,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
                 onChange={(e) => setDescription(e.target.value)}
                 required
                 rows={5}
-                className="w-full px-4 py-3 border-2 border-kizuna-gold rounded-lg focus:outline-none focus:border-kizuna-light-gold focus:ring-2 focus:ring-kizuna-gold/40 bg-black text-white transition-all duration-300 resize-none font-makinas"
+                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[#112B3A] outline-none transition focus:border-[#12A491] focus:ring-4 focus:ring-[#12A491]/10 rounded-xl outline-none focus: text-[#112B3A] transition-all duration-300 resize-none font-makinas"
                 placeholder="イベントの詳細を入力してください"
               />
             </div>
@@ -198,8 +183,8 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Date */}
               <div>
-                <label htmlFor="date" className="block text-lg font-semibold text-kizuna-gold mb-2 flex items-center font-makinas">
-                  <Calendar className="w-5 h-5 mr-2 text-kizuna-gold" />
+                <label htmlFor="date" className="block text-lg font-semibold text-slate-700 mb-2 flex items-center font-makinas">
+                  <Calendar className="w-5 h-5 mr-2 text-slate-700" />
                   開催日 <span className="text-red-500 ml-1">*</span>
                 </label>
                 <input
@@ -208,7 +193,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
                   required
-                  className="w-full px-4 py-3 border-2 border-kizuna-gold rounded-lg focus:outline-none focus:border-kizuna-light-gold focus:ring-2 focus:ring-kizuna-gold/40 bg-black text-white transition-all duration-300 font-makinas"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[#112B3A] outline-none transition focus:border-[#12A491] focus:ring-4 focus:ring-[#12A491]/10 rounded-xl outline-none focus: text-[#112B3A] transition-all duration-300 font-makinas"
                 />
               </div>
 
@@ -216,9 +201,9 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
               <div>
                 <label
                   htmlFor="location"
-                  className="block text-lg font-semibold text-kizuna-gold mb-2 flex items-center font-makinas"
+                  className="block text-lg font-semibold text-slate-700 mb-2 flex items-center font-makinas"
                 >
-                  <MapPin className="w-5 h-5 mr-2 text-kizuna-gold" />
+                  <MapPin className="w-5 h-5 mr-2 text-slate-700" />
                   開催場所 <span className="text-red-500 ml-1">*</span>
                 </label>
                 <input
@@ -227,7 +212,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   required
-                  className="w-full px-4 py-3 border-2 border-kizuna-gold rounded-lg focus:outline-none focus:border-kizuna-light-gold focus:ring-2 focus:ring-kizuna-gold/40 bg-black text-white transition-all duration-300 font-makinas"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[#112B3A] outline-none transition focus:border-[#12A491] focus:ring-4 focus:ring-[#12A491]/10 rounded-xl outline-none focus: text-[#112B3A] transition-all duration-300 font-makinas"
                   placeholder="例: 大阪市内ホテル"
                 />
               </div>
@@ -235,7 +220,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
 
             {/* Error Message */}
             {error && (
-              <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4">
+              <div className="rounded-xl border border-red-200 bg-red-50 p-4">
                 <p className="text-red-700 font-makinas">{error}</p>
               </div>
             )}
@@ -245,7 +230,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
               <button
                 type="button"
                 onClick={handleDelete}
-                className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg flex items-center font-makinas"
+                className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-sm flex items-center font-makinas"
               >
                 <Trash2 className="w-5 h-5 mr-2" />
                 削除
@@ -254,7 +239,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-gradient-to-r from-kizuna-gold to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-gold text-kizuna-dark font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg flex items-center font-makinas"
+                className="bg-gradient-to-r from-kizuna-gold to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-gold text-kizuna-dark font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-sm flex items-center font-makinas"
               >
                 {loading ? (
                   <>
