@@ -1,12 +1,10 @@
 "use client"
 
 import type React from "react"
-
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Lock, Eye, EyeOff } from "lucide-react"
+import { useEffect, useState } from "react"
+import { Eye, EyeOff, LockKeyhole } from "lucide-react"
+import Footer from "@/components/footer"
+import MainNav from "@/components/main-nav"
 
 interface PasswordProtectionProps {
   children: React.ReactNode
@@ -15,95 +13,55 @@ interface PasswordProtectionProps {
 
 export default function PasswordProtection({ children, correctPassword }: PasswordProtectionProps) {
   const [password, setPassword] = useState("")
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
+  const [authenticated, setAuthenticated] = useState(false)
+  const [show, setShow] = useState(false)
   const [error, setError] = useState("")
-  const [isShaking, setIsShaking] = useState(false)
 
   useEffect(() => {
-    const savedAuth = localStorage.getItem("jobs-auth")
-    if (savedAuth === correctPassword) {
-      setIsAuthenticated(true)
-    }
+    if (localStorage.getItem("jobs-auth") === correctPassword) setAuthenticated(true)
   }, [correctPassword])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault()
     if (password === correctPassword) {
-      setIsAuthenticated(true)
       localStorage.setItem("jobs-auth", password)
+      setAuthenticated(true)
       setError("")
     } else {
       setError("パスワードが正しくありません")
-      setIsShaking(true)
-      setTimeout(() => setIsShaking(false), 500)
       setPassword("")
     }
   }
 
-  if (isAuthenticated) {
-    return <>{children}</>
-  }
+  if (authenticated) return <>{children}</>
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-950 via-gray-900 to-black flex items-center justify-center p-4 relative overflow-hidden font-makinas-square">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 25% 25%, #B8A082 2px, transparent 2px),
-                           radial-gradient(circle at 75% 75%, #D4B896 2px, transparent 2px)`,
-            backgroundSize: "50px 50px",
-          }}
-        />
-      </div>
-      
-      <Card className={`w-full max-w-md shadow-2xl border-4 border-kizuna-gold backdrop-blur-sm bg-gradient-to-br from-black/95 via-gray-900/95 to-kizuna-dark/95 ${isShaking ? "animate-pulse" : ""}`}>
-        <CardHeader className="text-center bg-gradient-to-r from-kizuna-dark to-black text-white rounded-t-lg border-b-2 border-kizuna-gold">
-          <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-gradient-to-br from-kizuna-gold to-kizuna-bronze rounded-full flex items-center justify-center shadow-xl">
-              <Lock className="w-8 h-8 text-black" />
-            </div>
+    <div className="min-h-screen bg-white text-[#112B3A]">
+      <MainNav currentPage="求人情報" />
+      <main className="bg-gradient-to-b from-[#F6FBFA] to-white px-5 py-16 sm:px-8 sm:py-24">
+        <div className="mx-auto max-w-md rounded-3xl border border-slate-200 bg-white p-7 shadow-[0_18px_50px_rgba(15,61,62,0.10)] sm:p-9">
+          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#E8F7F4] text-[#087C73]">
+            <LockKeyhole className="h-8 w-8" />
+          </span>
+          <div className="mt-5 text-center">
+            <p className="text-[10px] font-extrabold tracking-[0.22em] text-[#12A491]">MEMBERS ONLY</p>
+            <h1 className="mt-2 text-2xl font-black">求人情報</h1>
+            <p className="mt-2 text-sm font-medium text-slate-500">絆命会会員専用ページです。</p>
           </div>
-          <CardTitle className="text-2xl font-bold text-transparent bg-gradient-to-r from-kizuna-dark-gold via-kizuna-bronze to-kizuna-dark-gold bg-clip-text font-makinas-square">求人情報</CardTitle>
-          <p className="text-kizuna-gold font-makinas-square">会員専用ページです</p>
-        </CardHeader>
-        <CardContent className="p-6">
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium text-kizuna-gold font-makinas-square">
-                パスワードを入力してください
-              </label>
+          <form onSubmit={submit} className="mt-7 space-y-4">
+            <div>
+              <label htmlFor="jobs-password" className="mb-2 block text-sm font-bold text-slate-700">パスワード</label>
               <div className="relative">
-                <Input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="パスワードを入力"
-                  className="pr-10 border-2 border-kizuna-gold/50 bg-black/50 text-white focus:border-kizuna-gold focus:ring-2 focus:ring-kizuna-gold/20 font-makinas-square"
-                  required
-                />
-                                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-kizuna-gold hover:text-kizuna-light-gold"
-                >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
+                <input id="jobs-password" type={show ? "text" : "password"} value={password} onChange={e => setPassword(e.target.value)} className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3.5 pr-11 text-sm outline-none transition focus:border-[#12A491] focus:ring-4 focus:ring-[#12A491]/10" placeholder="パスワードを入力" required />
+                <button type="button" onClick={() => setShow(v => !v)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#087C73]" aria-label="パスワード表示切替">{show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button>
               </div>
             </div>
-            {error && <div className="text-red-300 text-sm text-center bg-red-900/50 p-2 rounded border border-red-500 font-makinas-square">{error}</div>}
-            <Button
-              type="submit"
-              className="w-full bg-gradient-to-r from-kizuna-gold to-kizuna-bronze hover:from-kizuna-bronze hover:to-kizuna-gold text-black font-bold py-3 transition-all duration-300 transform hover:scale-105 shadow-xl font-makinas-square"
-            >
-              ログイン
-            </Button>
+            {error && <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-600">{error}</p>}
+            <button type="submit" className="w-full rounded-xl bg-gradient-to-r from-[#12B89E] to-[#087C73] px-5 py-3.5 text-sm font-extrabold text-white shadow-[0_10px_25px_rgba(8,124,115,0.18)]">求人情報を見る</button>
           </form>
-        </CardContent>
-      </Card>
+        </div>
+      </main>
+      <Footer />
     </div>
   )
 }
