@@ -21,28 +21,29 @@ const config: Config = {
     extend: {
       fontFamily: {
         makinas: [
+          "Makinas-Square",
           "マキナスsquare",
-          "-apple-system",
-          "BlinkMacSystemFont",
-          "Segoe UI",
-          "Roboto",
-          "Helvetica Neue",
-          "Arial",
-          "Hiragino Kaku Gothic ProN",
           "Hiragino Sans",
+          "Yu Gothic",
+          "Meiryo",
+          "sans-serif",
+        ],
+        "makinas-square": [
+          "Makinas-Square",
+          "マキナスsquare",
+          "Hiragino Sans",
+          "Yu Gothic",
           "Meiryo",
           "sans-serif",
         ],
         sans: [
-          "マキナスsquare",
           "-apple-system",
           "BlinkMacSystemFont",
           "Segoe UI",
-          "Roboto",
-          "Helvetica Neue",
-          "Arial",
-          "Hiragino Kaku Gothic ProN",
+          "Noto Sans JP",
           "Hiragino Sans",
+          "Yu Gothic UI",
+          "Yu Gothic",
           "Meiryo",
           "sans-serif",
         ],
@@ -81,23 +82,21 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // 絆命会ロゴベースのカラーパレット
         kizuna: {
-          dark: "#000000",        // ブラック
-          charcoal: "#1a1a1a",   // ダークグレー
-          sage: "#333333",       // ミディアムグレー
-          moss: "#666666",       // ライトグレー
-          beige: "#D4C5A9",      // ロゴのベージュ
-          gold: "#C8B99C",       // ロゴのゴールド
-          "dark-gold": "#B8A082", // 濃いゴールド
-          "bronze": "#A0906B",    // ブロンズ
-          cream: "#E8E0D0",      // 明るいベージュ
-          sand: "#F2EDE3",       // 最も明るいベージュ
+          dark: "#000000",
+          charcoal: "#1a1a1a",
+          sage: "#333333",
+          moss: "#666666",
+          beige: "#D4C5A9",
+          gold: "#C8B99C",
+          "dark-gold": "#B8A082",
+          bronze: "#A0906B",
+          cream: "#E8E0D0",
+          sand: "#F2EDE3",
         },
-        // ダークモード対応
         darkGreen: {
           50: "#F2EDE3",
-          100: "#E8E0D0", 
+          100: "#E8E0D0",
           200: "#D4C5A9",
           300: "#C8B99C",
           400: "#A89A7E",

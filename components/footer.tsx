@@ -1,70 +1,68 @@
-import { Heart, Handshake } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { ArrowUpRight, MessageCircle } from "lucide-react"
+
+const footerLinks = [
+  { label: "絆命会について", href: "/about" },
+  { label: "イベント", href: "/events" },
+  { label: "お知らせ", href: "/news" },
+  { label: "求人情報", href: "/jobs" },
+]
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-kizuna-dark">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 25% 25%, var(--kizuna-beige) 2px, transparent 2px),
-                           radial-gradient(circle at 75% 75%, var(--kizuna-gold) 2px, transparent 2px)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between">
-          {/* Logo Section */}
-          <div className="flex items-center space-x-6 mb-8 md:mb-0">
-            <div className="relative group">
-              <div className="w-16 h-16 bg-kizuna-beige/20 rounded-full flex items-center justify-center shadow-kizuna border-2 border-kizuna-beige/30 transform group-hover:scale-110 transition-all duration-300">
-                <Image 
-                  src="/icon-192.png" 
-                  alt="絆命会ロゴ" 
-                  width={40} 
-                  height={40}
-                  className="rounded-full"
+    <footer className="bg-[#0B3435] text-white">
+      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+          <div>
+            <Link href="/" className="inline-flex items-center gap-3">
+              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white p-1.5 shadow-sm">
+                <Image
+                  src="/images/school-emblem.webp"
+                  alt="東洋医療専門学校 校章"
+                  width={48}
+                  height={48}
+                  className="h-12 w-12 object-contain"
                 />
-              </div>
-              <div className="absolute inset-0 bg-kizuna-gold/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-kizuna-sand tracking-wider font-makinas">絆命会</h3>
-              <p className="text-kizuna-beige text-sm font-makinas">東洋医療専門学校 救急救命士学科 同窓会</p>
-            </div>
+              </span>
+              <span>
+                <span className="block text-xl font-extrabold tracking-[0.08em]">絆命会</span>
+                <span className="mt-1 block text-xs font-medium text-white/60">
+                  東洋医療専門学校 救急救命士学科 同窓会
+                </span>
+              </span>
+            </Link>
+            <p className="mt-6 max-w-xl text-sm leading-7 text-white/65">
+              卒業してからも、救急救命士として歩む仲間がつながり、学び、支え合える場所を。
+            </p>
           </div>
 
-          {/* Copyright & Links */}
-          <div className="text-center md:text-right space-y-4">
-            <Link
-              href="/admin/login"
-              className="text-kizuna-beige font-medium text-lg tracking-wide hover:text-kizuna-sand transition-colors duration-300 font-makinas"
+          <div className="lg:text-right">
+            <div className="flex flex-wrap gap-x-5 gap-y-3 lg:justify-end">
+              {footerLinks.map((item) => (
+                <Link key={item.label} href={item.href} className="text-sm font-semibold text-white/70 transition hover:text-white">
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+            <a
+              href="https://lin.ee/Y8DHYjk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#0F3D3E] transition hover:bg-[#F2F7F6]"
             >
-              © 2003 Hanmeikai. All rights reserved.
-            </Link>
-            <div className="w-32 h-0.5 bg-gradient-to-r from-kizuna-gold to-kizuna-beige mx-auto md:ml-auto md:mr-0 rounded-full"></div>
+              <MessageCircle className="h-4 w-4" />
+              LINEで問い合わせ
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
           </div>
         </div>
 
-        {/* Decorative Elements */}
-        <div className="flex justify-center mt-8">
-          <div className="flex space-x-3">
-            {[...Array(5)].map((_, i) => (
-              <div
-                key={i}
-                className="w-2 h-2 bg-kizuna-gold/60 rounded-full animate-pulse"
-                style={{
-                  animationDelay: `${i * 0.3}s`,
-                  animationDuration: `${1.5 + (i * 0.1)}s`,
-                }}
-              />
-            ))}
-          </div>
+        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2003 Hanmeikai. All rights reserved.</p>
+          <Link href="/admin/login" className="transition hover:text-white/70">
+            Management
+          </Link>
         </div>
       </div>
     </footer>

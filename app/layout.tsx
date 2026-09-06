@@ -1,10 +1,7 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Inter } from "next/font/google"
 import "./globals.css"
 import { getSeoConfig } from "@/lib/seo-config"
-
-const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kizunakai.com"),
@@ -48,16 +45,14 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
   },
   manifest: "/manifest.json",
-  verification: {
-    google: "your-google-verification-code", // 必要に応じて設定
-  },
-  generator: "v0.dev",
+  generator: "Next.js",
 }
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
+  themeColor: "#0F3D3E",
 }
 
 export default function RootLayout({
@@ -66,38 +61,26 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const seo = getSeoConfig("default")
+
   return (
     <html lang="ja">
       <head>
-        {/* 追加のファビコン設定 */}
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
         <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-
-        {/* PWA対応 */}
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#059669" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="絆命会" />
-
-        {/* Microsoft Tiles */}
-        <meta name="msapplication-TileColor" content="#059669" />
+        <meta name="msapplication-TileColor" content="#0F3D3E" />
         <meta name="msapplication-TileImage" content="/icon-192.png" />
-
-        {/* 検索エンジン最適化 */}
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
         <link rel="canonical" href="https://kizunakai.com" />
-        {/* Google Site Verification */}
         {seo.googleSiteVerification && (
           <meta name="google-site-verification" content={seo.googleSiteVerification} />
         )}
-
-        {/* Google tag (gtag.js) - G-Y5X9H7GMW0 */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y5X9H7GMW0"></script>
         <script
           dangerouslySetInnerHTML={{
@@ -105,16 +88,12 @@ export default function RootLayout({
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-
 gtag('config', 'G-Y5X9H7GMW0');
             `,
           }}
         />
-
       </head>
-      <body className={inter.className}>
-        {children}
-      </body>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   )
 }
