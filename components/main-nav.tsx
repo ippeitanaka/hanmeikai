@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu, MessageCircle, X } from "lucide-react"
-import KizunaMark from "@/components/kizuna-mark"
 
 type NavItem = {
   name: string
@@ -37,8 +37,15 @@ export default function MainNav({ currentPage }: MainNavProps) {
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur-xl">
       <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
         <Link href="/" className="group flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0F3D3E] text-white shadow-sm transition-transform group-hover:-translate-y-0.5">
-            <KizunaMark className="h-8 w-8" />
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center transition-transform group-hover:-translate-y-0.5">
+            <Image
+              src="/images/school-emblem.webp"
+              alt="東洋医療専門学校 校章"
+              width={48}
+              height={48}
+              className="h-12 w-12 object-contain"
+              priority
+            />
           </span>
           <span className="min-w-0">
             <span className="block text-lg font-extrabold tracking-[0.08em] text-slate-900">絆命会</span>
