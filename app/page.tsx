@@ -137,7 +137,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="border-y border-slate-100 bg-[#F7FBFC] py-18 sm:py-20">
+        <section className="border-y border-slate-100 bg-[#F7FBFC] py-16 sm:py-20">
           <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10">
             <div className="text-center">
               <p className="text-[11px] font-extrabold tracking-[0.24em] text-[#18A99A]">WHAT WE DO</p>
@@ -174,7 +174,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="bg-white py-18 sm:py-20">
+        <section className="bg-white py-16 sm:py-20">
           <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10">
             <div className="text-center">
               <p className="text-[11px] font-extrabold tracking-[0.24em] text-[#18A99A]">LATEST INFORMATION</p>
@@ -213,7 +213,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="border-y border-slate-100 bg-[#F5FAFB] py-16 sm:py-18">
+        <section className="border-y border-slate-100 bg-[#F5FAFB] py-16 sm:py-20">
           <div className="mx-auto grid max-w-[1440px] gap-10 px-5 sm:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:px-10">
             <div>
               <p className="text-[11px] font-extrabold tracking-[0.24em] text-[#18A99A]">ABOUT</p>
