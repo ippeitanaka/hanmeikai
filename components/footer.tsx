@@ -1,6 +1,6 @@
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowUpRight, MessageCircle } from "lucide-react"
-import KizunaMark from "@/components/kizuna-mark"
 
 const footerLinks = [
   { label: "絆命会について", href: "/about" },
@@ -16,8 +16,14 @@ export default function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
           <div>
             <Link href="/" className="inline-flex items-center gap-3">
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-[#D8A54A]">
-                <KizunaMark className="h-9 w-9" />
+              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white p-1.5 shadow-sm">
+                <Image
+                  src="/images/school-emblem.webp"
+                  alt="東洋医療専門学校 校章"
+                  width={48}
+                  height={48}
+                  className="h-12 w-12 object-contain"
+                />
               </span>
               <span>
                 <span className="block text-xl font-extrabold tracking-[0.08em]">絆命会</span>
